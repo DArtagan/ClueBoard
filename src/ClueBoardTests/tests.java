@@ -1,0 +1,137 @@
+package ClueBoardTests;
+
+//import static org.junit.Assert.*;
+//import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.*;
+
+import java.io.FileNotFoundException;
+import java.util.Map;
+
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import boardClasses.BadConfigFormatException;
+import boardClasses.Board;
+import boardClasses.BoardCell;
+import boardClasses.RoomCell;
+
+import org.junit.Test;
+
+public class tests {
+	private static Board board;
+	public static final int NUM_ROOMS = 11;
+	public static final int NUM_ROWS = 22;
+	public static final int NUM_COLUMNS = 23;
+	
+	@BeforeClass
+	public static void setUp()  {
+		board = new Board();
+		try {
+			board.loadConfigFiles("BoardConfiguration.csv", "Legend.txt");
+		} catch (BadConfigFormatException e) {
+			
+			e.getMessage();
+		}
+	}
+	@Test
+	public void testRooms() {
+		Map<Character, String> rooms = board.getRooms();
+		// Ensure we read the correct number of rooms
+		assertEquals(NUM_ROOMS, rooms.size());
+		// Test retrieving a few from the hash, including the first
+		// and last in the file and a few others
+		assertEquals("Hallway", rooms.get('H'));
+		assertEquals("Closet", rooms.get('X'));
+		assertEquals("Kitchen", rooms.get('K'));
+		assertEquals("Dining Room", rooms.get('D'));
+		assertEquals("Ball Room", rooms.get('B'));
+		assertEquals("Billiards Room", rooms.get('R'));
+		assertEquals("Library", rooms.get('L'));
+		assertEquals("Study", rooms.get('S'));
+		assertEquals("Lounge", rooms.get('O'));
+		assertEquals("Conservatory", rooms.get('C'));
+		assertEquals("Television Room", rooms.get('T'));
+	}
+	
+	@Test
+	public void testBoardDimensions() {
+		// Ensure we have the proper number of rows and columns
+		assertEquals(NUM_ROWS, board.getNumRows());
+		assertEquals(NUM_COLUMNS, board.getNumColumns());		
+	}
+	
+	@Test
+	public void FourDoorDirections() {
+		// Test one each RIGHT/LEFT/UP/DOWN
+		RoomCell room = (RoomCell) board.GetRoomCellAt(2, 4);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.RIGHT, room.getDoorDirection());
+		
+		room = (RoomCell) board.GetRoomCellAt(7, 4);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.DOWN, room.getDoorDirection());
+		
+		room = (RoomCell) board.GetRoomCellAt(1, 18);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.LEFT, room.getDoorDirection());
+		room = (RoomCell) board.GetRoomCellAt(18, 6);
+		assertTrue(room.isDoorway());
+		assertEquals(RoomCell.DoorDirection.UP, room.getDoorDirection());
+		// Test that room pieces that aren't doors know it
+		room = (RoomCell) board.GetRoomCellAt(17, 14);
+		assertFalse(room.isDoorway());	
+		// Test that walkways are not doors
+		BoardCell cell  =  board.GetRoomCellAt(5, 5);
+		assertFalse(cell.isDoorway());		
+
+	}
+	@Test
+	public void testRoomInitials() {
+		assertEquals('C', board.GetRoomCellAt(0, 0).getInitial());
+		assertEquals('R', board.GetRoomCellAt(20, 20).getInitial());
+		assertEquals('B', board.GetRoomCellAt(10, 20).getInitial());
+		assertEquals('O', board.GetRoomCellAt(9, 3).getInitial());
+		assertEquals('K', board.GetRoomCellAt(1, 11).getInitial());
+		assertEquals('D', board.GetRoomCellAt(3, 19).getInitial());
+		assertEquals('T', board.GetRoomCellAt(18, 2).getInitial());
+		assertEquals('S', board.GetRoomCellAt(17, 9).getInitial());
+		assertEquals('L', board.GetRoomCellAt(17, 14).getInitial());
+		assertEquals('X', board.GetRoomCellAt(7, 9).getInitial());
+		assertEquals('H', board.GetRoomCellAt(0, 6).getInitial());
+	}
+	
+	@Test
+	public void calcIndexTest(){
+
+		int list = board.calcIndex(0, 0);
+		assertEquals(list, 0);
+		list = board.calcIndex(5, 5);
+		assertEquals(120, list);
+		list = board.calcIndex(2, 4);
+		assertEquals(list, 50);
+		list = board.calcIndex(10, 8);
+		assertEquals(list, 238);
+		list = board.calcIndex(20, 20);
+		assertEquals(list, 480);
+		list = board.calcIndex(2, 2);
+		assertEquals(list, 48);
+
+	}
+	// Test that an exception is thrown for a bad boardConfig file
+	@Test (expected = BadConfigFormatException.class)
+	public void testBadColumns() throws BadConfigFormatException, FileNotFoundException {
+		
+		Board b = new Board();
+		b.loadConfigFiles("BadFile.csv", "Legend.txt");
+	}
+	// Test that an exception is thrown for a bad legend file
+	@Test (expected = BadConfigFormatException.class)
+	public void testBadRoom() throws BadConfigFormatException {
+		
+		Board b = new Board();
+		b.loadConfigFiles("BoardConfiguration.csv", "BadLegend.txt");
+	}
+
+
+}
