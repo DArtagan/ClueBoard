@@ -5,7 +5,6 @@ abstract public class BoardCell {
     private int pieceCol;
     
     public boolean isWalkway(){
-
         return false;
     }    
     
@@ -19,6 +18,7 @@ abstract public class BoardCell {
 
     public void draw(){
     }
+    
     public char getInitial(){
     	return 'H';
     }

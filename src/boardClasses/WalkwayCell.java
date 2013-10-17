@@ -1,4 +1,5 @@
 package boardClasses;
+
 public class WalkwayCell extends BoardCell {
 	@Override
     public boolean isWalkway(){
@@ -6,6 +7,5 @@ public class WalkwayCell extends BoardCell {
     }
     
     public void draw(){
-        
     }
 }

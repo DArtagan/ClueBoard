@@ -1,10 +1,11 @@
 package boardClasses;
+
 public class RoomCell extends BoardCell {
     public enum DoorDirection {UP, DOWN, LEFT, RIGHT, NONE};
     public DoorDirection doorDirection;
     private char roomInitial;
     
-    RoomCell( char initial, char direction){
+    RoomCell(char initial, char direction){
     	switch (direction){
     	case 'U':
     		doorDirection = DoorDirection.UP;
@@ -34,14 +35,13 @@ public class RoomCell extends BoardCell {
     }
 
 	public DoorDirection getDoorDirection() {
-		
 		return doorDirection;
 	}
 
 	public char getInitial() {
-		
 		return roomInitial;
 	}
+	
 	@Override
 	public boolean isDoorway(){
         if (doorDirection == DoorDirection.NONE)
