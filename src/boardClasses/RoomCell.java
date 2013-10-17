@@ -25,6 +25,7 @@ public class RoomCell extends BoardCell {
     	}
     	roomInitial = initial;
     }
+
     @Override
     public boolean isRoom(){
         return true;
