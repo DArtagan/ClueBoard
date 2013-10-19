@@ -133,7 +133,7 @@ public class Board {
 		LinkedList <Integer> adjs;
 		for (int i = 0; i < numRows*numColumns; i++) {//for every square in grid
 			adjs = new LinkedList<Integer>();//start a new list
-			if (GetRoomCellAt(0,i).isDoorway()) {
+			if (getCellAt(0,i).isDoorway()) {
 				if (((RoomCell) cells.get(i)).getDoorDirection()  == DoorDirection.DOWN) {
 					adjs.add(i+numColumns);
 				} else if (((RoomCell) cells.get(i)).getDoorDirection()  == DoorDirection.LEFT) {
@@ -189,12 +189,12 @@ public class Board {
 
 		for (int i :adjs) {
 			if(visited[i] == false) {
-				if(GetRoomCellAt(0,i).isDoorway()) {
-					targets.add(GetRoomCellAt(0,i));
+				if(getCellAt(0,i).isDoorway()) {
+					targets.add(getCellAt(0,i));
 				}
 				if (step == 1) {
-					if (!GetRoomCellAt(0,i).isDoorway()) {
-						targets.add(GetRoomCellAt(0,i));
+					if (!getCellAt(0,i).isDoorway()) {
+						targets.add(getCellAt(0,i));
 					}
 				} else {
 					calc2Targets(0,i,step-1);
