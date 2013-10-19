@@ -109,7 +109,7 @@ public class Board {
 	}
 
 	public BoardCell getCellAt(int row, int col) {
-		return cells.get(this.calcIndex(row, col));
+		return getCellAt(calcIndex(row, col));
 	}
 	
 	public BoardCell getCellAt(int index) {
