@@ -20,18 +20,18 @@ public class Board {
 	private int numRows;
 	private int numColumns;
 	private Set<BoardCell> targets;
-	private Map<Integer, LinkedList<Integer>> adjMtx;
+	private Map<Integer, LinkedList<Integer>> adjMap;
 	private boolean[] visited;
 
 	public Board() {
 		cells = new ArrayList<BoardCell>();
 		rooms = new TreeMap<Character, String>();
 	}
-	
+
 	public Board(String layoutName, String legendName) throws IOException, BadConfigFormatException {
 		cells = new ArrayList<BoardCell>();
 		rooms = new TreeMap<Character, String>();
-		loadConfigFiles(legendName, layoutName);
+		loadConfigFiles(layoutName, legendName);
 	}
 
 	public void loadConfigFiles(String layoutName, String legendName) throws IOException, BadConfigFormatException {
@@ -56,7 +56,7 @@ public class Board {
 		legendIn.close();
 		legendReader.close();
 	}
-	
+
 	private void loadLayout(String layoutName) throws BadConfigFormatException, IOException {
 		int colCount1 = 0;
 		int colCount2 = 0;
@@ -105,7 +105,7 @@ public class Board {
 	public BoardCell getCellAt(int row, int col) {
 		return getCellAt(calcIndex(row, col));
 	}
-	
+
 	public BoardCell getCellAt(int index) {
 		return cells.get(index);
 	}
@@ -123,7 +123,7 @@ public class Board {
 	}
 
 	public void calcAdjacencies() {
-		adjMtx = new HashMap<Integer, LinkedList<Integer>>();
+		adjMap = new HashMap<Integer, LinkedList<Integer>>();
 
 		LinkedList <Integer> adjs;
 		for (int i = 0; i < numRows*numColumns; i++) {
@@ -137,14 +137,14 @@ public class Board {
 					adjs.add(i+1);
 				} else if (((RoomCell) cells.get(i)).getDoorDirection() == DoorDirection.UP) {
 					adjs.add(i-numColumns);
-				} 
+				}
 			} else if (!getCellAt(i).isRoom()) {
 				if (i%numColumns != 0) {
 					// If the square isn't on the left.
 					if(!cells.get(i-1).isRoom() || (cells.get(i-1).isDoorway() && ((RoomCell) cells.get(i-1)).getDoorDirection() == DoorDirection.RIGHT)) {
 						// If it's a walkway or a proper facing door, add the
 						// square to the left to the adjacency list.
-						adjs.add(i-1);  
+						adjs.add(i-1);
 					}
 				}
 				if(i/numColumns != 0) {
@@ -159,7 +159,7 @@ public class Board {
 					// If the square isn't on the right.
 					if(!cells.get(i+1).isRoom() || (cells.get(i+1).isDoorway() && ((RoomCell) cells.get(i+1)).getDoorDirection() == DoorDirection.LEFT)) {
 						// If it's a walkway or a proper facing door,
-						// add the square to the right to the adjacency list. 
+						// add the square to the right to the adjacency list.
 						adjs.add(i+1);
 					}
 				}
@@ -172,14 +172,14 @@ public class Board {
 					}
 				}
 			}
-			adjMtx.put(i, adjs);
+			adjMap.put(i, adjs);
 		}
 	}
 
 	public LinkedList<Integer> getAdjList(int calcIndex) {
-		return adjMtx.get(calcIndex);
+		return adjMap.get(calcIndex);
 	}
-	
+
 	public void calcTargets(int row, int col, int steps) {
 		targets = new HashSet<BoardCell>();
 		visited = new boolean[numRows*numColumns];
@@ -187,7 +187,7 @@ public class Board {
 		int index = calcIndex(row,col);
 		calcTargetsHelper(index, steps);
 	}
-	
+
 	private void calcTargetsHelper(int index, int steps) {
 		visited[index] = true;
 		LinkedList<Integer> adjacencies = getAdjList(index);
@@ -208,7 +208,7 @@ public class Board {
 		}
 		visited[index] = false;
 	}
-	
+
 	public Set<BoardCell> getTargets() {
 		return targets;
 	}

@@ -3,7 +3,8 @@ package clueTests;
 // Doing a static import allows me to write assertEquals rather than
 // Assert.assertEquals
 import static junit.framework.Assert.assertEquals;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.util.Map;
@@ -19,13 +20,13 @@ import clue.RoomCell;
 
 @SuppressWarnings("deprecation")
 public class CR_BoardInitTests {
-	// I made this static because I only want to set it up one 
+	// I made this static because I only want to set it up one
 	// time (using @BeforeClass), no need to do setup before each test
 	private static Board board;
 	public static final int NUM_ROOMS = 11;
 	public static final int NUM_ROWS = 22;
 	public static final int NUM_COLUMNS = 23;
-	
+
 	@BeforeClass
 	public static void setUp() {
 		board = new Board();
@@ -50,14 +51,14 @@ public class CR_BoardInitTests {
 		assertEquals("Dining room", rooms.get('D'));
 		assertEquals("Walkway", rooms.get('W'));
 	}
-	
+
 	@Test
 	public void testBoardDimensions() {
 		// Ensure we have the proper number of rows and columns
 		assertEquals(NUM_ROWS, board.getNumRows());
-		assertEquals(NUM_COLUMNS, board.getNumColumns());		
+		assertEquals(NUM_COLUMNS, board.getNumColumns());
 	}
-	
+
 	// Test a doorway in each direction, plus two cells that are not
 	// a doorway.
 	// These cells are white on the planning spreadsheet
@@ -78,16 +79,16 @@ public class CR_BoardInitTests {
 		assertEquals(RoomCell.DoorDirection.UP, ((RoomCell) room).getDoorDirection());
 		// Test that room pieces that aren't doors know it
 		room = board.getCellAt(14, 14);
-		assertFalse(room.isDoorway());	
+		assertFalse(room.isDoorway());
 		// Test that walkways are not doors
 		BoardCell cell = board.getCellAt(board.calcIndex(0, 6));
-		assertFalse(cell.isDoorway());		
+		assertFalse(cell.isDoorway());
 
 	}
-	
+
 	// Test that we have the correct number of doors
 	@Test
-	public void testNumberOfDoorways() 
+	public void testNumberOfDoorways()
 	{
 		int numDoors = 0;
 		int totalCells = board.getNumColumns() * board.getNumRows();
@@ -95,13 +96,14 @@ public class CR_BoardInitTests {
 		for (int i=0; i<totalCells; i++)
 		{
 			BoardCell cell = board.getCellAt(i);
-			if (cell.isDoorway())
+			if (cell.isDoorway()) {
 				numDoors++;
+			}
 		}
 		Assert.assertEquals(16, numDoors);
 	}
 
-	
+
 	@Test
 	public void testCalcIndex() {
 		// Test each corner of the board
@@ -111,9 +113,9 @@ public class CR_BoardInitTests {
 		assertEquals(505, board.calcIndex(NUM_ROWS-1, NUM_COLUMNS-1));
 		// Test a couple others
 		assertEquals(24, board.calcIndex(1, 1));
-		assertEquals(66, board.calcIndex(2, 20));		
+		assertEquals(66, board.calcIndex(2, 20));
 	}
-	
+
 	// Test a few room cells to ensure the room initial is
 	// correct.
 	@Test
@@ -124,7 +126,7 @@ public class CR_BoardInitTests {
 		assertEquals('O', board.getCellAt(21, 22).getInitial());
 		assertEquals('K', board.getCellAt(21, 0).getInitial());
 	}
-	
+
 	// Test that an exception is thrown for a bad config file
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadColumns() throws BadConfigFormatException, IOException {
