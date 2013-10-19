@@ -1,5 +1,6 @@
 package clueTests;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Set;
 
@@ -7,17 +8,23 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import clueGame.Board;
-import clueGame.BoardCell;
+import clue.BadConfigFormatException;
+import clue.Board;
+import clue.BoardCell;
 
 public class CR_BoardAdjTargetTests {
 	private static Board board;
 	@BeforeClass
 	public static void setUp() {
 		board = new Board();
-		board.loadConfigFiles();
+		try {
+			board.loadConfigFiles("CR_ClueLegend.txt", "CR_ClueLayout.csv");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (BadConfigFormatException e) {
+			e.printStackTrace();
+		}
 		board.calcAdjacencies();
-
 	}
 
 	// Ensure that player does not move around within room
