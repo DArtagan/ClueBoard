@@ -1,7 +1,5 @@
 package clueTests;
 
-import static org.junit.Assert.fail;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,6 +15,7 @@ public class TestPlayerMethods {
 
 	@Test
 	public void testLoadPeople() {
-		fail("Not yet implemented");
+		// Test loading people from a config file.
+
 	}
 }
