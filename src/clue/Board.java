@@ -191,10 +191,10 @@ public class Board {
 		for (int i = 0; i < visited.length; i++) {
 			visited[i] = false;
 		}
-		calc2Targets(row, col, step);	
+		calcTargetsHelper(row, col, step);	
 	}
 	
-	public void calc2Targets(int row, int col, int step) {
+	private void calcTargetsHelper(int row, int col, int step) {
 		int index = calcIndex(row,col);
 		visited[index] = true;
 		LinkedList<Integer> adjs = getAdjList(index);
