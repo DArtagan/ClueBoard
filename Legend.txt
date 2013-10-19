@@ -1,4 +1,4 @@
-H, Hallway
+W, Walkway
 X, Closet
 K, Kitchen
 D, Dining Room
