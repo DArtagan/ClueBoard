@@ -1,16 +1,14 @@
 package clueTests;
 
-//import static org.junit.Assert.*;
-//import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.Map;
 
-import org.junit.Assert;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.Test;
+
 
 import clue.BadConfigFormatException;
 import clue.Board;
@@ -27,7 +25,7 @@ public class tests {
 	public static void setUp()  {
 		board = new Board();
 		try {
-			board.loadConfigFiles("BoardConfiguration.csv", "Legend.txt");
+			board.loadConfigFiles("OtherBoardConfiguration.csv", "OtherLegend.txt");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (BadConfigFormatException e) {
@@ -42,7 +40,7 @@ public class tests {
 		assertEquals(NUM_ROOMS, rooms.size());
 		// Test retrieving a few from the hash, including the first
 		// and last in the file and a few others
-		assertEquals("Hallway", rooms.get('H'));
+		assertEquals("Walkway", rooms.get('W'));
 		assertEquals("Closet", rooms.get('X'));
 		assertEquals("Kitchen", rooms.get('K'));
 		assertEquals("Dining Room", rooms.get('D'));
@@ -64,27 +62,30 @@ public class tests {
 	
 	@Test
 	public void FourDoorDirections() {
-		// Test one each RIGHT/LEFT/UP/DOWN
+		// Test one each RIGHT/LEFT/UP/DOWN.
 		RoomCell room = (RoomCell) board.getCellAt(2, 4);
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.RIGHT, room.getDoorDirection());
-		
+
 		room = (RoomCell) board.getCellAt(7, 4);
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.DOWN, room.getDoorDirection());
-		
+
 		room = (RoomCell) board.getCellAt(1, 18);
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.LEFT, room.getDoorDirection());
+
 		room = (RoomCell) board.getCellAt(18, 6);
 		assertTrue(room.isDoorway());
 		assertEquals(RoomCell.DoorDirection.UP, room.getDoorDirection());
-		// Test that room pieces that aren't doors know it
+
+		// Test that room pieces that aren't doors know it.
 		room = (RoomCell) board.getCellAt(17, 14);
-		assertFalse(room.isDoorway());	
-		// Test that walkways are not doors
+		assertFalse(room.isDoorway());
+
+		// Test that walkways are not doors.
 		BoardCell cell  =  board.getCellAt(5, 5);
-		assertFalse(cell.isDoorway());		
+		assertFalse(cell.isDoorway());
 
 	}
 
@@ -100,7 +101,7 @@ public class tests {
 		assertEquals('S', board.getCellAt(17, 9).getInitial());
 		assertEquals('L', board.getCellAt(17, 14).getInitial());
 		assertEquals('X', board.getCellAt(7, 9).getInitial());
-		assertEquals('H', board.getCellAt(0, 6).getInitial());
+		assertEquals('W', board.getCellAt(0, 6).getInitial());
 	}
 	
 	@Test
@@ -123,14 +124,14 @@ public class tests {
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadColumns() throws BadConfigFormatException, IOException {
 		Board b = new Board();
-		b.loadConfigFiles("BadFile.csv", "Legend.txt");
+		b.loadConfigFiles("OtherBadFile.csv", "OtherLegend.txt");
 	}
 
 	// Test that an exception is thrown for a bad legend file
 	@Test (expected = BadConfigFormatException.class)
 	public void testBadRoom() throws IOException, BadConfigFormatException {
 		Board b = new Board();
-		b.loadConfigFiles("BoardConfiguration.csv", "BadLegend.txt");
+		b.loadConfigFiles("OtherBoardConfiguration.csv", "OtherBadLegend.txt");
 	}
 
 

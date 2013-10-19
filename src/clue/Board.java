@@ -1,8 +1,9 @@
 package clue;
-import java.io.FileNotFoundException;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -14,16 +15,13 @@ import java.util.TreeMap;
 import clue.RoomCell.DoorDirection;
 
 public class Board {
-	// Constants
-	protected static final char WALKWAY = 'W';
-	
 	private ArrayList<BoardCell> cells;
 	private TreeMap<Character, String> rooms;
-	private int numRows = 0;
-	private int numColumns = 0;
+	private int numRows;
+	private int numColumns;
 	private Set<BoardCell> targets;
 	private Map<Integer, LinkedList<Integer>> adjMtx;
-	private boolean[] visited ;
+	private boolean[] visited;
 
 	public Board() {
 		cells = new ArrayList<BoardCell>();
@@ -41,7 +39,7 @@ public class Board {
 		loadLayout(layoutName);
 	}
 
-	public void loadLegend(String legendName) throws IOException, BadConfigFormatException {
+	private void loadLegend(String legendName) throws IOException, BadConfigFormatException {
 		FileReader legendReader = new FileReader(legendName);
 		Scanner legendIn = new Scanner(legendReader);
 		String line, parts[];
@@ -59,35 +57,29 @@ public class Board {
 		legendReader.close();
 	}
 	
-	public void loadLayout(String layoutName) throws BadConfigFormatException {
+	private void loadLayout(String layoutName) throws BadConfigFormatException, IOException {
 		int colCount1 = 0;
 		int colCount2 = 0;
-		Scanner scan = new Scanner(System.in);
-		FileReader reader = null;
-		try {
-			reader = new FileReader(layoutName);
-		} catch(FileNotFoundException e) {
-			scan.close();
-			System.out.println(e.getMessage());
-		}
-		scan = new Scanner(reader);
+		char c;
+		FileReader reader = new FileReader(layoutName);
+		Scanner scan = new Scanner(reader);
 
 		while (scan.hasNextLine()) {
-			numRows++;
+			++numRows;
 			String line = scan.nextLine();
-			colCount1=0;
+			colCount1 = 0;
 			for (int i = 0; i < line.length(); i++) {
-				char c = line.charAt(i);        
-				if (c!=',' && (i==0 || line.charAt(i-1) ==',' )) {
-					colCount1++;
-					if (numRows==1) {
-						colCount2++;
+				c = line.charAt(i);
+				if (c != ',' && (i == 0 || line.charAt(i-1) == ',')) {
+					++colCount1;
+					if (numRows == 1) {
+						++colCount2;
 					}
-					if (c != WALKWAY) {
+					if (c != WalkwayCell.WALKWAY) {
 						if (i != line.length()-1) {
-							cells.add(new RoomCell(c,line.charAt(i+1)));
+							cells.add(new RoomCell(c, line.charAt(i+1)));
 						} else {
-							cells.add(new RoomCell(c,' '));
+							cells.add(new RoomCell(c));
 						}
 					} else {
 						cells.add(new WalkwayCell());
@@ -96,12 +88,14 @@ public class Board {
 			}
 			if (colCount1 != colCount2) {
 				scan.close();
+				reader.close();
 				throw new BadConfigFormatException();
 			}
 			colCount2 = colCount1;
 		}
 		numColumns = colCount2;
 		scan.close();
+		reader.close();
 	}
 
 	public int calcIndex(int row, int col) {
@@ -186,38 +180,44 @@ public class Board {
 		return adjMtx.get(calcIndex);
 	}
 	
-	public void calcTargets(int row, int col, int step) {
+	public void calcTargets(int row, int col, int steps) {
 		targets = new HashSet<BoardCell>();
 		visited = new boolean[numRows*numColumns];
-		for (int i = 0; i < visited.length; i++) {
-			visited[i] = false;
-		}
-		calcTargetsHelper(row, col, step);	
+		Arrays.fill(visited, false);
+		int index = calcIndex(row,col);
+		calcTargetsHelper(index, steps);
 	}
 	
-	private void calcTargetsHelper(int row, int col, int step) {
-		int index = calcIndex(row,col);
+	private void calcTargetsHelper(int index, int steps) {
 		visited[index] = true;
-		LinkedList<Integer> adjs = getAdjList(index);
+		LinkedList<Integer> adjacencies = getAdjList(index);
 
-		for (int i :adjs) {
+		for (int i : adjacencies) {
 			if(visited[i] == false) {
-				if(getCellAt(0,i).isDoorway()) {
-					targets.add(getCellAt(0,i));
+				if(getCellAt(i).isDoorway()) {
+					targets.add(getCellAt(i));
 				}
-				if (step == 1) {
-					if (!getCellAt(0,i).isDoorway()) {
-						targets.add(getCellAt(0,i));
+				if (steps == 1) {
+					if (!getCellAt(i).isDoorway()) {
+						targets.add(getCellAt(i));
 					}
 				} else {
-					calcTargetsHelper(0,i,step-1);
+					calcTargetsHelper(i, steps-1);
 				}
 			}
 		}
-		visited[index]=false;
+		visited[index] = false;
 	}
 	
 	public Set<BoardCell> getTargets() {
+		return targets;
+	}
+
+	public Set<BoardCell> getTargets(int index, int steps) {
+		targets = new HashSet<BoardCell>();
+		visited = new boolean[numRows*numColumns];
+		Arrays.fill(visited, false);
+		calcTargetsHelper(index, steps);
 		return targets;
 	}
 }
