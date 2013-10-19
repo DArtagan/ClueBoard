@@ -1,8 +1,6 @@
 package clue;
 
 abstract public class BoardCell {
-    private int pieceRow;
-    private int pieceCol;
     
     public boolean isWalkway() {
         return false;
@@ -15,9 +13,6 @@ abstract public class BoardCell {
     public boolean isDoorway() {
         return false;
     }  
-
-    public void draw() {
-    }
     
     public char getInitial() {
     	return Board.WALKWAY;

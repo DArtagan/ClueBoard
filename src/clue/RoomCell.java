@@ -30,9 +30,6 @@ public class RoomCell extends BoardCell {
     public boolean isRoom() {
         return true;
     }
-    
-    public void draw() {
-    }
 
 	public DoorDirection getDoorDirection() {
 		return doorDirection;

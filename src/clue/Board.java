@@ -29,10 +29,16 @@ public class Board {
 		cells = new ArrayList<BoardCell>();
 		rooms = new TreeMap<Character, String>();
 	}
+	
+	public Board(String legendName, String layoutName) throws IOException, BadConfigFormatException {
+		cells = new ArrayList<BoardCell>();
+		rooms = new TreeMap<Character, String>();
+		loadConfigFiles(legendName, layoutName);
+	}
 
-	public void loadConfigFiles(String layoutName, String legendName) throws IOException, BadConfigFormatException {
-		loadLayout(layoutName);
+	public void loadConfigFiles(String legendName, String layoutName) throws IOException, BadConfigFormatException {
 		loadLegend(legendName);
+		loadLayout(layoutName);
 	}
 
 	public void loadLegend(String legendName) throws IOException, BadConfigFormatException {
@@ -101,11 +107,11 @@ public class Board {
 		return row*numColumns+col;
 	}
 
-	public BoardCell GetRoomCellAt(int row, int col) {
+	public BoardCell getCellAt(int row, int col) {
 		return cells.get(this.calcIndex(row, col));
 	}
 	
-	public BoardCell GetRoomCellAt(int index) {
+	public BoardCell getCellAt(int index) {
 		return cells.get(index);
 	}
 
