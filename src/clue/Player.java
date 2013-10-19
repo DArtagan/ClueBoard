@@ -8,6 +8,6 @@ public abstract class Player {
 	}
 
 	public Card disproveSuggestion(String person, String room, String weapon) {
-
+		return null;
 	}
 }
