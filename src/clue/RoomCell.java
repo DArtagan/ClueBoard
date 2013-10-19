@@ -1,4 +1,4 @@
-package boardClasses;
+package clue;
 
 public class RoomCell extends BoardCell {
     public enum DoorDirection {UP, DOWN, LEFT, RIGHT, NONE};

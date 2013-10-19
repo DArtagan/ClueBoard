@@ -1,4 +1,4 @@
-package boardClasses;
+package clue;
 
 public class BadConfigFormatException extends Exception {
 

@@ -1,4 +1,4 @@
-package ClueBoardTests;
+package clueTests;
 
 import java.util.LinkedList;
 import java.util.Set;
@@ -8,9 +8,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import boardClasses.BadConfigFormatException;
-import boardClasses.Board;
-import boardClasses.BoardCell;
+import clue.BadConfigFormatException;
+import clue.Board;
+import clue.BoardCell;
 
 public class CR_BoardAdjTargetTests {
 	private static Board board;

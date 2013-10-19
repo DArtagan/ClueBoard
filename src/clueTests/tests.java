@@ -1,4 +1,4 @@
-package ClueBoardTests;
+package clueTests;
 
 //import static org.junit.Assert.*;
 //import static junit.framework.Assert.assertEquals;
@@ -10,13 +10,12 @@ import java.util.Map;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import boardClasses.BadConfigFormatException;
-import boardClasses.Board;
-import boardClasses.BoardCell;
-import boardClasses.RoomCell;
-
 import org.junit.Test;
+
+import clue.BadConfigFormatException;
+import clue.Board;
+import clue.BoardCell;
+import clue.RoomCell;
 
 public class tests {
 	private static Board board;

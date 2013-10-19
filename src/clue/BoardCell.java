@@ -1,4 +1,4 @@
-package boardClasses;
+package clue;
 
 abstract public class BoardCell {
     private int pieceRow;

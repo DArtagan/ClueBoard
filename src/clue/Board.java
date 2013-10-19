@@ -1,4 +1,4 @@
-package boardClasses;
+package clue;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
 
-import boardClasses.RoomCell.DoorDirection;
+import clue.RoomCell.DoorDirection;
 
 public class Board {
 	private ArrayList<BoardCell> cells = new ArrayList<BoardCell>();
