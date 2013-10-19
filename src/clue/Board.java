@@ -30,13 +30,13 @@ public class Board {
 		rooms = new TreeMap<Character, String>();
 	}
 	
-	public Board(String legendName, String layoutName) throws IOException, BadConfigFormatException {
+	public Board(String layoutName, String legendName) throws IOException, BadConfigFormatException {
 		cells = new ArrayList<BoardCell>();
 		rooms = new TreeMap<Character, String>();
 		loadConfigFiles(legendName, layoutName);
 	}
 
-	public void loadConfigFiles(String legendName, String layoutName) throws IOException, BadConfigFormatException {
+	public void loadConfigFiles(String layoutName, String legendName) throws IOException, BadConfigFormatException {
 		loadLegend(legendName);
 		loadLayout(layoutName);
 	}
