@@ -23,6 +23,6 @@ public class ClueGame {
 	}
 
 	public boolean checkAccusation(Solution solution) {
-
+		return false;
 	}
 }
