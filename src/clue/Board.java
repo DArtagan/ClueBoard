@@ -60,7 +60,8 @@ public class Board {
 	}
 	
 	public void loadLayout(String layoutName) throws BadConfigFormatException {
-		int colCount1=0, colCount2=0;
+		int colCount1 = 0;
+		int colCount2 = 0;
 		Scanner scan = new Scanner(System.in);
 		FileReader reader = null;
 		try {
@@ -108,7 +109,7 @@ public class Board {
 	}
 
 	public BoardCell getCellAt(int row, int col) {
-		return cells.get(this.calcIndex(row, col));
+		return getCellAt(calcIndex(row, col));
 	}
 	
 	public BoardCell getCellAt(int index) {
@@ -133,7 +134,7 @@ public class Board {
 		LinkedList <Integer> adjs;
 		for (int i = 0; i < numRows*numColumns; i++) {
 			adjs = new LinkedList<Integer>();
-			if (getCellAt(0,i).isDoorway()) {
+			if (getCellAt(i).isDoorway()) {
 				if (((RoomCell) cells.get(i)).getDoorDirection()  == DoorDirection.DOWN) {
 					adjs.add(i+numColumns);
 				} else if (((RoomCell) cells.get(i)).getDoorDirection()  == DoorDirection.LEFT) {
@@ -142,8 +143,8 @@ public class Board {
 					adjs.add(i+1);
 				} else if (((RoomCell) cells.get(i)).getDoorDirection() == DoorDirection.UP) {
 					adjs.add(i-numColumns);
-				}
-			} else {
+				} 
+			} else if (!getCellAt(i).isRoom()) {
 				if (i%numColumns != 0) {
 					// If the square isn't on the left.
 					if(!cells.get(i-1).isRoom() || (cells.get(i-1).isDoorway() && ((RoomCell) cells.get(i-1)).getDoorDirection() == DoorDirection.RIGHT)) {
@@ -191,10 +192,10 @@ public class Board {
 		for (int i = 0; i < visited.length; i++) {
 			visited[i] = false;
 		}
-		calc2Targets(row, col, step);	
+		calcTargetsHelper(row, col, step);	
 	}
 	
-	public void calc2Targets(int row, int col, int step) {
+	private void calcTargetsHelper(int row, int col, int step) {
 		int index = calcIndex(row,col);
 		visited[index] = true;
 		LinkedList<Integer> adjs = getAdjList(index);
@@ -209,7 +210,7 @@ public class Board {
 						targets.add(getCellAt(0,i));
 					}
 				} else {
-					calc2Targets(0,i,step-1);
+					calcTargetsHelper(0,i,step-1);
 				}
 			}
 		}

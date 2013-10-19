@@ -5,7 +5,6 @@ package clueTests;
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.*;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 
@@ -128,41 +127,23 @@ public class CR_BoardInitTests {
 	
 	// Test that an exception is thrown for a bad config file
 	@Test (expected = BadConfigFormatException.class)
-	public void testBadColumns() throws BadConfigFormatException, FileNotFoundException {
+	public void testBadColumns() throws BadConfigFormatException, IOException {
 		// overloaded Board ctor takes config file names
-		try {
-			new Board("ClueLayoutBadColumns.csv", "ClueLegend.txt");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (BadConfigFormatException e) {
-			e.printStackTrace();
-		}
+		new Board("CR_ClueLayoutBadColumns.csv", "CR_ClueLegend.txt");
 		// You may change these calls if needed to match your function names
 		// My loadConfigFiles has a try/catch, so I can't call it directly to
 		// see test throwing the BadConfigFormatException
 	}
 	// Test that an exception is thrown for a bad config file
 	@Test (expected = BadConfigFormatException.class)
-	public void testBadRoom() throws BadConfigFormatException, FileNotFoundException {
+	public void testBadRoom() throws BadConfigFormatException, IOException {
 		// overloaded Board ctor takes config file name
-		try {
-			new Board("ClueLayoutBadRoom.csv", "ClueLegend.txt");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (BadConfigFormatException e) {
-			e.printStackTrace();
-		}
+		new Board("CR_ClueLayoutBadRoom.csv", "CR_ClueLegend.txt");
 	}
 	// Test that an exception is thrown for a bad config file
 	@Test (expected = BadConfigFormatException.class)
-	public void testBadRoomFormat() throws BadConfigFormatException, FileNotFoundException {
+	public void testBadRoomFormat() throws BadConfigFormatException, IOException {
 		// overloaded Board ctor takes config file name
-		try {
-			new Board("ClueLayout.csv", "ClueLegendBadFormat.txt");
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (BadConfigFormatException e) {
-			e.printStackTrace();
-		}
+		new Board("CR_ClueLayout.csv", "CR_ClueLegendBadFormat.txt");
 	}
 }
