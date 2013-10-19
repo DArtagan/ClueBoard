@@ -5,8 +5,8 @@ public class RoomCell extends BoardCell {
     public DoorDirection doorDirection;
     private char roomInitial;
     
-    RoomCell(char initial, char direction){
-    	switch (direction){
+    RoomCell(char initial, char direction) {
+    	switch (direction) {
     	case 'U':
     		doorDirection = DoorDirection.UP;
     		break;
@@ -27,12 +27,11 @@ public class RoomCell extends BoardCell {
     }
 
     @Override
-    public boolean isRoom(){
+    public boolean isRoom() {
         return true;
     }
     
-    public void draw(){
-        
+    public void draw() {
     }
 
 	public DoorDirection getDoorDirection() {
@@ -44,9 +43,10 @@ public class RoomCell extends BoardCell {
 	}
 	
 	@Override
-	public boolean isDoorway(){
-        if (doorDirection == DoorDirection.NONE)
+	public boolean isDoorway() {
+        if (doorDirection == DoorDirection.NONE) {
         	return false;
+        }
         return true;
     }
 }
