@@ -4,22 +4,22 @@ abstract public class BoardCell {
     private int pieceRow;
     private int pieceCol;
     
-    public boolean isWalkway(){
+    public boolean isWalkway() {
         return false;
     }    
     
-    public boolean isRoom(){
+    public boolean isRoom() {
         return false;
     }
 
-    public boolean isDoorway(){
+    public boolean isDoorway() {
         return false;
     }  
 
-    public void draw(){
+    public void draw() {
     }
     
-    public char getInitial(){
+    public char getInitial() {
     	return 'H';
     }
 
