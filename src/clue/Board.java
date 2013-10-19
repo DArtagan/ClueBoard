@@ -1,6 +1,7 @@
 package clue;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,7 +15,7 @@ import clue.RoomCell.DoorDirection;
 
 public class Board {
 	private ArrayList<BoardCell> cells;
-	private Map<Character, String> rooms;
+	private TreeMap<Character, String> rooms;
 	private int numRows = 0;
 	private int numColumns = 0;
 	private Set<BoardCell> targets;
@@ -26,11 +27,29 @@ public class Board {
 		rooms = new TreeMap<Character, String>();
 	}
 
-	public void loadConfigFiles(String layoutName, String legendName) throws BadConfigFormatException {
+	public void loadConfigFiles(String layoutName, String legendName) throws IOException, BadConfigFormatException {
 		loadLayout(layoutName);
 		loadLegend(legendName);
 	}
 
+	public void loadLegend(String legendName) throws IOException, BadConfigFormatException {
+		FileReader legendReader = new FileReader(legendName);
+		Scanner legendIn = new Scanner(legendReader);
+		String line, parts[];
+		while (legendIn.hasNextLine()) {
+			line = legendIn.nextLine();
+			parts = line.split(", ");
+			if(parts.length != 2 || parts[0] == "" || parts[1] == "") {
+				legendIn.close();
+				legendReader.close();
+				throw new BadConfigFormatException("Legend is malformed.");
+			}
+			rooms.put(parts[0].charAt(0), parts[1]);
+		}
+		legendIn.close();
+		legendReader.close();
+	}
+	
 	public void loadLayout(String layoutName) throws BadConfigFormatException {
 		int colCount1=0, colCount2=0;
 		Scanner scan = new Scanner(System.in);
@@ -54,7 +73,7 @@ public class Board {
 					if (numRows==1) {
 						colCount2++;
 					}
-					if (c != 'H') {
+					if (c != 'W') {
 						if (i != line.length()-1) {
 							cells.add(new RoomCell(c,line.charAt(i+1)));
 						} else {
@@ -72,25 +91,6 @@ public class Board {
 			colCount2 = colCount1;
 		}
 		numColumns = colCount2;
-		scan.close();
-	}
-
-	public void loadLegend(String legendName) throws BadConfigFormatException {
-		FileReader reader = null;
-		try {
-			reader = new FileReader(legendName);
-		} catch(FileNotFoundException e) {
-			System.out.println(e.getMessage());
-		}
-		Scanner scan = new Scanner(reader);
-		while (scan.hasNextLine()) {
-			String line = scan.nextLine();
-			if(!(line.charAt(0) == 'H'||line.charAt(0) == 'R'||line.charAt(0) == 'X'||line.charAt(0) == 'K'||line.charAt(0) == 'D'||line.charAt(0) == 'B'||line.charAt(0) == 'L'||line.charAt(0) == 'S'||line.charAt(0) == 'O'||line.charAt(0) == 'C'||line.charAt(0) == 'T')) {
-				scan.close();
-				throw new BadConfigFormatException();
-			}
-			rooms.put(line.charAt(0), line.substring(3,line.length()));
-		}
 		scan.close();
 	}
 

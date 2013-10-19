@@ -20,7 +20,7 @@ abstract public class BoardCell {
     }
     
     public char getInitial() {
-    	return 'H';
+    	return 'W';
     }
 
 }
