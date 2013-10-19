@@ -22,7 +22,7 @@ public class Board {
 	private int numRows = 0;
 	private int numColumns = 0;
 	private Set<BoardCell> targets;
-	private Map<Integer, LinkedList<Integer>> adjMtx;//map for what squares are adjacent to each
+	private Map<Integer, LinkedList<Integer>> adjMtx;
 	private boolean[] visited ;
 
 	public Board() {
@@ -128,11 +128,11 @@ public class Board {
 	}
 
 	public void calcAdjacencies() {
-		adjMtx = new HashMap<Integer, LinkedList<Integer>>();//initializes the adjacency matrix
+		adjMtx = new HashMap<Integer, LinkedList<Integer>>();
 
 		LinkedList <Integer> adjs;
-		for (int i = 0; i < numRows*numColumns; i++) {//for every square in grid
-			adjs = new LinkedList<Integer>();//start a new list
+		for (int i = 0; i < numRows*numColumns; i++) {
+			adjs = new LinkedList<Integer>();
 			if (getCellAt(0,i).isDoorway()) {
 				if (((RoomCell) cells.get(i)).getDoorDirection()  == DoorDirection.DOWN) {
 					adjs.add(i+numColumns);
@@ -144,24 +144,36 @@ public class Board {
 					adjs.add(i-numColumns);
 				}
 			} else {
-				if (i%numColumns != 0) { //if the square isn't on the left
-					if(!cells.get(i-1).isRoom() || (cells.get(i-1).isDoorway() && ((RoomCell) cells.get(i-1)).getDoorDirection() == DoorDirection.RIGHT)) {//If it's a walkway or a proper facing door
-						adjs.add(i-1);//add the square to the left to the adjacency list
+				if (i%numColumns != 0) {
+					// If the square isn't on the left.
+					if(!cells.get(i-1).isRoom() || (cells.get(i-1).isDoorway() && ((RoomCell) cells.get(i-1)).getDoorDirection() == DoorDirection.RIGHT)) {
+						// If it's a walkway or a proper facing door, add the
+						// square to the left to the adjacency list.
+						adjs.add(i-1);  
 					}
 				}
-				if(i/numColumns != 0) {//if the square isn't on the top
-					if(!cells.get(i-numColumns).isRoom() || (cells.get(i-numColumns).isDoorway() && ((RoomCell) cells.get(i-numColumns)).getDoorDirection() == DoorDirection.DOWN)) {//If it's a walkway or a proper facing door
-						adjs.add(i-numColumns);//add the square to the top to the adjacency list
+				if(i/numColumns != 0) {
+					// If the square isn't on the top.
+					if(!cells.get(i-numColumns).isRoom() || (cells.get(i-numColumns).isDoorway() && ((RoomCell) cells.get(i-numColumns)).getDoorDirection() == DoorDirection.DOWN)) {
+						// If it's a walkway or a proper facing door, add
+						// the square to the top to the adjacency list.
+						adjs.add(i-numColumns);
 					}
 				}
-				if(i%numColumns != numColumns-1) {//if the square isn't on the right
-					if(!cells.get(i+1).isRoom() || (cells.get(i+1).isDoorway() && ((RoomCell) cells.get(i+1)).getDoorDirection() == DoorDirection.LEFT)) {//If it's a walkway or a proper facing door
-						adjs.add(i+1);//add the square to the right to the adjacency listif(i/numColumns != numRows-1)//if the square isn't on the right
+				if(i%numColumns != numColumns-1) {
+					// If the square isn't on the right.
+					if(!cells.get(i+1).isRoom() || (cells.get(i+1).isDoorway() && ((RoomCell) cells.get(i+1)).getDoorDirection() == DoorDirection.LEFT)) {
+						// If it's a walkway or a proper facing door,
+						// add the square to the right to the adjacency list. 
+						adjs.add(i+1);
 					}
 				}
-				if(i/numColumns != numRows-1) {//if the square isn't on the bottom
-					if(!cells.get(i+numColumns).isRoom() || (cells.get(i+numColumns).isDoorway() && ((RoomCell) cells.get(i+numColumns)).getDoorDirection() == DoorDirection.UP)) {//If it's a walkway or a proper facing door
-						adjs.add(i+numColumns);//add the square to the top to the adjacency list
+				if(i/numColumns != numRows-1) {
+					//if the square isn't on the bottom.
+					if(!cells.get(i+numColumns).isRoom() || (cells.get(i+numColumns).isDoorway() && ((RoomCell) cells.get(i+numColumns)).getDoorDirection() == DoorDirection.UP)) {
+						// If it's a walkway or a proper facing door,
+						// add the square to the top to the adjacency list
+						adjs.add(i+numColumns);
 					}
 				}
 			}
