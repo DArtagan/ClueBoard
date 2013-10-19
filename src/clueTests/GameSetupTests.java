@@ -21,6 +21,10 @@ public class GameSetupTests {
 		fail("Not yet implemented");
 	}
 
+	@Test public void testEqualCards() {
+		fail("Not yet implemented");
+	}
+
 	@Test
 	public void testDealCards() {
 		fail("Not yet implemented");
