@@ -20,7 +20,7 @@ abstract public class BoardCell {
     }
     
     public char getInitial() {
-    	return 'W';
+    	return Board.WALKWAY;
     }
 
 }

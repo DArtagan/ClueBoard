@@ -14,6 +14,9 @@ import java.util.TreeMap;
 import clue.RoomCell.DoorDirection;
 
 public class Board {
+	// Constants
+	protected static final char WALKWAY = 'W';
+	
 	private ArrayList<BoardCell> cells;
 	private TreeMap<Character, String> rooms;
 	private int numRows = 0;
@@ -73,7 +76,7 @@ public class Board {
 					if (numRows==1) {
 						colCount2++;
 					}
-					if (c != 'W') {
+					if (c != WALKWAY) {
 						if (i != line.length()-1) {
 							cells.add(new RoomCell(c,line.charAt(i+1)));
 						} else {
