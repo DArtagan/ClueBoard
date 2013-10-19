@@ -68,9 +68,16 @@ public class Board {
 			++numRows;
 			String line = scan.nextLine();
 			colCount1 = 0;
-			for (int i = 0; i < line.length(); i++) {
+			for (int i = 0; i < line.length(); ++i) {
 				c = line.charAt(i);
-				if (c != ',' && (i == 0 || line.charAt(i-1) == ',')) {
+				if (!(c != ',' && (i == 0 || line.charAt(i-1) == ','))) {
+					continue;
+				}
+				if (!rooms.containsKey(c)) {
+					scan.close();
+					reader.close();
+					throw new BadConfigFormatException("Bad room initial in layout.");
+				} else {
 					++colCount1;
 					if (numRows == 1) {
 						++colCount2;
