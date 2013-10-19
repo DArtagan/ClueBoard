@@ -209,7 +209,7 @@ public class Board {
 						targets.add(getCellAt(0,i));
 					}
 				} else {
-					calc2Targets(0,i,step-1);
+					calcTargetsHelper(0,i,step-1);
 				}
 			}
 		}
