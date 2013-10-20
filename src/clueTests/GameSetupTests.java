@@ -20,6 +20,9 @@ public class GameSetupTests {
 	// Constants
 	private final static int cardTotal = 21;
 
+	// Valid cards
+	Card dagger, rope, conservatory, library, mrgreen, scarlett;
+
 	// Variables
 	private ClueGame clueGame;
 
@@ -28,6 +31,14 @@ public class GameSetupTests {
 		clueGame = new ClueGame("ClueBoard.csv", "legend.txt");
 		clueGame.loadConfigFiles("playerConfig.txt", "weaponConfig.txt");
 		clueGame.deal();
+
+		// Check valid cards.
+		dagger = new Card("Dagger", CardType.WEAPON);
+		rope = new Card("Rope", CardType.WEAPON);
+		conservatory = new Card("Conservatory", CardType.ROOM);
+		library = new Card("Library", CardType.ROOM);
+		mrgreen = new Card("Mr. Green", CardType.PERSON);
+		scarlett = new Card("Miss Scarlett", CardType.PERSON);
 	}
 
 	@Test
@@ -51,14 +62,6 @@ public class GameSetupTests {
 		int weaponTotal = 6;
 		int roomTotal = 9;
 		int personTotal = 6;
-
-		// Check valid cards.
-		Card dagger = new Card("Dagger", CardType.WEAPON);
-		Card rope = new Card("Rope", CardType.WEAPON);
-		Card conservatory = new Card("Conservatory", CardType.ROOM);
-		Card library = new Card("Library", CardType.ROOM);
-		Card mrgreen = new Card("Mr. Green", CardType.PERSON);
-		Card scarlett = new Card("Miss Scarlett", CardType.PERSON);
 
 		assertTrue(clueGame.getCards().contains(dagger));
 		assertTrue(clueGame.getCards().contains(rope));
@@ -107,17 +110,26 @@ public class GameSetupTests {
 				++cardCount;
 			}
 			if(cardCountLast == 0) {
+				// For the first player,
+				// can't check against the last player
 				cardCountLast = cardCount;
 			}
+			// assert that this player has the same number of cards as the last player
 			assertTrue(cardCount == cardCountLast);
-			cardCountLast = cardCount;
-			cardCountTotal += cardCount;
+			cardCountLast = cardCount;  // set the record of the last count before checking next player
+			cardCountTotal += cardCount;  // add to total for each player
 		}
 		assertTrue(cardCountTotal + 3 == cardTotal);
+		// the total number of cards that all players have, plus three, equal the total deck
+		// we can use plus 3, because we checked earlier that a solution was generated
+		// solutions eat three cards
 
 		// Duplicate Card Check
 		for (Player player : players) {
 			for (Player opponent : players) {
+				if(opponent.equals(player)) {
+					continue;
+				}
 				for (Card card : player.getCards()) {
 					assertFalse(opponent.getCards().contains(card));
 				}

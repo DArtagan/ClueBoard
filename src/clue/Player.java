@@ -82,7 +82,7 @@ public abstract class Player {
 
 	// For use by unit tests only.
 	public HashSet<Card> getCards() {
-		return null;
+		return myCards;
 	}
 
 	public void addCard(Card card) {
