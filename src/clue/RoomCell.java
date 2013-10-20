@@ -1,7 +1,7 @@
 package clue;
 
 public class RoomCell extends BoardCell {
-	public enum DoorDirection {UP, DOWN, LEFT, RIGHT, NONE};
+	public static enum DoorDirection {UP, DOWN, LEFT, RIGHT, NONE};
 	public DoorDirection doorDirection = DoorDirection.NONE;
 
 	RoomCell(char initial, char direction) {
