@@ -16,7 +16,7 @@ public abstract class Player {
 		    Field field = Class.forName("java.awt.Color").getField(color);
 		    this.color = (Color)field.get(null);
 		} catch (Exception e) {
-		    this.color = null; // Not defined
+		    this.color = null;  // Not defined
 		}
 	}
 
