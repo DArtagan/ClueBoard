@@ -3,7 +3,7 @@ package clue;
 import java.util.HashSet;
 
 public class ClueGame {
-	Solution solution;
+	public Solution solution;
 
 	public ClueGame() {
 

@@ -16,7 +16,7 @@ import clue.RoomCell.DoorDirection;
 
 public class Board {
 	private ArrayList<BoardCell> cells;
-	private TreeMap<Character, String> rooms;
+	protected TreeMap<Character, String> rooms;
 	private int numRows;
 	private int numColumns;
 	private Set<BoardCell> targets;

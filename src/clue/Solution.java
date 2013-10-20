@@ -1,5 +1,6 @@
 package clue;
 
+
 public class Solution {
 	public String person, weapon, room;
 
@@ -55,5 +56,4 @@ public class Solution {
 		}
 		return true;
 	}
-
 }
