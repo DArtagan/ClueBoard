@@ -82,7 +82,7 @@ public class ClueGame {
 	}
 
 	public boolean checkAccusation(Solution solution) {
-		return false;
+		return this.solution.equals(solution);
 	}
 
 	private void generateDeck() {
