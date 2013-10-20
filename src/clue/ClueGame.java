@@ -18,7 +18,6 @@ public class ClueGame {
 	public ClueGame(String layoutName, String legendName) throws IOException, BadConfigFormatException {
 		players = new HashSet<Player>();
 		weapons = new HashSet<Card>();
-		deck = new HashSet<Card>();
 		board = new Board();
 		board.loadConfigFiles(layoutName, legendName);
 	}
@@ -65,6 +64,7 @@ public class ClueGame {
 
 	public void loadConfigFiles(String playerConfig, String weaponConfig) throws BadConfigFormatException, IOException {
 		// Load player config.
+		deck = new HashSet<Card>();
 		FileReader playerReader = new FileReader(playerConfig);
 		Scanner playerScanner = new Scanner(playerReader);
 		String line, fields[];
