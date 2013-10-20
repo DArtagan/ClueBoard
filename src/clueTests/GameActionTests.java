@@ -25,9 +25,21 @@ public class GameActionTests {
 		Solution accusation = new Solution("Miss Scarlett", "Revolver", "Aquarium");
 		clueGame.setSolution(accusation);
 
-		// Test that correct accusations
+		// Test that correct accusations return true.
 		assertTrue(clueGame.checkAccusation(accusation));
-		assertFalse(clueGame.checkAccusation(accusation));
+		// And that accusations of various levels of almost-correctness return false.
+		Solution false1 = new Solution("Miss Scarlett", "Rope", "Aquarium");
+		Solution false2 = new Solution("Mr. Green", "Revolver", "Aquarium");
+		Solution false3 = new Solution("Miss Scarlett", "Revolver", "Laboratory");
+		Solution false4 = new Solution("Professor Plum", "Lead Pipe", "Kitchen");
+		Solution false5 = new Solution("A", "B", "C");  // Nonsense solution
+		Solution false6 = new Solution("Miss Scarlett", "Rope", "Kitchen");
+		assertFalse(clueGame.checkAccusation(false1));
+		assertFalse(clueGame.checkAccusation(false2));
+		assertFalse(clueGame.checkAccusation(false3));
+		assertFalse(clueGame.checkAccusation(false4));
+		assertFalse(clueGame.checkAccusation(false5));
+		assertFalse(clueGame.checkAccusation(false6));
 	}
 
 	@Test

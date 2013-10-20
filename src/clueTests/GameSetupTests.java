@@ -23,7 +23,7 @@ public class GameSetupTests {
 	@Test
 	public void testLoadPeople() {
 		// Test some valid players, including first and last in the file.
-		ComputerPlayer mrgreen = new ComputerPlayer("Reverend Green", "green", 160);
+		ComputerPlayer mrgreen = new ComputerPlayer("Mr. Green", "green", 160);
 		ComputerPlayer mustard = new ComputerPlayer("Colonel Mustard", "yellow", 10);
 		ComputerPlayer scarlet = new ComputerPlayer("Miss Scarlett", "red", 161);
 		ComputerPlayer prfplum = new ComputerPlayer("Professor Plum", "purple", 368);

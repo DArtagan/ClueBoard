@@ -1,6 +1,6 @@
 Miss Scarlett, red, 161
 Colonel Mustard, yellow, 10
 Mrs. White, white, 15
-Reverend Green, green, 160
+Mr. Green, green, 160
 Mrs. Peacock, blue, 344
 Professor Plum, purple, 368
