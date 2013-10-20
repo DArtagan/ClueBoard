@@ -1,5 +1,7 @@
 package clue;
 
+import java.util.HashSet;
+
 public class ClueGame {
 
 	public ClueGame() {
@@ -10,7 +12,7 @@ public class ClueGame {
 
 	}
 
-	public void loadConfigFile() {
+	public void loadConfigFiles(String playerConfig, String weaponConfig) {
 
 	}
 
@@ -24,5 +26,9 @@ public class ClueGame {
 
 	public boolean checkAccusation(Solution solution) {
 		return false;
+	}
+
+	public HashSet<Player> getPlayers() {
+		return null;
 	}
 }
