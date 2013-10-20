@@ -1,5 +1,6 @@
 package clueTests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -24,7 +25,7 @@ public class GameSetupTests {
 
 	@Before
 	public void setUp() throws Exception {
-		clueGame = new ClueGame();
+		clueGame = new ClueGame("ClueBoard.csv", "legend.txt");
 		clueGame.loadConfigFiles("playerConfig.txt", "weaponConfig.txt");
 		clueGame.deal();
 	}
@@ -65,7 +66,7 @@ public class GameSetupTests {
 		assertTrue(clueGame.getCards().contains(mrgreen));
 		assertTrue(clueGame.getCards().contains(scarlett));
 
-		assertTrue(clueGame.getCards().size() == cardTotal);
+		assertEquals(cardTotal, clueGame.getCards().size());
 
 		int weaponCount = 0;
 		int roomCount = 0;
@@ -81,9 +82,9 @@ public class GameSetupTests {
 				++personCount;
 			}
 		}
-		assertTrue(weaponCount == weaponTotal);
-		assertTrue(roomCount == roomTotal);
-		assertTrue(personCount == personTotal);
+		assertEquals(weaponTotal, weaponCount);
+		assertEquals(roomTotal, roomCount);
+		assertEquals(personTotal, personCount);
 	}
 
 	@Test

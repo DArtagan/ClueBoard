@@ -46,7 +46,7 @@ public class Card {
 	}
 
 	public CardType getType() {
-		return null;
+		return type;
 	}
 
 	public void setType(CardType setType) {
