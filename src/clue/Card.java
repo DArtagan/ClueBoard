@@ -4,7 +4,7 @@ public class Card {
 	public enum CardType {ROOM, WEAPON, PERSON};
 	public String Name;
 
-	public Card() {
+	public Card(String string, CardType weapon) {
 
 	}
 

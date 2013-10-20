@@ -16,7 +16,7 @@ public class ClueGame {
 
 	}
 
-	public void slectAnswer() {
+	public void selectAnswer() {
 
 	}
 
@@ -29,6 +29,10 @@ public class ClueGame {
 	}
 
 	public HashSet<Player> getPlayers() {
+		return null;
+	}
+
+	public HashSet<Card> getCards() {
 		return null;
 	}
 }
