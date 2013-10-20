@@ -1,6 +1,5 @@
 package clueTests;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -25,13 +24,10 @@ public class GameSetupTests {
 		ComputerPlayer mrgreen = new ComputerPlayer("Mr. Green");
 		ComputerPlayer mustard = new ComputerPlayer("Colonel Mustard");
 		ComputerPlayer scarlet = new ComputerPlayer("Miss Scarlet");
-		// Not a valid player
-		ComputerPlayer player0 = new ComputerPlayer("Player Zero");
 
 		assertTrue(clueGame.getPlayers().contains(mrgreen));
 		assertTrue(clueGame.getPlayers().contains(mustard));
 		assertTrue(clueGame.getPlayers().contains(scarlet));
-		assertFalse(clueGame.getPlayers().contains(player0));
 		assertTrue(clueGame.getPlayers().size() == 6);
 	}
 
