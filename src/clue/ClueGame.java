@@ -17,7 +17,7 @@ public class ClueGame {
 
 	}
 
-	public void slectAnswer() {
+	public void selectAnswer() {
 
 	}
 
@@ -37,5 +37,9 @@ public class ClueGame {
 
 	public void setSolution(Solution accusation) {
 		solution = accusation;
+	}
+
+	public HashSet<Card> getCards() {
+		return null;
 	}
 }
