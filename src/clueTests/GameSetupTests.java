@@ -12,6 +12,7 @@ import clue.Card;
 import clue.Card.CardType;
 import clue.ClueGame;
 import clue.ComputerPlayer;
+import clue.HumanPlayer;
 import clue.Player;
 
 public class GameSetupTests {
@@ -33,8 +34,8 @@ public class GameSetupTests {
 		// Test some valid players, including first and last in the file.
 		ComputerPlayer mrgreen = new ComputerPlayer("Mr. Green", "green", 160);
 		ComputerPlayer mustard = new ComputerPlayer("Colonel Mustard", "yellow", 10);
-		ComputerPlayer scarlet = new ComputerPlayer("Miss Scarlett", "red", 161);
-		ComputerPlayer prfplum = new ComputerPlayer("Professor Plum", "purple", 368);
+		HumanPlayer scarlet = new HumanPlayer("Miss Scarlett", "red", 161);
+		ComputerPlayer prfplum = new ComputerPlayer("Professor Plum", "magenta", 368);
 
 		assertTrue(clueGame.getPlayers().contains(mrgreen));
 		assertTrue(clueGame.getPlayers().contains(mustard));
