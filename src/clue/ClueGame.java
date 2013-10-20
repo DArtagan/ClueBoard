@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 public class ClueGame {
-	Solution solution;
+	public Solution solution;
 	HashSet<Player> players;
 	HashSet<Card> weapons;
 	HashSet<Card> deck;

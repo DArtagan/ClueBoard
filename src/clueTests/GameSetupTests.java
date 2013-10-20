@@ -1,7 +1,9 @@
 package clueTests;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+
+import java.util.HashSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,14 +13,20 @@ import clue.Card.CardType;
 import clue.ClueGame;
 import clue.ComputerPlayer;
 import clue.HumanPlayer;
+import clue.Player;
 
 public class GameSetupTests {
+	// Constants
+	private final static int cardTotal = 21;
+
+	// Variables
 	private ClueGame clueGame;
 
 	@Before
 	public void setUp() throws Exception {
 		clueGame = new ClueGame();
 		clueGame.loadConfigFiles("playerConfig.txt", "weaponConfig.txt");
+		clueGame.deal();
 	}
 
 	@Test
@@ -39,8 +47,6 @@ public class GameSetupTests {
 
 	@Test
 	public void testLoadCards() {
-		int cardTotal = 21;
-
 		int weaponTotal = 6;
 		int roomTotal = 9;
 		int personTotal = 6;
@@ -65,13 +71,13 @@ public class GameSetupTests {
 		int roomCount = 0;
 		int personCount = 0;
 		for (Card card : clueGame.getCards()) {
-			if (card.getCardType() == Card.CardType.WEAPON) {
+			if (card.getType() == Card.CardType.WEAPON) {
 				++weaponCount;
 			}
-			if (card.getCardType() == Card.CardType.ROOM) {
+			if (card.getType() == Card.CardType.ROOM) {
 				++roomCount;
 			}
-			if (card.getCardType() == Card.CardType.PERSON) {
+			if (card.getType() == Card.CardType.PERSON) {
 				++personCount;
 			}
 		}
@@ -82,7 +88,38 @@ public class GameSetupTests {
 
 	@Test
 	public void testDealCards() {
-		fail("Not yet implemented");
+		HashSet<Card> cards = clueGame.getCards();
+		HashSet<Player> players = clueGame.getPlayers();
+
+		// Solution generated
+		assertTrue(clueGame.solution.weapon != null && clueGame.solution.room != null && clueGame.solution.person != null);
+
+		// Card Count
+		int cardCount;
+		int cardCountTotal = 0;
+		int cardCountLast = 0;
+		for (Player player : players) {
+			cardCount = 0;
+			for (Card card : player.getCards()) {
+				++cardCount;
+			}
+			if(cardCountLast == 0) {
+				cardCountLast = cardCount;
+			}
+			assertTrue(cardCount == cardCountLast);
+			cardCountLast = cardCount;
+			cardCountTotal += cardCount;
+		}
+		assertTrue(cardCountTotal + 3 == cardTotal);
+
+		// Duplicate Card Check
+		for (Player player : players) {
+			for (Player opponent : players) {
+				for (Card card : player.getCards()) {
+					assertFalse(opponent.getCards().contains(card));
+				}
+			}
+		}
 	}
 
 }

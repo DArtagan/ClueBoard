@@ -1,26 +1,20 @@
 package clue;
 
 public class Card {
-	public enum CardType {ROOM, WEAPON, PERSON};
+	public static enum CardType {ROOM, WEAPON, PERSON};
+
 	public String Name;
+	private CardType type;
 
 	public Card(String string, CardType weapon) {
 
 	}
 
-	public String getName() {
+	public CardType getType() {
 		return null;
 	}
 
-	public CardType getCardType() {
-		return null;
-	}
-
-	public void setName() {
-
-	}
-
-	public void setCardType() {
+	public void setType() {
 
 	}
 

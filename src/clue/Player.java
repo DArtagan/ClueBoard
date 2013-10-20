@@ -15,10 +15,10 @@ public abstract class Player {
 		this.index = index;
 
 		try {
-		    Field field = Class.forName("java.awt.Color").getField(color);
-		    this.color = (Color)field.get(null);
+			Field field = Class.forName("java.awt.Color").getField(color);
+			this.color = (Color)field.get(null);
 		} catch (Exception e) {
-		    this.color = null;  // Not defined
+			this.color = null;  // Not defined
 		}
 	}
 
@@ -73,5 +73,10 @@ public abstract class Player {
 	public String toString() {
 		return "Player [name=" + name + ", color=" + color + ", index=" + index
 				+ "]";
+	}
+
+	// For use by unit tests only.
+	public HashSet<Card> getCards() {
+		return null;
 	}
 }
