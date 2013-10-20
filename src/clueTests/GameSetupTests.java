@@ -38,10 +38,7 @@ public class GameSetupTests {
 	@Test
 	public void testLoadCards() {
 		fail("Not yet implemented");
-	}
 
-	@Test public void testEqualCards() {
-		fail("Not yet implemented");
 	}
 
 	@Test
