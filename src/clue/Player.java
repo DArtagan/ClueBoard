@@ -20,6 +20,7 @@ public abstract class Player {
 		} catch (Exception e) {
 			this.color = null;  // Not defined
 		}
+		myCards = new HashSet<Card>();
 	}
 
 	public String getName() {

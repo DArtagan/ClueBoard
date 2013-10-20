@@ -39,25 +39,26 @@ public class ClueGame {
 	public void deal() {
 		// Set Solution
 		Card card = null;
+		HashSet<Card> tempDeck = new HashSet<Card>(deck);
 		String[] tempSolution = new String[3];
 		int i = 0;
 		for (CardType type : Card.CardType.values()) {
-			while (card.getType() != type) {
-				card = randomCard(deck);
-			}
-			deck.remove(card);
+			do {
+				card = randomCard(tempDeck);
+			} while (card.getType() != type);
+			tempDeck.remove(card);
 			tempSolution[i] = card.name;
 			i++;
 		}
 		solution = new Solution(tempSolution[0], tempSolution[1], tempSolution[2]);
 
 		// Give to players
-		while (!(deck.isEmpty())) {
+		while (!(tempDeck.isEmpty())) {
 			for (Player player : players) {
-				card = randomCard(deck);
+				card = randomCard(tempDeck);
 				if (card != null) {
 					player.addCard(card);
-					deck.remove(card);
+					tempDeck.remove(card);
 				}
 			}
 		}
