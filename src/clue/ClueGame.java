@@ -129,7 +129,7 @@ public class ClueGame {
 	}
 
 	private void generateDeck() {
-		// Add all rooms.
+		// Add all rooms, except for walkway and closet.
 		for (Character key : board.getRooms().keySet()) {
 			if (key != Board.CLOSET && key != Board.WALKWAY) {
 				deck.add(new Card(board.getRooms().get(key), Card.CardType.ROOM));
