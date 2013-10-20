@@ -12,7 +12,9 @@ public class ClueGame {
 	HashSet<Card> deck;
 
 	public ClueGame() {
-
+		players = new HashSet<Player>();
+		weapons = new HashSet<Card>();
+		deck = new HashSet<Card>();
 	}
 
 	public void deal() {
@@ -89,7 +91,7 @@ public class ClueGame {
 
 	// These methods to be used by unit tests only.
 	public HashSet<Player> getPlayers() {
-		return null;
+		return players;
 	}
 
 	public void setSolution(Solution accusation) {
@@ -97,6 +99,6 @@ public class ClueGame {
 	}
 
 	public HashSet<Card> getCards() {
-		return null;
+		return deck;
 	}
 }
