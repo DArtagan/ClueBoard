@@ -3,7 +3,10 @@ package clue;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Scanner;
+
+import clue.Card.CardType;
 
 public class ClueGame {
 	public Solution solution;
@@ -17,8 +20,44 @@ public class ClueGame {
 		deck = new HashSet<Card>();
 	}
 
-	public void deal() {
+	public Card randomCard(HashSet<Card> set) {
+		int size = set.size();
+		int choice = new Random().nextInt(size);
+		int i = 0;
+		for(Card card : set) {
+			if (i == choice) {
+				return card;
+			}
+			++i;
+		}
+		return null;
+	}
 
+	public void deal() {
+		// Set Solution
+		Card card = null;
+		String[] tempSolution = new String[3];
+		int i = 0;
+		for (CardType type : Card.CardType.values()) {
+			while (card.getType() != type) {
+				card = randomCard(deck);
+			}
+			deck.remove(card);
+			tempSolution[i] = card.name;
+			i++;
+		}
+		solution = new Solution(tempSolution[0], tempSolution[1], tempSolution[2]);
+
+		// Give to players
+		while (!(deck.isEmpty())) {
+			for (Player player : players) {
+				card = randomCard(deck);
+				if (card != null) {
+					player.addCard(card);
+					deck.remove(card);
+				}
+			}
+		}
 	}
 
 	public void loadConfigFiles(String playerConfig, String weaponConfig) throws BadConfigFormatException, IOException {

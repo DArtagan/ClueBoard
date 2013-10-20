@@ -1,7 +1,7 @@
 package clue;
 
 public class Card {
-	public static enum CardType {ROOM, WEAPON, PERSON};
+	public static enum CardType {PERSON, WEAPON, ROOM};
 
 	public String name;
 	private CardType type;

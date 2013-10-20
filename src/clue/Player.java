@@ -79,4 +79,8 @@ public abstract class Player {
 	public HashSet<Card> getCards() {
 		return null;
 	}
+
+	public void addCard(Card card) {
+		myCards.add(card);
+	}
 }
