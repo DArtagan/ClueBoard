@@ -16,7 +16,7 @@ public class GameSetupTests {
 	@Before
 	public void setUp() throws Exception {
 		clueGame = new ClueGame();
-		clueGame.loadConfigFiles();
+		clueGame.loadConfigFiles("playerConfig.txt", "weaponConfig.txt");
 	}
 
 	@Test

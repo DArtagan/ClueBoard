@@ -12,7 +12,7 @@ public class ClueGame {
 
 	}
 
-	public void loadConfigFiles() {
+	public void loadConfigFiles(String playerConfig, String weaponConfig) {
 
 	}
 
