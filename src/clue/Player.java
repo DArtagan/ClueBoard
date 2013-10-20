@@ -2,11 +2,13 @@ package clue;
 
 import java.awt.Color;
 import java.lang.reflect.Field;
+import java.util.HashSet;
 
 public abstract class Player {
 	private String name;
 	private Color color;
 	private int index;
+	private HashSet<Card> myCards;
 
 	public Player(String name, String color, int index) {
 		this.name = name;

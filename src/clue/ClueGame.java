@@ -3,6 +3,7 @@ package clue;
 import java.util.HashSet;
 
 public class ClueGame {
+	Solution solution;
 
 	public ClueGame() {
 
@@ -28,7 +29,13 @@ public class ClueGame {
 		return false;
 	}
 
+
+	// These methods to be used by unit tests only.
 	public HashSet<Player> getPlayers() {
 		return null;
+	}
+
+	public void setSolution(Solution accusation) {
+		solution = accusation;
 	}
 }
