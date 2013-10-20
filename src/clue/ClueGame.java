@@ -47,7 +47,7 @@ public class ClueGame {
 			} while (card.getType() != type);
 			tempDeck.remove(card);
 			tempSolution[i] = card.name;
-			i++;
+			++i;
 		}
 		solution = new Solution(tempSolution[0], tempSolution[1], tempSolution[2]);
 
