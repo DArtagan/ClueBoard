@@ -1,0 +1,135 @@
+* Better comments.
+* Comment
+* ++i
+*   Merge branch 'cluegame' of https://github.com/nurbu5/ClueBoard into cluegame
+|\  
+| * Move initialization of deck to config.
+* | Deal null pointers resolved, test now passes.
+|/  
+*   Merge branch 'cluegame' of https://github.com/nurbu5/ClueBoard into cluegame
+|\  
+| * Adding more comments to the tests.
+| * testLoadCards now passes, generateDeck complete.
+| * Implemented checkAccusation.
+* | Deal function.
+|/  
+*   Merge branch 'cluegame' of https://github.com/nurbu5/ClueBoard into cluegame
+|\  
+| *   Fixed merge conflicts.
+| |\  
+| * | Implementing more functions and fixing tests.
+* | | Card class fleshed out.
+| |/  
+|/|   
+* |   Merge
+|\ \  
+| |/  
+| * DoorDirection is static.
+| * Implemented loadConfigFiles.
+* | Deal test.
+|/  
+* Mr. Green
+*   Fixed conflict.
+|\  
+| *   Merge branch 'cluegame' of https://github.com/nurbu5/ClueBoard into cluegame
+| |\  
+| * | testLoadCards now tests number of cards, number of card types, and a selection of cards.
+* | | Working on accusation test.
+| |/  
+|/|   
+* | Add hashCode/equals to Solution.
+* | Added UML method stubs to ComputerPlayer.
+* | Add auto-gen hashCode/equals for Player comparison.
+* | space
+* |   Merge branch 'cluegame' of https://github.com/nurbu5/ClueBoard into cluegame
+|\ \  
+| |/  
+| *   Merge branch 'cluegame' of https://github.com/nurbu5/ClueBoard into cluegame
+| |\  
+| * | weaponConfig.txt
+* | | Fixed player constructor.
+| |/  
+|/|   
+* | Remove useless test.
+* | Fix loadConfigFiles stub/tests.
+* |   Merge branch 'cluegame' of https://github.com/nurbu5/ClueBoard into cluegame
+|\ \  
+| |/  
+| * playerConfig.txt
+| *   Merge branch 'cluegame' of https://github.com/nurbu5/ClueBoard into cluegame
+| |\  
+| * | Don't need equals test for cards.
+* | | Writing failing Player tests.
+| |/  
+|/|   
+* |   Merge branch 'cluegame' of https://github.com/nurbu5/ClueBoard into cluegame
+|\ \  
+| |/  
+| *   Merge branch 'cluegame' of https://github.com/nurbu5/ClueBoard into cluegame
+| |\  
+| * | Card class tests.
+* | | player -> name
+| |/  
+|/|   
+* | Return false.
+* | Added ClueGame and Solution classes.
+|/  
+* Return null.
+*   Merge branch 'cluegame' of https://github.com/nurbu5/ClueBoard into cluegame
+|\  
+| * Blank card class.
+* | Add method stubs for ActionTests.
+* | Add method stubs for SetupTests.
+|/  
+* Added test files.
+* Removed Player test file.
+* Initial work on Player test file.
+* Adding test and class files.
+* Fixed not checking for bad layouts correctly.
+* Fixed tests.
+* Added our test/config files.
+* Fixed all the things.
+*   Merge branch 'refactor' of https://github.com/nurbu5/ClueBoard into refactor
+|\  
+| * Fixing the tests.
+| * Fixed calcAdjacencies.
+| * calc2Targets -> calcTargetsHelper (2)
+| *   Merge branch 'refactor' of https://github.com/nurbu5/ClueBoard into refactor
+| |\  
+| * | calc2Targets -> calcTargetsHelper
+* | | Use Cyndi's convention of (layout, legend).  Rooms are door.NONE by default.
+| |/  
+|/|   
+* |   Merge branch 'refactor' of https://github.com/nurbu5/ClueBoard into refactor
+|\ \  
+| |/  
+| * Refactoring tests.
+| * Changed comments.
+* | Change config files to use W convention.
+|/  
+* Change GetRoomCellAt to getCellAt.
+* Remove draw functions, add alternative constructor for board.
+* Cyndi's tests now compile.
+* Added all of Cyndi's tests from source.
+* The char for walkway is now a constant set at the beginning of Board.
+* Allow importing of arbitrary legend, convention is that 'W' is walkway.
+* Spacing in WalkwayCell.java.
+* Spacing in RoomCell.java
+* Spacing in BoardCell.java.
+* Spacing and brackets in board.java.
+* Changed packages to be clue and clueTests.
+* More whitespace changes.
+*   Merge branch 'master' of https://github.com/nurbu5/ClueBoard
+|\  
+| * Added newline at end of file.
+* | --Cell classes spacing refined
+|/  
+*   Merge branch 'master' of https://github.com/nurbu5/ClueBoard
+|\  
+| * Added CR's Clue Layout.
+| * Added CR's legend.
+* | Board.java modified spacing, shortened functions
+* | BadConfigFormatException spacing changed
+|/  
+* initial commit
+* Initial commit
