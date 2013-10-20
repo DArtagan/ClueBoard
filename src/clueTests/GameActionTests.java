@@ -15,7 +15,7 @@ public class GameActionTests {
 
 	@Before
 	public void setUp() throws Exception {
-		clueGame = new ClueGame();
+		clueGame = new ClueGame("ClueBoard.csv", "legend.txt");
 		clueGame.loadConfigFiles("playerConfig.txt", "weaponConfig.txt");
 	}
 

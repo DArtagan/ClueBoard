@@ -13,11 +13,14 @@ public class ClueGame {
 	HashSet<Player> players;
 	HashSet<Card> weapons;
 	HashSet<Card> deck;
+	Board board;
 
-	public ClueGame() {
+	public ClueGame(String layoutName, String legendName) throws IOException, BadConfigFormatException {
 		players = new HashSet<Player>();
 		weapons = new HashSet<Card>();
 		deck = new HashSet<Card>();
+		board = new Board();
+		board.loadConfigFiles(layoutName, legendName);
 	}
 
 	public Card randomCard(HashSet<Card> set) {
@@ -121,11 +124,24 @@ public class ClueGame {
 	}
 
 	public boolean checkAccusation(Solution solution) {
-		return false;
+		return this.solution.equals(solution);
 	}
 
 	private void generateDeck() {
+		// Add all rooms.
+		for (Character key : board.getRooms().keySet()) {
+			if (key != Board.CLOSET && key != Board.WALKWAY) {
+				deck.add(new Card(board.getRooms().get(key), Card.CardType.ROOM));
+			}
+		}
 
+		// Add all players.
+		for (Player player : players) {
+			deck.add(new Card(player.getName(), Card.CardType.PERSON));
+		}
+
+		// Add all weapons.
+		deck.addAll(weapons);
 	}
 
 	// These methods to be used by unit tests only.

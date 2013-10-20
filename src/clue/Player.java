@@ -22,6 +22,10 @@ public abstract class Player {
 		}
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public Card disproveSuggestion(String person, String room, String weapon) {
 		return null;
 	}
