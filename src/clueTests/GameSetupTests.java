@@ -35,15 +35,15 @@ public class GameSetupTests {
 		// Test some valid players, including first and last in the file.
 		ComputerPlayer mrgreen = new ComputerPlayer("Mr. Green", "green", 160);
 		ComputerPlayer mustard = new ComputerPlayer("Colonel Mustard", "yellow", 10);
-		HumanPlayer scarlet = new HumanPlayer("Miss Scarlett", "red", 161);
 		ComputerPlayer prfplum = new ComputerPlayer("Professor Plum", "magenta", 368);
+		HumanPlayer scarlet = new HumanPlayer("Miss Scarlett", "red", 161);
 
 		assertTrue(clueGame.getPlayers().contains(mrgreen));
 		assertTrue(clueGame.getPlayers().contains(mustard));
 		assertTrue(clueGame.getPlayers().contains(scarlet));
 		assertTrue(clueGame.getPlayers().contains(prfplum));
 		// Test to make sure the number of players is correct.
-		assertTrue(clueGame.getPlayers().size() == 6);
+		assertEquals(6, clueGame.getPlayers().size());
 	}
 
 	@Test
@@ -52,6 +52,7 @@ public class GameSetupTests {
 		int roomTotal = 9;
 		int personTotal = 6;
 
+		// Check valid cards.
 		Card dagger = new Card("Dagger", CardType.WEAPON);
 		Card rope = new Card("Rope", CardType.WEAPON);
 		Card conservatory = new Card("Conservatory", CardType.ROOM);
@@ -65,9 +66,10 @@ public class GameSetupTests {
 		assertTrue(clueGame.getCards().contains(library));
 		assertTrue(clueGame.getCards().contains(mrgreen));
 		assertTrue(clueGame.getCards().contains(scarlett));
-
+		// Check number of cards is correct.
 		assertEquals(cardTotal, clueGame.getCards().size());
 
+		// Count numbers of each type of card.
 		int weaponCount = 0;
 		int roomCount = 0;
 		int personCount = 0;
