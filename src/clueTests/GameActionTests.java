@@ -64,7 +64,23 @@ public class GameActionTests {
 
 	@Test
 	public void testDisproveSuggestionOnePlayerMultipleMatches() {
-		fail("Not yet implemented");
+		grimm.addCard(scarlettCard);
+		grimm.addCard(leadpipeCard);
+		grimm.addCard(aquariumCard);
+
+		int scarlettTimes = 0;
+		int leadpipeTimes = 0;
+		int otherTimes = 0;
+		for (int i = 0; i < 30; ++i) {
+			switch (grimm.disproveSuggestion(scarlettCard, leadpipeCard, ballroomCard) {
+				case scarlettCard: ++scarlettTimes; break;
+				case leadpipeCard: ++leadpipeTimes; break;
+				default: ++otherTimes;
+			}
+		}
+		assertTrue(scarlettTimes > 3);
+		assertTrue(leadpipeTimes > 3);
+		assertEquals(0, otherTimes);
 	}
 
 	@Test
