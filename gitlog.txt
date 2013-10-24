@@ -1,3 +1,5 @@
+Github repository: https://github.com/nurbu5/ClueBoard/tree/develop
+
 * gitlog.txt for class.
 * createSuggestion implemented, light bugfixing.
 *   Merge branch 'clueplayers' of https://github.com/nurbu5/ClueBoard into clueplayers
