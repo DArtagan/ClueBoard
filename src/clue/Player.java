@@ -15,7 +15,8 @@ public abstract class Player {
 		this.index = index;
 
 		try {
-			Field field = Class.forName("java.awt.Color").getField(color);
+			// We can use reflection to convert the string to a color
+			Field field = Class.forName("java.awt.Color").getField(color.trim());
 			this.color = (Color)field.get(null);
 		} catch (Exception e) {
 			this.color = null;  // Not defined

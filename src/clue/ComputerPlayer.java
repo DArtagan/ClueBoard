@@ -1,6 +1,7 @@
 package clue;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Random;
 
 public class ComputerPlayer extends Player {
@@ -40,8 +41,28 @@ public class ComputerPlayer extends Player {
 		return true;
 	}
 
-	public HashSet<Card> createSuggestion(HashSet<Card> deck) {
-		return null;
+	public HashSet<Card> createSuggestion(HashSet<Card> deck, Map<Character, String> rooms) {
+		HashSet<Card> suggestion = new HashSet<Card>();
+		HashSet<Card> person = new HashSet<Card>();
+		HashSet<Card> weapon = new HashSet<Card>();
+
+		// Create and split not-seen list into players and weapons
+		for (Card card : deck) {
+			System.out.println(seenCards);
+			if (!(seenCards.contains(card))) {
+				if (card.getType() == Card.CardType.PERSON) {
+					person.add(card);
+				} else if (card.getType() == Card.CardType.WEAPON) {
+					weapon.add(card);
+				}
+			}
+		}
+
+		suggestion.add(ClueGame.randomCard(person));
+		suggestion.add(new Card(rooms.get(lastRoomVisited.getInitial()), Card.CardType.ROOM));
+		suggestion.add(ClueGame.randomCard(weapon));
+		System.out.println(suggestion);
+		return suggestion;
 	}
 
 	public void updateSeen(Card seen) {

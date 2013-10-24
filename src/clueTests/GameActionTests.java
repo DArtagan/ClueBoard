@@ -271,34 +271,40 @@ public class GameActionTests {
 
 	@Test
 	public void testComputerMakeSuggestion() {
+		// Set that Grimm is in the study
+		grimm.setIndex(260);
+		grimm.setVisited(clueGame.getBoard().getCellAt(260));
+
 		// Set seen cards
 		Card cards[] = {profplumCard,revolverCard,leadpipeCard,ballroomCard,aquariumCard,studyCard};
-		HashSet<Card> daCards = new HashSet<Card>();
+		HashSet<Card> seenCards = new HashSet<Card>();
 		for (Card card : cards) {
-			daCards.add(card);
+			seenCards.add(card);
 		}
-		grimm.setSeen(daCards);
+		System.out.println(seenCards);
+		grimm.setSeen(seenCards);
 
 		// Set deck cards
-		daCards.add(kitchenCard);
-		daCards.add(ropeCard);
-		daCards.add(mustardCard);
-		clueGame.setDeck(daCards);
-		grimm.setIndex(260);
-		suggestion = grimm.createSuggestion(clueGame.getCards());
-
+		HashSet<Card> deckCards = new HashSet<Card>(seenCards);  // WHY IS THIS NECESSARY?
+		deckCards.add(kitchenCard);
+		deckCards.add(ropeCard);
+		deckCards.add(mustardCard);
+		clueGame.setDeck(deckCards);
+		System.out.println(clueGame.getCards());
+		suggestion = grimm.createSuggestion(clueGame.getCards(), clueGame.getBoard().getRooms());
+		System.out.println(suggestion);
 		assertTrue(suggestion.contains(studyCard));
 		assertTrue(suggestion.contains(ropeCard));
-		assertTrue(suggestion.contains(profplumCard));
+		assertTrue(suggestion.contains(mustardCard));
 
 		// Check for checking between random possibilities
 		int trials = 30;
-		daCards.add(whiteCard);
-		clueGame.setDeck(daCards);
+		deckCards.add(whiteCard);
+		clueGame.setDeck(deckCards);
 		int mustardTotal = 0;
 		int whiteTotal = 0;
 		for (int i=0; i<trials; ++i) {
-			suggestion = grimm.createSuggestion(clueGame.getCards());
+			suggestion = grimm.createSuggestion(clueGame.getCards(), clueGame.getBoard().getRooms());
 			if (suggestion.contains(mustardCard)) {
 				++mustardTotal;
 			} else if (suggestion.contains(whiteCard)) {
