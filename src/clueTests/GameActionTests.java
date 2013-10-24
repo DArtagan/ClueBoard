@@ -5,6 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,6 +14,8 @@ import clue.BoardCell;
 import clue.Card;
 import clue.ClueGame;
 import clue.ComputerPlayer;
+import clue.HumanPlayer;
+import clue.Player;
 import clue.Solution;
 
 public class GameActionTests {
@@ -19,6 +23,9 @@ public class GameActionTests {
 	ComputerPlayer grimm;
 	Card profplumCard, scarlettCard, revolverCard, leadpipeCard,
 		 ballroomCard, aquariumCard, mustardCard, ropeCard, kitchenCard;
+	ComputerPlayer mrgreen, mustard, plum;
+	HumanPlayer scarlett;
+	ArrayList<Player> players;
 
 	@Before
 	public void setUp() throws Exception {
@@ -36,6 +43,16 @@ public class GameActionTests {
 		mustardCard = new Card("Colonel Mustard", Card.CardType.PERSON);
 		ropeCard = new Card("Rope", Card.CardType.WEAPON);
 		kitchenCard = new Card("Kitchen", Card.CardType.ROOM);
+		// Players.
+		mrgreen = new ComputerPlayer("Mr. Green", "green", 160);
+		mustard = new ComputerPlayer("Colonel Mustard", "yellow", 10);
+		plum = new ComputerPlayer("Professor Plum", "magenta", 368);
+		scarlett = new HumanPlayer("Miss Scarlett", "red", 161);
+		players.add(grimm);
+		players.add(mrgreen);
+		players.add(scarlett);
+		players.add(mustard);
+		players.add(plum);
 	}
 
 	@Test
@@ -149,6 +166,7 @@ public class GameActionTests {
 		grimm.addCard(ballroomCard);
 		grimm.addCard(aquariumCard);
 
+		// Test that the correct card (or a null value) is returned.
 		assertEquals(grimm.disproveSuggestion(profplumCard, kitchenCard, ropeCard), profplumCard);
 		assertEquals(grimm.disproveSuggestion(mustardCard, kitchenCard, revolverCard), revolverCard);
 		assertEquals(grimm.disproveSuggestion(mustardCard, ballroomCard, ropeCard), ballroomCard);
