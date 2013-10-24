@@ -73,10 +73,10 @@ public class GameActionTests {
 		// Pick a location with no rooms in target, just three targets
 		clueGame.getBoard().calcTargets(1, 10, 2);
 		int loc0x11Tot = 0;
-		for (int i=0; i<trials; i++) {
+		for (int i=0; i<trials; ++i) {
 			BoardCell selected = grimm.pickLocation(clueGame.getBoard().getTargets());
 			if (selected == clueGame.getBoard().getCellAt(8, 15)) {
-				loc0x11Tot++;
+				++loc0x11Tot;
 			} else {
 				fail("Invalid target selected");
 			}
@@ -92,14 +92,14 @@ public class GameActionTests {
 		int loc14x1Tot = 0;
 		int loc15x2Tot = 0;
 		int loc16x1Tot = 0;
-		for (int i=0; i<trials; i++) {
+		for (int i=0; i<trials; ++i) {
 			BoardCell selected = grimm.pickLocation(clueGame.getBoard().getTargets());
 			if (selected == clueGame.getBoard().getCellAt(14, 1)) {
-				loc14x1Tot++;
+				++loc14x1Tot;
 			} else if (selected == clueGame.getBoard().getCellAt(15, 2)) {
-				loc15x2Tot++;
+				++loc15x2Tot;
 			} else if (selected == clueGame.getBoard().getCellAt(16, 1)) {
-				loc16x1Tot++;
+				++loc16x1Tot;
 			} else {
 				fail("Invalid target selected");
 			}
@@ -120,7 +120,7 @@ public class GameActionTests {
 		int loc13x22Tot = 0;
 		int loc14x21Tot = 0;
 		int loc15x20Tot = 0;
-		for (int i=0; i<trials; i++) {
+		for (int i=0; i<trials; ++i) {
 			BoardCell selected = grimm.pickLocation(clueGame.getBoard().getTargets());
 			if (selected == clueGame.getBoard().getCellAt(8, 15)) {
 				loc13x22Tot++;
@@ -149,10 +149,10 @@ public class GameActionTests {
 		grimm.addCard(ballroomCard);
 		grimm.addCard(aquariumCard);
 
-		assertEquals(grimm.disproveSuggestion(profplumCard, ropeCard, kitchenCard), profplumCard);
-		assertEquals(grimm.disproveSuggestion(mustardCard, revolverCard, kitchenCard), revolverCard);
-		assertEquals(grimm.disproveSuggestion(mustardCard, ropeCard, ballroomCard), ballroomCard);
-		assertEquals(grimm.disproveSuggestion(mustardCard, ropeCard, kitchenCard), null);
+		assertEquals(grimm.disproveSuggestion(profplumCard, kitchenCard, ropeCard), profplumCard);
+		assertEquals(grimm.disproveSuggestion(mustardCard, kitchenCard, revolverCard), revolverCard);
+		assertEquals(grimm.disproveSuggestion(mustardCard, ballroomCard, ropeCard), ballroomCard);
+		assertEquals(grimm.disproveSuggestion(mustardCard, kitchenCard, ropeCard), null);
 	}
 
 	@Test
@@ -165,7 +165,7 @@ public class GameActionTests {
 		int leadpipeTimes = 0;
 		int otherTimes = 0;
 		for (int i = 0; i < 30; ++i) {
-			switch (grimm.disproveSuggestion(scarlettCard, leadpipeCard, ballroomCard).toString()) {
+			switch (grimm.disproveSuggestion(scarlettCard, ballroomCard, leadpipeCard).toString()) {
 				case "Miss Scarlett": ++scarlettTimes; break;
 				case "Lead Pipe": ++leadpipeTimes; break;
 				default: ++otherTimes;
