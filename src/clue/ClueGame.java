@@ -161,4 +161,8 @@ public class ClueGame {
 	public Board getBoard() {
 		return board;
 	}
+
+	public void setPlayers(HashSet<Player> players) {
+		this.players = players;
+	}
 }

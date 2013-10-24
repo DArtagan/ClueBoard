@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,10 +23,12 @@ public class GameActionTests {
 	ClueGame clueGame;
 	ComputerPlayer grimm;
 	Card profplumCard, scarlettCard, revolverCard, leadpipeCard,
-		 ballroomCard, aquariumCard, mustardCard, ropeCard, kitchenCard;
+		 ballroomCard, aquariumCard, mustardCard, ropeCard, kitchenCard,
+		 candleCard, whiteCard, labCard, studyCard;
 	ComputerPlayer mrgreen, mustard, plum;
 	HumanPlayer scarlett;
 	ArrayList<Player> players;
+	HashSet<Card> suggestion;
 
 	@Before
 	public void setUp() throws Exception {
@@ -43,6 +46,10 @@ public class GameActionTests {
 		mustardCard = new Card("Colonel Mustard", Card.CardType.PERSON);
 		ropeCard = new Card("Rope", Card.CardType.WEAPON);
 		kitchenCard = new Card("Kitchen", Card.CardType.ROOM);
+		candleCard = new Card("Candlestick", Card.CardType.WEAPON);
+		whiteCard = new Card("Mrs. White", Card.CardType.WEAPON);
+		labCard = new Card("Laboratory", Card.CardType.ROOM);
+		studyCard = new Card("Study", Card.CardType.ROOM);
 		// Players.
 		mrgreen = new ComputerPlayer("Mr. Green", "green", 160);
 		mustard = new ComputerPlayer("Colonel Mustard", "yellow", 10);
@@ -53,6 +60,7 @@ public class GameActionTests {
 		players.add(scarlett);
 		players.add(mustard);
 		players.add(plum);
+		suggestion = new HashSet<Card>();
 	}
 
 	@Test
@@ -196,7 +204,42 @@ public class GameActionTests {
 
 	@Test
 	public void testDisproveSuggestionAllPlayers() {
-		fail("Not yet implemented");
+		// Set up the game.
+		mrgreen.addCard(profplumCard);
+		mrgreen.addCard(kitchenCard);
+		mustard.addCard(revolverCard);
+		mustard.addCard(mustardCard);
+		mustard.addCard(labCard);
+		plum.addCard(aquariumCard);
+		plum.addCard(candleCard);
+		scarlett.addCard(leadpipeCard);
+		scarlett.addCard(whiteCard);
+		scarlett.addCard(studyCard);
+		clueGame.setPlayers(new HashSet<Player>(players));
+
+		// Make a suggestion which no players can disprove, and ensure that null is returned.
+		suggestion.add(scarlettCard);
+		suggestion.add(ballroomCard);
+		suggestion.add(ropeCard);
+		assertEquals(null, clueGame.handleSuggestion(suggestion, grimm));
+
+		// Ensure that if the person who makes the suggestion is the only one who can disprove it, null is returned.
+		suggestion.clear();
+		suggestion.add(mustardCard);
+		suggestion.add(labCard);
+		suggestion.add(revolverCard);
+		assertEquals(null, clueGame.handleSuggestion(suggestion, mustard));
+		suggestion.clear();
+		suggestion.add(whiteCard);
+		suggestion.add(studyCard);
+		suggestion.add(leadpipeCard);
+		assertEquals(null, clueGame.handleSuggestion(suggestion, scarlett));
+
+		// Test the order that players are queried.
+		//set up a suggestion that two players could disprove.
+		//ensure that the first person does the disproving (where "first" depends on the order in the players list).
+		//I also set up a test where the furthest person from the accuser is the one who can disprove, to ensure that all players are queried.
+
 	}
 
 	@Test
