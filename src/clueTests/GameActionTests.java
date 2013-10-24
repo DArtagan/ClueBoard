@@ -231,10 +231,18 @@ public class GameActionTests {
 		assertEquals(null, clueGame.handleSuggestion(suggestion, scarlett));
 
 		// Test the order that players are queried.
-		//set up a suggestion that two players could disprove.
-		//ensure that the first person does the disproving (where "first" depends on the order in the players list).
+		// Set up a suggestion that two players can disprove.
+		// Ensure that the first person does the disproving (where "first" depends on the order in the players list).
+		suggestion.add(ballroomCard);
+		suggestion.add(leadpipeCard);
+		suggestion.add(mustardCard);
+		assertEquals(mustardCard, clueGame.handleSuggestion(suggestion, grimm));
 		//I also set up a test where the furthest person from the accuser is the one who can disprove, to ensure that all players are queried.
-
+		suggestion.clear();
+		suggestion.add(ballroomCard);
+		suggestion.add(aquariumCard);
+		suggestion.add(ropeCard);
+		assertEquals(aquariumCard, clueGame.handleSuggestion(suggestion, grimm));
 	}
 
 	@Test
