@@ -53,9 +53,9 @@ public class GameActionTests {
 	}
 
 	@Test
-	<<<<<<< HEAD
 	public void testTargetRoomPreference() {
 		int trials = 10;
+		grimm.setVisited(323);
 		// Pick a location with no rooms in target, just three targets
 		clueGame.getBoard().calcTargets(1, 10, 2);
 		int loc0x11Tot = 0;
