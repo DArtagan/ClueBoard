@@ -1,5 +1,80 @@
-Git Repository: https://github.com/nurbu5/ClueBoard/tree/develop
-
+* createSuggestion implemented, light bugfixing.
+*   Merge branch 'clueplayers' of https://github.com/nurbu5/ClueBoard into clueplayers
+|\  
+| * ?
+* | Test suggestions pick randomly between two.
+|/  
+*   Merge branch 'clueplayers' of https://github.com/nurbu5/ClueBoard into clueplayers
+|\  
+| *   Merge branch 'clueplayers' of https://github.com/nurbu5/ClueBoard into clueplayers
+| |\  
+| * | Remove prints used for debugging.
+* | | Removed unnecessary code.
+| |/  
+|/|   
+* |   Merge branch 'clueplayers' of https://github.com/nurbu5/ClueBoard into clueplayers
+|\ \  
+| |/  
+| *   Merge branch 'clueplayers' of https://github.com/nurbu5/ClueBoard into clueplayers
+| |\  
+| * | Needed to reset visited inside loop.
+| * | Proper indexes in target tests.
+* | | Implemented handleSuggestion.
+| |/  
+|/|   
+* | Remove some duplication.
+|/  
+*   Merge branch 'clueplayers' of https://github.com/nurbu5/ClueBoard into clueplayers
+|\  
+| * Most disproveSuggestion tests now pass.
+* | Seen only exists for computers.  Work on computer pickLocation().
+|/  
+*   Merge branch 'clueplayers' of https://github.com/nurbu5/ClueBoard into clueplayers
+|\  
+| * Added toString to Card, OnePlayerMultipleMatches passes.
+| * Don't return that.
+| * Implemented disproveSuggestion.
+* | randomCard now handles zero size sets, return null.
+|/  
+* randomCard is now static.
+* createSuggestion return null.
+* Add board.calcAdjacencies to ClueGame.
+* cardCount change.
+* SetupTests pass again.
+* Fixed setSeen.
+* Small test fixes.
+*   Merge branch 'actiontests' of https://github.com/nurbu5/ClueBoard into actiontests
+|\  
+| * Suggestion hash sets in tests, cause we're passing sets of cards.
+* | Finished disproveSuggestion tests.
+|/  
+*   Fixed more conflicts.
+|\  
+| * testComputerMakeSuggestion now an implemented, failing test.
+* |   Fixed conflict.
+|\ \  
+| |/  
+| * setup of testComputerMakeSuggestion
+* | Working on the third and final disproveSuggestion test.
+|/  
+* Adding players.
+* Increment before, fix order of suggestions.
+* Working on failing tests.
+*   Merge branch 'actiontests' of https://github.com/nurbu5/ClueBoard into actiontests
+|\  
+| * Target tests finished.
+* |   Merge remote-tracking branch 'origin/develop' into actiontests
+|\ \  
+| |/  
+| *   Silly git merging.
+| |\  
+| * | Target tests.
+* | | Wrote a second disproveSuggestion test.
+| |/  
+|/|   
+* | Wrote a test for disproveSuggestion.
+|/  
+* Including git log for grading.
 * Better comments.
 * Comment
 * ++i
