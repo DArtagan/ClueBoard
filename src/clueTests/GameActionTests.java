@@ -89,13 +89,14 @@ public class GameActionTests {
 	@Test
 	public void testTargetRoomPreference() {
 		int trials = 10;
-		grimm.setVisited(clueGame.getBoard().getCellAt(323));
-		// Pick a location with no rooms in target, just three targets
+		// Pick a location with one room in the targets
 		clueGame.getBoard().calcTargets(1, 10, 2);
 		int loc0x11Tot = 0;
 		for (int i=0; i<trials; ++i) {
+			grimm.setVisited(clueGame.getBoard().getCellAt(323));
 			BoardCell selected = grimm.pickLocation(clueGame.getBoard().getTargets());
-			if (selected == clueGame.getBoard().getCellAt(8, 15)) {
+			System.out.println(selected);
+			if (selected == clueGame.getBoard().getCellAt(0, 11)) {
 				++loc0x11Tot;
 			} else {
 				fail("Invalid target selected");
@@ -108,11 +109,11 @@ public class GameActionTests {
 	public void testTargetVisitedRoomPreference() {
 		int trials = 30;
 		clueGame.getBoard().calcTargets(15, 0, 2);
-		grimm.setVisited(clueGame.getBoard().getCellAt(323));
 		int loc14x1Tot = 0;
 		int loc15x2Tot = 0;
 		int loc16x1Tot = 0;
 		for (int i=0; i<trials; ++i) {
+			grimm.setVisited(clueGame.getBoard().getCellAt(323));
 			BoardCell selected = grimm.pickLocation(clueGame.getBoard().getTargets());
 			if (selected == clueGame.getBoard().getCellAt(14, 1)) {
 				++loc14x1Tot;
@@ -127,6 +128,9 @@ public class GameActionTests {
 		// Ensure we have 30 total selections (fail should also ensure)
 		assertEquals(trials, loc14x1Tot + loc15x2Tot + loc16x1Tot);
 		// Ensure each target was selected more than once
+		System.out.println(loc14x1Tot);
+		System.out.println(loc15x2Tot);
+		System.out.println(loc16x1Tot);
 		assertTrue(loc14x1Tot > 2);
 		assertTrue(loc15x2Tot > 2);
 		assertTrue(loc16x1Tot > 2);
@@ -142,17 +146,17 @@ public class GameActionTests {
 		int loc15x20Tot = 0;
 		for (int i=0; i<trials; ++i) {
 			BoardCell selected = grimm.pickLocation(clueGame.getBoard().getTargets());
-			if (selected == clueGame.getBoard().getCellAt(8, 15)) {
+			if (selected == clueGame.getBoard().getCellAt(13, 22)) {
 				loc13x22Tot++;
-			} else if (selected == clueGame.getBoard().getCellAt(10, 17)) {
+			} else if (selected == clueGame.getBoard().getCellAt(14, 21)) {
 				loc14x21Tot++;
-			} else if (selected == clueGame.getBoard().getCellAt(14, 15)) {
+			} else if (selected == clueGame.getBoard().getCellAt(15, 20)) {
 				loc15x20Tot++;
 			} else {
 				fail("Invalid target selected");
 			}
 		}
-		// Ensure we have 100 total selections (fail should also ensure)
+		// Ensure we have 30 total selections (fail should also ensure)
 		assertEquals(trials, loc13x22Tot + loc14x21Tot + loc15x20Tot);
 		// Ensure each target was selected more than once
 		assertTrue(loc13x22Tot > 2);
