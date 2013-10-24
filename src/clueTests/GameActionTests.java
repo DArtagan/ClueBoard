@@ -87,11 +87,6 @@ public class GameActionTests {
 	}
 
 	@Test
-	public void testSelectTarget() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testTargetRoomPreference() {
 		int trials = 10;
 		grimm.setVisited(323);
@@ -192,9 +187,9 @@ public class GameActionTests {
 		int otherTimes = 0;
 		for (int i = 0; i < 30; ++i) {
 			switch (grimm.disproveSuggestion(scarlettCard, ballroomCard, leadpipeCard).toString()) {
-				case "Miss Scarlett": ++scarlettTimes; break;
-				case "Lead Pipe": ++leadpipeTimes; break;
-				default: ++otherTimes;
+			case "Miss Scarlett": ++scarlettTimes; break;
+			case "Lead Pipe": ++leadpipeTimes; break;
+			default: ++otherTimes;
 			}
 		}
 		assertTrue(scarlettTimes > 3);
@@ -243,8 +238,15 @@ public class GameActionTests {
 	}
 
 	@Test
-	public void testMakeSuggestion() {
-		fail("Not yet implemented");
+	public void testComputerMakeSuggestion() {
+		Card cards[] = {profplumCard,scarlettCard,revolverCard,leadpipeCard,ballroomCard,aquariumCard};
+		HashSet<Card> seen = new HashSet<Card>();
+		for (Card card : cards) {
+			seen.add(card);
+		}
+		grimm.setSeen(seen);
+		grimm.setIndex(260);
+
+
 	}
 }
-
