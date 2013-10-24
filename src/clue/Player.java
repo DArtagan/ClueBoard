@@ -30,7 +30,13 @@ public abstract class Player {
 	}
 
 	public Card disproveSuggestion(HashSet<Card> suggestion) {
-		return null;
+		HashSet<Card> returnCards = new HashSet<Card>();
+		for (Card card : suggestion) {
+			if (myCards.contains(card)) {
+				returnCards.add(card);
+			}
+		}
+		return ClueGame.randomCard(returnCards);
 	}
 
 	public void setSeen(HashSet<Card> seen) {
