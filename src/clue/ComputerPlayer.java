@@ -1,6 +1,7 @@
 package clue;
 
 import java.util.HashSet;
+import java.util.Random;
 
 public class ComputerPlayer extends Player {
 	private BoardCell lastRoomVisited;
@@ -22,13 +23,17 @@ public class ComputerPlayer extends Player {
 		HashSet<BoardCell> tempTargets = new HashSet<BoardCell>(targets);
 		for (BoardCell target : tempTargets) {
 			if (target.isDoorway()) {
-				if (target == lastRoomVisited) {  // If it hasn't been to that door before
+				if (target != lastRoomVisited) {  // If it hasn't been to that door before
+					lastRoomVisited = target;
 					return target;
 				}
 			}
 		}
-		lastRoomVisited = null;
-		return lastRoomVisited;
+		BoardCell target = randomTarget(targets);
+		if (target.isDoorway()){
+			lastRoomVisited = target;
+		}
+		return target;
 	}
 
 	public HashSet<Card> createSuggestion(HashSet<Card> deck) {
@@ -40,6 +45,18 @@ public class ComputerPlayer extends Player {
 	}
 
 	private BoardCell randomTarget(HashSet<BoardCell> targets) {
+		int size = targets.size();
+		if (size <= 0) {
+			return null;
+		}
+		int choice = new Random().nextInt(size);
+		int i = 0;
+		for(BoardCell target : targets) {
+			if (i == choice) {
+				return target;
+			}
+			++i;
+		}
 		return null;
 	}
 
