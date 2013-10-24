@@ -22,6 +22,7 @@ public abstract class Player {
 			this.color = null;  // Not defined
 		}
 		myCards = new HashSet<Card>();
+		seenCards = new HashSet<Card>();
 	}
 
 	public String getName() {
