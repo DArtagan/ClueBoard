@@ -23,7 +23,7 @@ public class ClueGame {
 		board.calcAdjacencies();
 	}
 
-	public Card randomCard(HashSet<Card> set) {
+	public static Card randomCard(HashSet<Card> set) {
 		int size = set.size();
 		int choice = new Random().nextInt(size);
 		int i = 0;
