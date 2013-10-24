@@ -45,6 +45,11 @@ public class Card {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return name;
+	}
+
 	public CardType getType() {
 		return type;
 	}
