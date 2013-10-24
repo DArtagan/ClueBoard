@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import clue.BoardCell;
+import clue.Card;
 import clue.ClueGame;
 import clue.ComputerPlayer;
 import clue.Solution;
@@ -16,12 +17,25 @@ import clue.Solution;
 public class GameActionTests {
 	ClueGame clueGame;
 	ComputerPlayer grimm;
+	Card profplumCard, scarlettCard, revolverCard, leadpipeCard,
+		 ballroomCard, aquariumCard, mustardCard, ropeCard, kitchenCard;
 
 	@Before
 	public void setUp() throws Exception {
 		clueGame = new ClueGame("ClueBoard.csv", "legend.txt");
 		clueGame.loadConfigFiles("playerConfig.txt", "weaponConfig.txt");
 		grimm = new ComputerPlayer("Grimm", "black", 291);
+
+		// Cards.
+		profplumCard = new Card("Professor Plum", Card.CardType.PERSON);
+		scarlettCard = new Card("Miss Scarlett", Card.CardType.PERSON);
+		revolverCard = new Card("Revolver", Card.CardType.WEAPON);
+		leadpipeCard = new Card("Lead Pipe", Card.CardType.WEAPON);
+		ballroomCard = new Card("Ballroom", Card.CardType.ROOM);
+		aquariumCard = new Card("Aquarium", Card.CardType.ROOM);
+		mustardCard = new Card("Colonel Mustard", Card.CardType.PERSON);
+		ropeCard = new Card("Rope", Card.CardType.WEAPON);
+		kitchenCard = new Card("Kitchen", Card.CardType.ROOM);
 	}
 
 	@Test
@@ -151,9 +165,9 @@ public class GameActionTests {
 		int leadpipeTimes = 0;
 		int otherTimes = 0;
 		for (int i = 0; i < 30; ++i) {
-			switch (grimm.disproveSuggestion(scarlettCard, leadpipeCard, ballroomCard) {
-				case scarlettCard: ++scarlettTimes; break;
-				case leadpipeCard: ++leadpipeTimes; break;
+			switch (grimm.disproveSuggestion(scarlettCard, leadpipeCard, ballroomCard).toString()) {
+				case "Miss Scarlett": ++scarlettTimes; break;
+				case "Lead Pipe": ++leadpipeTimes; break;
 				default: ++otherTimes;
 			}
 		}

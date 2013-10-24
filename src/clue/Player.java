@@ -27,7 +27,7 @@ public abstract class Player {
 		return name;
 	}
 
-	public Card disproveSuggestion(String person, String room, String weapon) {
+	public Card disproveSuggestion(Card person, Card room, Card weapon) {
 		return null;
 	}
 
