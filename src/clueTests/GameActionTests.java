@@ -21,11 +21,10 @@ import clue.Solution;
 
 public class GameActionTests {
 	ClueGame clueGame;
-	ComputerPlayer grimm;
+	ComputerPlayer grimm, mrgreen, mustard, plum;
 	Card profplumCard, scarlettCard, revolverCard, leadpipeCard,
 	ballroomCard, aquariumCard, mustardCard, ropeCard, kitchenCard,
 	candleCard, whiteCard, labCard, studyCard;
-	ComputerPlayer mrgreen, mustard, plum;
 	HumanPlayer scarlett;
 	ArrayList<Player> players;
 	HashSet<Card> suggestion;
@@ -55,6 +54,7 @@ public class GameActionTests {
 		mustard = new ComputerPlayer("Colonel Mustard", "yellow", 10);
 		plum = new ComputerPlayer("Professor Plum", "magenta", 368);
 		scarlett = new HumanPlayer("Miss Scarlett", "red", 161);
+		players = new ArrayList<Player>();
 		players.add(grimm);
 		players.add(mrgreen);
 		players.add(scarlett);
