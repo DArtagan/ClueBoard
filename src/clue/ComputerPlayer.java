@@ -14,7 +14,7 @@ public class ComputerPlayer extends Player {
 	}
 
 	public HashSet<Card> createSuggestion(HashSet<Card> deck) {
-		return deck;
+		return null;
 	}
 
 	public void updateSeen(Card seen) {
