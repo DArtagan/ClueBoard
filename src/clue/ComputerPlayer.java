@@ -36,6 +36,10 @@ public class ComputerPlayer extends Player {
 		return target;
 	}
 
+	public boolean isComputerPlayer() {
+		return true;
+	}
+
 	public HashSet<Card> createSuggestion(HashSet<Card> deck) {
 		return null;
 	}
