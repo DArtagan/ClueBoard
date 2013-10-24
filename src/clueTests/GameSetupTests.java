@@ -94,7 +94,6 @@ public class GameSetupTests {
 
 	@Test
 	public void testDealCards() {
-		HashSet<Card> cards = clueGame.getCards();
 		HashSet<Player> players = clueGame.getPlayers();
 
 		// Solution generated
@@ -105,10 +104,7 @@ public class GameSetupTests {
 		int cardCountTotal = 0;
 		int cardCountLast = 0;
 		for (Player player : players) {
-			cardCount = 0;
-			for (Card card : player.getCards()) {
-				++cardCount;
-			}
+			cardCount = player.getCards().size();
 			if(cardCountLast == 0) {
 				// For the first player,
 				// can't check against the last player
