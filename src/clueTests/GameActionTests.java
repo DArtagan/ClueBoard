@@ -89,7 +89,7 @@ public class GameActionTests {
 	@Test
 	public void testTargetRoomPreference() {
 		int trials = 10;
-		grimm.setVisited(323);
+		grimm.setVisited(clueGame.getBoard().getCellAt(323));
 		// Pick a location with no rooms in target, just three targets
 		clueGame.getBoard().calcTargets(1, 10, 2);
 		int loc0x11Tot = 0;
@@ -108,7 +108,7 @@ public class GameActionTests {
 	public void testTargetVisitedRoomPreference() {
 		int trials = 30;
 		clueGame.getBoard().calcTargets(15, 0, 2);
-		grimm.setVisited(323);
+		grimm.setVisited(clueGame.getBoard().getCellAt(323));
 		int loc14x1Tot = 0;
 		int loc15x2Tot = 0;
 		int loc16x1Tot = 0;
@@ -209,9 +209,9 @@ public class GameActionTests {
 		int otherTimes = 0;
 		for (int i = 0; i < 30; ++i) {
 			switch (grimm.disproveSuggestion(suggestion).toString()) {
-				case "Miss Scarlett": ++scarlettTimes; break;
-				case "Lead Pipe": ++leadpipeTimes; break;
-				default: ++otherTimes;
+			case "Miss Scarlett": ++scarlettTimes; break;
+			case "Lead Pipe": ++leadpipeTimes; break;
+			default: ++otherTimes;
 			}
 		}
 		assertTrue(scarlettTimes > 3);
