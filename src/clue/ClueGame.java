@@ -20,6 +20,7 @@ public class ClueGame {
 		weapons = new HashSet<Card>();
 		board = new Board();
 		board.loadConfigFiles(layoutName, legendName);
+		board.calcAdjacencies();
 	}
 
 	public Card randomCard(HashSet<Card> set) {
