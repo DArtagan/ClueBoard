@@ -13,8 +13,8 @@ public class ComputerPlayer extends Player {
 		return null;
 	}
 
-	public void createSuggestion() {
-
+	public HashSet<Card> createSuggestion(HashSet<Card> deck) {
+		return deck;
 	}
 
 	public void updateSeen(Card seen) {

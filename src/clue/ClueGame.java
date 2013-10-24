@@ -120,7 +120,7 @@ public class ClueGame {
 
 	}
 
-	public void handleSuggestion(String person, String room, String weapon, Player accusingPerson) {
+	public void handleSuggestion(Card person, Card room, Card weapon, Player accusingPerson) {
 
 	}
 
@@ -160,5 +160,9 @@ public class ClueGame {
 
 	public Board getBoard() {
 		return board;
+	}
+
+	public void setDeck(HashSet<Card> in) {
+		deck = in;
 	}
 }
