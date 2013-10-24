@@ -132,16 +132,13 @@ public class ClueGame {
 
 	public Card handleSuggestion(HashSet<Card> suggestion, Player accusingPerson) {
 		Card personCard = null;
-		Card roomCard = null;
 		for (Card card : suggestion) {
 			// Find the person and room cards.
 			// If these don't exist, everything we know is a lie. We do not
 			// handle this case, as it should never happen. Make sure it
 			// doesn't, please.
-			switch (card.getType()) {
-				case PERSON: personCard = card; break;
-				case ROOM: roomCard = card; break;
-				default: break;
+			if (card.getType() == Card.CardType.PERSON) {
+				personCard = card;
 			}
 		}
 		playerNames.get(personCard.toString()).setIndex(accusingPerson.getIndex());;
