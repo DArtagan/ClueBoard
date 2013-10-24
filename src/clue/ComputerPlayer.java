@@ -9,8 +9,8 @@ public class ComputerPlayer extends Player {
 		super(player, color, index);
 	}
 
-	public void pickLocation(HashSet<BoardCell> targets) {
-
+	public BoardCell pickLocation(HashSet<BoardCell> targets) {
+		return null;
 	}
 
 	public void createSuggestion() {
@@ -19,5 +19,10 @@ public class ComputerPlayer extends Player {
 
 	public void updateSeen(Card seen) {
 
+	}
+
+	// For tests
+	public void setVisited(int index) {
+		lastRoomVisited = index;
 	}
 }
