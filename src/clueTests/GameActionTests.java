@@ -239,14 +239,21 @@ public class GameActionTests {
 
 	@Test
 	public void testComputerMakeSuggestion() {
-		Card cards[] = {profplumCard,scarlettCard,revolverCard,leadpipeCard,ballroomCard,aquariumCard};
+		Card cards[] = {profplumCard,revolverCard,leadpipeCard,ballroomCard,aquariumCard,studyCard};
 		HashSet<Card> seen = new HashSet<Card>();
 		for (Card card : cards) {
 			seen.add(card);
 		}
 		grimm.setSeen(seen);
+		seen.add(kitchenCard);
+		seen.add(ropeCard);
+		seen.add(profplumCard);
+		clueGame.setDeck(seen);
 		grimm.setIndex(260);
+		suggestion = grimm.createSuggestion(clueGame.getCards());
 
-
+		assert(suggestion.contains(studyCard));
+		assert(suggestion.contains(ropeCard));
+		assert(suggestion.contains(profplumCard));
 	}
 }
