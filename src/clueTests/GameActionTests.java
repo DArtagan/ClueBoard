@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class GameActionTests {
 	ClueGame clueGame;
 	ComputerPlayer grimm;
 	Card profplumCard, scarlettCard, revolverCard, leadpipeCard,
-		 ballroomCard, aquariumCard, mustardCard, ropeCard, kitchenCard;
+	ballroomCard, aquariumCard, mustardCard, ropeCard, kitchenCard;
 	ComputerPlayer mrgreen, mustard, plum;
 	HumanPlayer scarlett;
 	ArrayList<Player> players;
@@ -76,11 +77,6 @@ public class GameActionTests {
 		assertFalse(clueGame.checkAccusation(false4));
 		assertFalse(clueGame.checkAccusation(false5));
 		assertFalse(clueGame.checkAccusation(false6));
-	}
-
-	@Test
-	public void testSelectTarget() {
-		fail("Not yet implemented");
 	}
 
 	@Test
@@ -184,9 +180,9 @@ public class GameActionTests {
 		int otherTimes = 0;
 		for (int i = 0; i < 30; ++i) {
 			switch (grimm.disproveSuggestion(scarlettCard, ballroomCard, leadpipeCard).toString()) {
-				case "Miss Scarlett": ++scarlettTimes; break;
-				case "Lead Pipe": ++leadpipeTimes; break;
-				default: ++otherTimes;
+			case "Miss Scarlett": ++scarlettTimes; break;
+			case "Lead Pipe": ++leadpipeTimes; break;
+			default: ++otherTimes;
 			}
 		}
 		assertTrue(scarlettTimes > 3);
@@ -200,8 +196,15 @@ public class GameActionTests {
 	}
 
 	@Test
-	public void testMakeSuggestion() {
-		fail("Not yet implemented");
+	public void testComputerMakeSuggestion() {
+		Card cards[] = {profplumCard,scarlettCard,revolverCard,leadpipeCard,ballroomCard,aquariumCard};
+		HashSet<Card> seen = new HashSet<Card>();
+		for (Card card : cards) {
+			seen.add(card);
+		}
+		grimm.setSeen(seen);
+		grimm.setIndex(260);
+
+
 	}
 }
-

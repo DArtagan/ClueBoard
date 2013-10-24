@@ -9,6 +9,7 @@ public abstract class Player {
 	private Color color;
 	private int index;
 	private HashSet<Card> myCards;
+	private HashSet<Card> seenCards;
 
 	public Player(String name, String color, int index) {
 		this.name = name;
@@ -80,12 +81,21 @@ public abstract class Player {
 				+ "]";
 	}
 
+	public void addCard(Card card) {
+		myCards.add(card);
+		seenCards.add(card);
+	}
+
 	// For use by unit tests only.
 	public HashSet<Card> getCards() {
 		return myCards;
 	}
 
-	public void addCard(Card card) {
-		myCards.add(card);
+	public void setSeen(HashSet<Card> seen) {
+		seenCards = seen;
+	}
+
+	public void setIndex(int spot) {
+		index = spot;
 	}
 }
