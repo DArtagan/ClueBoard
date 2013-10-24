@@ -25,7 +25,7 @@ public class ClueGame {
 
 	public static Card randomCard(HashSet<Card> set) {
 		int size = set.size();
-		if (size == 0) {
+		if (size <= 0) {
 			return null;
 		}
 		int choice = new Random().nextInt(size);
