@@ -170,24 +170,25 @@ public class GameActionTests {
 		grimm.addCard(aquariumCard);
 
 		// Test that the correct card (or a null value) is returned.
+		suggestion.clear();
 		suggestion.add(profplumCard);
 		suggestion.add(kitchenCard);
 		suggestion.add(ropeCard);
 		assertEquals(grimm.disproveSuggestion(suggestion), profplumCard);
-		suggestion.clear();
 
+		suggestion.clear();
 		suggestion.add(mustardCard);
 		suggestion.add(kitchenCard);
 		suggestion.add(revolverCard);
 		assertEquals(grimm.disproveSuggestion(suggestion), revolverCard);
-		suggestion.clear();
 
+		suggestion.clear();
 		suggestion.add(mustardCard);
 		suggestion.add(ballroomCard);
 		suggestion.add(ropeCard);
 		assertEquals(grimm.disproveSuggestion(suggestion), ballroomCard);
-		suggestion.clear();
 
+		suggestion.clear();
 		suggestion.add(mustardCard);
 		suggestion.add(kitchenCard);
 		suggestion.add(ropeCard);
@@ -233,6 +234,9 @@ public class GameActionTests {
 		scarlett.addCard(whiteCard);
 		scarlett.addCard(studyCard);
 		clueGame.setPlayers(new HashSet<Player>(players));
+		/*for (Player player : clueGame.getPlayers()) {
+			System.out.println(player.getCards());
+		}*/
 
 		// Make a suggestion which no players can disprove, and ensure that null is returned.
 		suggestion.add(scarlettCard);
