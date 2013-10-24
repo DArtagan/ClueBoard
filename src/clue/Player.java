@@ -28,7 +28,7 @@ public abstract class Player {
 		return name;
 	}
 
-	public Card disproveSuggestion(Card person, Card room, Card weapon) {
+	public Card disproveSuggestion(HashSet<Card> suggestion) {
 		return null;
 	}
 

@@ -23,8 +23,8 @@ public class GameActionTests {
 	ClueGame clueGame;
 	ComputerPlayer grimm;
 	Card profplumCard, scarlettCard, revolverCard, leadpipeCard,
-		 ballroomCard, aquariumCard, mustardCard, ropeCard, kitchenCard,
-		 candleCard, whiteCard, labCard, studyCard;
+	ballroomCard, aquariumCard, mustardCard, ropeCard, kitchenCard,
+	candleCard, whiteCard, labCard, studyCard;
 	ComputerPlayer mrgreen, mustard, plum;
 	HumanPlayer scarlett;
 	ArrayList<Player> players;
@@ -170,10 +170,28 @@ public class GameActionTests {
 		grimm.addCard(aquariumCard);
 
 		// Test that the correct card (or a null value) is returned.
-		assertEquals(grimm.disproveSuggestion(profplumCard, kitchenCard, ropeCard), profplumCard);
-		assertEquals(grimm.disproveSuggestion(mustardCard, kitchenCard, revolverCard), revolverCard);
-		assertEquals(grimm.disproveSuggestion(mustardCard, ballroomCard, ropeCard), ballroomCard);
-		assertEquals(grimm.disproveSuggestion(mustardCard, kitchenCard, ropeCard), null);
+		suggestion.add(profplumCard);
+		suggestion.add(kitchenCard);
+		suggestion.add(ropeCard);
+		assertEquals(grimm.disproveSuggestion(suggestion), profplumCard);
+		suggestion.clear();
+
+		suggestion.add(mustardCard);
+		suggestion.add(kitchenCard);
+		suggestion.add(revolverCard);
+		assertEquals(grimm.disproveSuggestion(suggestion), revolverCard);
+		suggestion.clear();
+
+		suggestion.add(mustardCard);
+		suggestion.add(ballroomCard);
+		suggestion.add(ropeCard);
+		assertEquals(grimm.disproveSuggestion(suggestion), ballroomCard);
+		suggestion.clear();
+
+		suggestion.add(mustardCard);
+		suggestion.add(kitchenCard);
+		suggestion.add(ropeCard);
+		assertEquals(grimm.disproveSuggestion(suggestion), null);
 	}
 
 	@Test
@@ -182,11 +200,15 @@ public class GameActionTests {
 		grimm.addCard(leadpipeCard);
 		grimm.addCard(aquariumCard);
 
+		suggestion.add(scarlettCard);
+		suggestion.add(ballroomCard);
+		suggestion.add(leadpipeCard);
+
 		int scarlettTimes = 0;
 		int leadpipeTimes = 0;
 		int otherTimes = 0;
 		for (int i = 0; i < 30; ++i) {
-			switch (grimm.disproveSuggestion(scarlettCard, ballroomCard, leadpipeCard).toString()) {
+			switch (grimm.disproveSuggestion(suggestion).toString()) {
 			case "Miss Scarlett": ++scarlettTimes; break;
 			case "Lead Pipe": ++leadpipeTimes; break;
 			default: ++otherTimes;
@@ -215,7 +237,6 @@ public class GameActionTests {
 		// Make a suggestion which no players can disprove, and ensure that null is returned.
 		suggestion.add(scarlettCard);
 		suggestion.add(ballroomCard);
-		suggestion.add(ropeCard);
 		assertEquals(null, clueGame.handleSuggestion(suggestion, grimm));
 
 		// Ensure that if the person who makes the suggestion is the only one who can disprove it, null is returned.
