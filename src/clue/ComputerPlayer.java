@@ -16,7 +16,7 @@ public class ComputerPlayer extends Player {
 
 	public void addCard(Card card) {
 		super.addCard(card);
-		seenCards.add(card);
+		updateSeen(card);
 	}
 
 	public BoardCell pickLocation(HashSet<BoardCell> targets) {
@@ -41,7 +41,7 @@ public class ComputerPlayer extends Player {
 	}
 
 	public void updateSeen(Card seen) {
-
+		seenCards.add(seen);
 	}
 
 	private BoardCell randomTarget(HashSet<BoardCell> targets) {
@@ -66,6 +66,6 @@ public class ComputerPlayer extends Player {
 	}
 
 	public void setSeen(HashSet<Card> seen) {
-		seenCards.addAll(seen);
+		seenCards = seen;
 	}
 }
