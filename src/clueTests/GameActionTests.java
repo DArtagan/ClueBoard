@@ -48,7 +48,27 @@ public class GameActionTests {
 	}
 
 	@Test
-	public void testDisproveSelection() {
+	public void testDisproveSuggestionOnePlayerOneMatch() {
+		grimm.addCard(profplumCard);
+		grimm.addCard(scarlettCard);
+		grimm.addCard(revolverCard);
+		grimm.addCard(leadpipeCard);
+		grimm.addCard(ballroomCard);
+		grimm.addCard(aquariumCard);
+
+		assertEquals(grimm.disproveSuggestion(profplumCard, ropeCard, kitchenCard), profplumCard);
+		assertEquals(grimm.disproveSuggestion(mustardCard, revolverCard, kitchenCard), revolverCard);
+		assertEquals(grimm.disproveSuggestion(mustardCard, ropeCard, ballroomCard), ballroomCard);
+		assertEquals(grimm.disproveSuggestion(mustardCard, ropeCard, kitchenCard), null);
+	}
+
+	@Test
+	public void testDisproveSuggestionOnePlayerMultipleMatches() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testDisproveSuggestionAllPlayers() {
 		fail("Not yet implemented");
 	}
 
