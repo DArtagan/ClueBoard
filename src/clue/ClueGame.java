@@ -2,6 +2,7 @@ package clue;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
@@ -11,6 +12,7 @@ import clue.Card.CardType;
 public class ClueGame {
 	public Solution solution;
 	private HashSet<Player> players;
+	private HashMap<String, Player> playerNames;
 	private HashSet<Card> weapons;
 	private HashSet<Card> deck;
 	private Board board;
@@ -21,6 +23,7 @@ public class ClueGame {
 		board = new Board();
 		board.loadConfigFiles(layoutName, legendName);
 		board.calcAdjacencies();
+		playerNames = new HashMap<String, Player>();
 	}
 
 	public static Card randomCard(HashSet<Card> set) {
@@ -117,6 +120,9 @@ public class ClueGame {
 		weaponScanner.close();
 		weaponReader.close();
 
+		for (Player player : players) {
+			playerNames.put(player.getName(), player);
+		}
 		generateDeck();
 	}
 
@@ -124,8 +130,37 @@ public class ClueGame {
 
 	}
 
-	public HashSet<Card> handleSuggestion(HashSet<Card> suggestion, Player accusingPerson) {
-		return null;
+	public Card handleSuggestion(HashSet<Card> suggestion, Player accusingPerson) {
+		Card personCard = null;
+		Card roomCard = null;
+		for (Card card : suggestion) {
+			// Find the person and room cards.
+			// If these don't exist, everything we know is a lie. We do not
+			// handle this case, as it should never happen. Make sure it
+			// doesn't, please.
+			switch (card.getType()) {
+				case PERSON: personCard = card; break;
+				case ROOM: roomCard = card; break;
+				default: break;
+			}
+		}
+		playerNames.get(personCard.toString()).setIndex(accusingPerson.getIndex());;
+
+		Card card = null;
+		for (Player player : players) {
+			// Don't check the accuser's cards.
+			if (!player.equals(accusingPerson)) {
+				card = player.disproveSuggestion(suggestion);
+				if (card != null) {
+					// Update the computer players' "seen" lists.
+					if (player.isComputerPlayer()) {
+						((ComputerPlayer) player).updateSeen(card);
+					}
+					return card;
+				}
+			}
+		}
+		return card;
 	}
 
 	public boolean checkAccusation(Solution solution) {

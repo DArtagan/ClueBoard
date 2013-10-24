@@ -46,7 +46,7 @@ public class GameActionTests {
 		ropeCard = new Card("Rope", Card.CardType.WEAPON);
 		kitchenCard = new Card("Kitchen", Card.CardType.ROOM);
 		candleCard = new Card("Candlestick", Card.CardType.WEAPON);
-		whiteCard = new Card("Mrs. White", Card.CardType.WEAPON);
+		whiteCard = new Card("Mrs. White", Card.CardType.PERSON);
 		labCard = new Card("Laboratory", Card.CardType.ROOM);
 		studyCard = new Card("Study", Card.CardType.ROOM);
 		// Players.
@@ -241,6 +241,7 @@ public class GameActionTests {
 		// Make a suggestion which no players can disprove, and ensure that null is returned.
 		suggestion.add(scarlettCard);
 		suggestion.add(ballroomCard);
+		suggestion.add(ropeCard);
 		assertEquals(null, clueGame.handleSuggestion(suggestion, grimm));
 
 		// Ensure that if the person who makes the suggestion is the only one who can disprove it, null is returned.
@@ -265,7 +266,7 @@ public class GameActionTests {
 		assertEquals(mustardCard, clueGame.handleSuggestion(suggestion, grimm));
 		// Set up a test where the furthest person from the accuser is the one who can disprove, to ensure that all players are queried.
 		suggestion.clear();
-		suggestion.add(ballroomCard);
+		suggestion.add(scarlettCard);
 		suggestion.add(aquariumCard);
 		suggestion.add(ropeCard);
 		assertEquals(aquariumCard, clueGame.handleSuggestion(suggestion, grimm));
