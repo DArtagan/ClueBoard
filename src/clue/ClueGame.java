@@ -120,8 +120,8 @@ public class ClueGame {
 
 	}
 
-	public void handleSuggestion(Card person, Card room, Card weapon, Player accusingPerson) {
-
+	public HashSet<Card> handleSuggestion(HashSet<Card> suggestion, Player accusingPerson) {
+		return suggestion;
 	}
 
 	public boolean checkAccusation(Solution solution) {
