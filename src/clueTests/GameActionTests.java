@@ -95,7 +95,6 @@ public class GameActionTests {
 		for (int i=0; i<trials; ++i) {
 			grimm.setVisited(clueGame.getBoard().getCellAt(323));
 			BoardCell selected = grimm.pickLocation(clueGame.getBoard().getTargets());
-			System.out.println(selected);
 			if (selected == clueGame.getBoard().getCellAt(0, 11)) {
 				++loc0x11Tot;
 			} else {
@@ -128,9 +127,6 @@ public class GameActionTests {
 		// Ensure we have 30 total selections (fail should also ensure)
 		assertEquals(trials, loc14x1Tot + loc15x2Tot + loc16x1Tot);
 		// Ensure each target was selected more than once
-		System.out.println(loc14x1Tot);
-		System.out.println(loc15x2Tot);
-		System.out.println(loc16x1Tot);
 		assertTrue(loc14x1Tot > 2);
 		assertTrue(loc15x2Tot > 2);
 		assertTrue(loc16x1Tot > 2);
@@ -238,9 +234,6 @@ public class GameActionTests {
 		scarlett.addCard(whiteCard);
 		scarlett.addCard(studyCard);
 		clueGame.setPlayers(new HashSet<Player>(players));
-		/*for (Player player : clueGame.getPlayers()) {
-			System.out.println(player.getCards());
-		}*/
 
 		// Make a suggestion which no players can disprove, and ensure that null is returned.
 		suggestion.add(scarlettCard);
