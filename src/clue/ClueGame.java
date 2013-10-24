@@ -122,7 +122,7 @@ public class ClueGame {
 	}
 
 	public HashSet<Card> handleSuggestion(HashSet<Card> suggestion, Player accusingPerson) {
-		return suggestion;
+		return null;
 	}
 
 	public boolean checkAccusation(Solution solution) {
