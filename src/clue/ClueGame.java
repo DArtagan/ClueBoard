@@ -10,10 +10,10 @@ import clue.Card.CardType;
 
 public class ClueGame {
 	public Solution solution;
-	HashSet<Player> players;
-	HashSet<Card> weapons;
-	HashSet<Card> deck;
-	Board board;
+	private HashSet<Player> players;
+	private HashSet<Card> weapons;
+	private HashSet<Card> deck;
+	private Board board;
 
 	public ClueGame(String layoutName, String legendName) throws IOException, BadConfigFormatException {
 		players = new HashSet<Player>();
@@ -156,5 +156,9 @@ public class ClueGame {
 
 	public HashSet<Card> getCards() {
 		return deck;
+	}
+
+	public Board getBoard() {
+		return board;
 	}
 }

@@ -9,7 +9,6 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.TreeMap;
 
 import clue.RoomCell.DoorDirection;
@@ -23,7 +22,7 @@ public class Board {
 	protected TreeMap<Character, String> rooms;
 	private int numRows;
 	private int numColumns;
-	private Set<BoardCell> targets;
+	private HashSet<BoardCell> targets;
 	private Map<Integer, LinkedList<Integer>> adjMap;
 	private boolean[] visited;
 
@@ -220,11 +219,11 @@ public class Board {
 		visited[index] = false;
 	}
 
-	public Set<BoardCell> getTargets() {
+	public HashSet<BoardCell> getTargets() {
 		return targets;
 	}
 
-	public Set<BoardCell> getTargets(int index, int steps) {
+	public HashSet<BoardCell> getTargets(int index, int steps) {
 		targets = new HashSet<BoardCell>();
 		visited = new boolean[numRows*numColumns];
 		Arrays.fill(visited, false);
