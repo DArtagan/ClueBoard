@@ -271,21 +271,46 @@ public class GameActionTests {
 
 	@Test
 	public void testComputerMakeSuggestion() {
+		// Set seen cards
 		Card cards[] = {profplumCard,revolverCard,leadpipeCard,ballroomCard,aquariumCard,studyCard};
-		HashSet<Card> seen = new HashSet<Card>();
+		HashSet<Card> daCards = new HashSet<Card>();
 		for (Card card : cards) {
-			seen.add(card);
+			daCards.add(card);
 		}
-		grimm.setSeen(seen);
-		seen.add(kitchenCard);
-		seen.add(ropeCard);
-		seen.add(profplumCard);
-		clueGame.setDeck(seen);
+		grimm.setSeen(daCards);
+
+		// Set deck cards
+		daCards.add(kitchenCard);
+		daCards.add(ropeCard);
+		daCards.add(mustardCard);
+		clueGame.setDeck(daCards);
 		grimm.setIndex(260);
 		suggestion = grimm.createSuggestion(clueGame.getCards());
 
-		assert(suggestion.contains(studyCard));
-		assert(suggestion.contains(ropeCard));
-		assert(suggestion.contains(profplumCard));
+		assertTrue(suggestion.contains(studyCard));
+		assertTrue(suggestion.contains(ropeCard));
+		assertTrue(suggestion.contains(profplumCard));
+
+		// Check for checking between random possibilities
+		int trials = 30;
+		daCards.add(whiteCard);
+		clueGame.setDeck(daCards);
+		int mustardTotal = 0;
+		int whiteTotal = 0;
+		for (int i=0; i<trials; ++i) {
+			suggestion = grimm.createSuggestion(clueGame.getCards());
+			if (suggestion.contains(mustardCard)) {
+				++mustardTotal;
+			} else if (suggestion.contains(whiteCard)) {
+				++whiteTotal;
+			} else {
+				fail("Invalid target selected");
+			}
+		}
+		// Ensure we have 30 total selections (fail should also ensure)
+		assertEquals(trials, mustardTotal + whiteTotal);
+		// Ensure each target was selected more than once
+		assertTrue(mustardTotal > 4);
+		assertTrue(whiteTotal > 4);
 	}
 }
