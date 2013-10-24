@@ -95,7 +95,7 @@ public class GameActionTests {
 		int loc0x11Tot = 0;
 		for (int i=0; i<trials; ++i) {
 			BoardCell selected = grimm.pickLocation(clueGame.getBoard().getTargets());
-			if (selected == clueGame.getBoard().getCellAt(8, 15)) {
+			if (selected == clueGame.getBoard().getCellAt(0, 11)) {
 				++loc0x11Tot;
 			} else {
 				fail("Invalid target selected");
@@ -142,11 +142,11 @@ public class GameActionTests {
 		int loc15x20Tot = 0;
 		for (int i=0; i<trials; ++i) {
 			BoardCell selected = grimm.pickLocation(clueGame.getBoard().getTargets());
-			if (selected == clueGame.getBoard().getCellAt(8, 15)) {
+			if (selected == clueGame.getBoard().getCellAt(13, 22)) {
 				loc13x22Tot++;
-			} else if (selected == clueGame.getBoard().getCellAt(10, 17)) {
+			} else if (selected == clueGame.getBoard().getCellAt(14, 21)) {
 				loc14x21Tot++;
-			} else if (selected == clueGame.getBoard().getCellAt(14, 15)) {
+			} else if (selected == clueGame.getBoard().getCellAt(15, 20)) {
 				loc15x20Tot++;
 			} else {
 				fail("Invalid target selected");
