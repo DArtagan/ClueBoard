@@ -1,5 +1,7 @@
 package clue;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,9 +13,11 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+import javax.swing.JPanel;
+
 import clue.RoomCell.DoorDirection;
 
-public class Board {
+public class Board extends JPanel {
 	// Configuration constants.
 	public static final char CLOSET = 'X';
 	public static final char WALKWAY = WalkwayCell.WALKWAY;
@@ -87,12 +91,12 @@ public class Board {
 					}
 					if (c != WALKWAY) {
 						if (i != line.length()-1) {
-							cells.add(new RoomCell(c, line.charAt(i+1)));
+							cells.add(new RoomCell(numRows, colCount1, c, line.charAt(i+1)));
 						} else {
-							cells.add(new RoomCell(c));
+							cells.add(new RoomCell(numRows, colCount1, c));
 						}
 					} else {
-						cells.add(new WalkwayCell());
+						cells.add(new WalkwayCell(numRows, colCount1));
 					}
 				}
 			}
@@ -229,5 +233,14 @@ public class Board {
 		Arrays.fill(visited, false);
 		calcTargetsHelper(index, steps);
 		return targets;
+	}
+
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.setColor(Color.BLUE);
+		for(BoardCell cell : cells){
+			cell.draw(g, this);
+		}
 	}
 }
