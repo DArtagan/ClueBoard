@@ -42,7 +42,12 @@ public class RoomCell extends BoardCell {
 
 	public void draw(Graphics g, Board board) {
 		super.paintComponent(g);
-		g.setColor(Color.BLUE);
-		g.drawRect(20*col, 20*row, 20, 20);
+		if (isDoorway()) {
+			g.setColor(Color.GREEN);
+			g.fill3DRect(20*col, 20*row, 20, 20, false);
+		} else {
+			g.setColor(Color.BLUE);
+			g.fill3DRect(20*col, 20*row, 20, 20, false);
+		}
 	}
 }
