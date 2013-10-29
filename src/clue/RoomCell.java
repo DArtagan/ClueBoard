@@ -43,7 +43,13 @@ public class RoomCell extends BoardCell {
 	public void draw(Graphics g, Board board) {
 		super.paintComponent(g);
 		g.setColor(Color.BLACK);
-		g.fillRect(CELL_SIZE*col, CELL_SIZE*row, CELL_SIZE, CELL_SIZE);
+		if (isDoorway()) {
+			g.setColor(Color.GREEN);
+			g.fill3DRect(CELL_SIZE*col, CELL_SIZE*row, CELL_SIZE, CELL_SIZE, false);
+		} else {
+			g.setColor(Color.BLUE);
+			g.fill3DRect(CELL_SIZE*col, CELL_SIZE*row, CELL_SIZE, CELL_SIZE, false);
+		}
 		g.setColor(Color.RED);
 		if(doorDirection == DoorDirection.UP) {
 			g.drawLine(col*CELL_SIZE, row*CELL_SIZE, col*CELL_SIZE+CELL_SIZE, row*CELL_SIZE);

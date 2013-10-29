@@ -17,7 +17,7 @@ public class WalkwayCell extends BoardCell {
 
 	public void draw(Graphics g, Board board) {
 		super.paintComponent(g);
-		g.setColor(Color.BLACK);
-		g.drawRect(col*CELL_SIZE, row*CELL_SIZE, CELL_SIZE, CELL_SIZE);
+		g.setColor(Color.lightGray);
+		g.fill3DRect(col*CELL_SIZE, row*CELL_SIZE, CELL_SIZE, CELL_SIZE, true);
 	}
 }
