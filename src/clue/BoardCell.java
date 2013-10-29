@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public abstract class BoardCell extends JPanel {
+	protected int CELL_SIZE = 20;
+
 	private char initial;
 	protected int row;
 	protected int col;

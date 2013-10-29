@@ -42,7 +42,17 @@ public class RoomCell extends BoardCell {
 
 	public void draw(Graphics g, Board board) {
 		super.paintComponent(g);
-		g.setColor(Color.BLUE);
-		g.drawRect(20*col, 20*row, 20, 20);
+		g.setColor(Color.BLACK);
+		g.fillRect(CELL_SIZE*col, CELL_SIZE*row, CELL_SIZE, CELL_SIZE);
+		g.setColor(Color.RED);
+		if(doorDirection == DoorDirection.UP) {
+			g.drawLine(col*CELL_SIZE, row*CELL_SIZE, col*CELL_SIZE+CELL_SIZE, row*CELL_SIZE);
+		} else if (doorDirection == DoorDirection.RIGHT) {
+			g.drawLine(col*CELL_SIZE+CELL_SIZE, row*CELL_SIZE, col*CELL_SIZE+CELL_SIZE, row*CELL_SIZE+CELL_SIZE);
+		} else if (doorDirection == DoorDirection.DOWN) {
+			g.drawLine(col*CELL_SIZE, row*CELL_SIZE+CELL_SIZE, col*CELL_SIZE+CELL_SIZE, row*CELL_SIZE+CELL_SIZE);
+		} else if (doorDirection == DoorDirection.LEFT) {
+			g.drawLine(col*CELL_SIZE, row*CELL_SIZE, col*CELL_SIZE, row*CELL_SIZE+CELL_SIZE);
+		}
 	}
 }

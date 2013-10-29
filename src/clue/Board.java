@@ -143,11 +143,11 @@ public class Board extends JPanel {
 		for (int i = 0; i < numRows*numColumns; i++) {
 			adjs = new LinkedList<Integer>();
 			if (getCellAt(i).isDoorway()) {
-				if (((RoomCell) cells.get(i)).getDoorDirection()  == DoorDirection.DOWN) {
+				if (((RoomCell) cells.get(i)).getDoorDirection() == DoorDirection.DOWN) {
 					adjs.add(i+numColumns);
-				} else if (((RoomCell) cells.get(i)).getDoorDirection()  == DoorDirection.LEFT) {
+				} else if (((RoomCell) cells.get(i)).getDoorDirection() == DoorDirection.LEFT) {
 					adjs.add(i-1);
-				} else if (((RoomCell) cells.get(i)).getDoorDirection()  == DoorDirection.RIGHT) {
+				} else if (((RoomCell) cells.get(i)).getDoorDirection() == DoorDirection.RIGHT) {
 					adjs.add(i+1);
 				} else if (((RoomCell) cells.get(i)).getDoorDirection() == DoorDirection.UP) {
 					adjs.add(i-numColumns);
