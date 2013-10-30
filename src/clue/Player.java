@@ -108,10 +108,12 @@ public abstract class Player extends JPanel {
 
 	public void paintComponent(Graphics g, int numRows, int numColumns) {
 		super.paintComponent(g);
+		int size = GUIBoard.CELL_SIZE;
+		int padding = 4;
 		g.setColor(color);
 		int row = index / numRows;
 		int col = index % numColumns;
-		g.fillOval(col*20+21, row*20+21, 16, 16);
+		g.fillOval(col*size+size+1, row*size+size+1, size-padding, size-padding);
 	}
 
 	// For use by unit tests only.
