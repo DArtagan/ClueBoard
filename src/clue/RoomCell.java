@@ -43,12 +43,10 @@ public class RoomCell extends BoardCell {
 	public void draw(Graphics g, Board board) {
 		super.paintComponent(g);
 		int size = GUIBoard.CELL_SIZE;
-		g.setColor(Color.BLACK);
+		g.setColor(Color.decode("0x073642"));
 		if (isDoorway()) {
-			g.setColor(Color.BLUE);
 			g.fill3DRect(size*col, size*row, size, size, true);
 		} else {
-			g.setColor(Color.BLUE);
 			g.fill3DRect(size*col, size*row, size, size, true);
 		}
 		g.setColor(Color.RED);

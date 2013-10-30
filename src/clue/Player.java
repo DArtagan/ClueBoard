@@ -17,12 +17,19 @@ public abstract class Player extends JPanel {
 		this.name = name;
 		this.index = index;
 
-		try {
-			// We can use reflection to convert the string to a color
-			Field field = Class.forName("java.awt.Color").getField(color.trim());
-			this.color = (Color)field.get(null);
-		} catch (Exception e) {
-			this.color = null;  // Not defined
+		if (color.length() == 8) {
+			try {
+				this.color = Color.decode(color);
+			} catch (Exception e) {
+			}
+		} else {
+			try {
+				// We can use reflection to convert the string to a color
+				Field field = Class.forName("java.awt.Color").getField(color.trim());
+				this.color = (Color)field.get(null);
+			} catch (Exception e) {
+				this.color = null;  // Not defined
+			}
 		}
 		myCards = new HashSet<Card>();
 	}
