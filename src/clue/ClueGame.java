@@ -1,5 +1,6 @@
 package clue;
 
+import java.awt.Graphics;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -7,9 +8,11 @@ import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.swing.JPanel;
+
 import clue.Card.CardType;
 
-public class ClueGame {
+public class ClueGame extends JPanel {
 	public Solution solution;
 	private HashSet<Player> players;
 	private HashMap<String, Player> playerNames;
@@ -56,8 +59,8 @@ public class ClueGame {
 			tempSolution[i] = card.name;
 			++i;
 		}
-		solution = new Solution(tempSolution[0], tempSolution[1], tempSolution[2]);
 
+		solution = new Solution(tempSolution[0], tempSolution[1], tempSolution[2]);
 		// Give to players
 		while (!(tempDeck.isEmpty())) {
 			for (Player player : players) {
@@ -179,6 +182,15 @@ public class ClueGame {
 
 		// Add all weapons.
 		deck.addAll(weapons);
+	}
+
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		board.paintComponent(g);
+		for(Player player : players) {
+			player.paintComponent(g, board.getNumRows(), board.getNumColumns());
+		}
 	}
 
 	// These methods to be used by unit tests only.

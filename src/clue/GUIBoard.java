@@ -23,7 +23,7 @@ public class GUIBoard extends JFrame {
 		} catch (BadConfigFormatException | IOException e) {
 			e.printStackTrace();
 		}
-		add(clueGame.getBoard(), BorderLayout.CENTER);
+		add(clueGame, BorderLayout.CENTER);
 	}
 
 	public static void main(String[] args) {

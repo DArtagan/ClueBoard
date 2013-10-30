@@ -24,8 +24,8 @@ public class Board extends JPanel {
 	// Member variables.
 	private ArrayList<BoardCell> cells;
 	protected TreeMap<Character, String> rooms;
-	private int numRows;
-	private int numColumns;
+	protected int numRows;
+	protected int numColumns;
 	private HashSet<BoardCell> targets;
 	private Map<Integer, LinkedList<Integer>> adjMap;
 	private boolean[] visited;

@@ -1,10 +1,13 @@
 package clue;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.lang.reflect.Field;
 import java.util.HashSet;
 
-public abstract class Player {
+import javax.swing.JPanel;
+
+public abstract class Player extends JPanel {
 	private String name;
 	private Color color;
 	private int index;
@@ -101,6 +104,14 @@ public abstract class Player {
 
 	public void addCard(Card card) {
 		myCards.add(card);
+	}
+
+	public void paintComponent(Graphics g, int numRows, int numColumns) {
+		super.paintComponent(g);
+		g.setColor(color);
+		int row = index / numRows;
+		int col = index % numColumns;
+		g.fillOval(col*20+21, row*20+21, 16, 16);
 	}
 
 	// For use by unit tests only.
