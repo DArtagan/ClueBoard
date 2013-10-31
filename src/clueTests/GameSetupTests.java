@@ -44,17 +44,18 @@ public class GameSetupTests {
 	@Test
 	public void testLoadPeople() {
 		// Test some valid players, including first and last in the file.
-		ComputerPlayer mrgreen = new ComputerPlayer("Mr. Green", "green", 160);
-		ComputerPlayer mustard = new ComputerPlayer("Colonel Mustard", "yellow", 10);
-		ComputerPlayer prfplum = new ComputerPlayer("Professor Plum", "magenta", 368);
-		HumanPlayer scarlet = new HumanPlayer("Miss Scarlett", "red", 161);
+		ComputerPlayer mrgreen = new ComputerPlayer("Mr. Green", "0x859900", 160);
+		ComputerPlayer mustard = new ComputerPlayer("Colonel Mustard", "0xb58900", 10);
+		ComputerPlayer prfplum = new ComputerPlayer("Professor Plum", "0x6c71c4", 368);
+		HumanPlayer scarlet = new HumanPlayer("Miss Scarlett", "0xdc322f", 161);
 
+		// Test to make sure the number of players is correct.
+		assertEquals(6, clueGame.getPlayers().size());
+		// Test that specific players still exist.
 		assertTrue(clueGame.getPlayers().contains(mrgreen));
 		assertTrue(clueGame.getPlayers().contains(mustard));
 		assertTrue(clueGame.getPlayers().contains(scarlet));
 		assertTrue(clueGame.getPlayers().contains(prfplum));
-		// Test to make sure the number of players is correct.
-		assertEquals(6, clueGame.getPlayers().size());
 	}
 
 	@Test

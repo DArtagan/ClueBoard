@@ -2,6 +2,7 @@ package clue;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,16 +29,19 @@ public class Board extends JPanel {
 	protected int numColumns;
 	private HashSet<BoardCell> targets;
 	private Map<Integer, LinkedList<Integer>> adjMap;
+	private Map<Character, Point> namesMap;
 	private boolean[] visited;
 
 	public Board() {
 		cells = new ArrayList<BoardCell>();
 		rooms = new TreeMap<Character, String>();
+		namesMap = new HashMap<Character, Point>();
 	}
 
 	public Board(String layoutName, String legendName) throws IOException, BadConfigFormatException {
 		cells = new ArrayList<BoardCell>();
 		rooms = new TreeMap<Character, String>();
+		namesMap = new HashMap<Character, Point>();
 		loadConfigFiles(layoutName, legendName);
 	}
 
@@ -84,9 +88,11 @@ public class Board extends JPanel {
 					reader.close();
 					throw new BadConfigFormatException("Bad room initial in layout.");
 				} else {
-					System.out.println(colCount1);
 					if (c != WALKWAY) {
 						if (i != line.length()-1) {
+							if (line.charAt(i+1) == 'N') {
+								namesMap.put(c, new Point(colCount1, numRows));
+							}
 							cells.add(new RoomCell(numRows, colCount1, c, line.charAt(i+1)));
 						} else {
 							cells.add(new RoomCell(numRows, colCount1, c));
@@ -99,9 +105,10 @@ public class Board extends JPanel {
 			}
 			++numRows;
 			if (numRows == 1) {
-				// If this is the first row.
+				// If this is the first row, store the number of columns to a temp value.
 				colCount2 = colCount1;
 			} else if (colCount1 != colCount2) {
+				// Compare columns to temp value to ensure all rows have same number of columns.
 				scan.close();
 				reader.close();
 				throw new BadConfigFormatException("Unexpected number of columns.");
@@ -190,8 +197,25 @@ public class Board extends JPanel {
 		}
 	}
 
-	public LinkedList<Integer> getAdjList(int calcIndex) {
-		return adjMap.get(calcIndex);
+	public LinkedList<Integer> getAdjList(int index) {
+		return adjMap.get(index);
+	}
+
+	public LinkedList<Integer> getAdjCells(int index) {
+		LinkedList<Integer> adj = new LinkedList<Integer>();
+		if((index - numColumns) >= 0) {
+			adj.add(index - numColumns);
+		}
+		if((index + numColumns) < (numRows*numColumns)) {
+			adj.add(index + numColumns);
+		}
+		if((index % numColumns) > 0) {
+			adj.add(index - 1);
+		}
+		if(((index + 1) % numColumns) > 0) {
+			adj.add(index + 1);
+		}
+		return adj;
 	}
 
 	public void calcTargets(int row, int col, int steps) {
@@ -235,6 +259,13 @@ public class Board extends JPanel {
 		return targets;
 	}
 
+	public void paintNames(Graphics g) {
+		g.setColor(Color.BLACK);
+		for (Character key : namesMap.keySet()) {
+			g.drawString(rooms.get(key), namesMap.get(key).x*GUIBoard.CELL_SIZE, namesMap.get(key).y*GUIBoard.CELL_SIZE);
+		}
+	}
+
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -242,5 +273,6 @@ public class Board extends JPanel {
 		for(BoardCell cell : cells){
 			cell.draw(g, this);
 		}
+		paintNames(g);
 	}
 }
