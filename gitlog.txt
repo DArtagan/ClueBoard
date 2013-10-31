@@ -1,5 +1,20 @@
-Github repository: https://github.com/nurbu5/ClueBoard/tree/develop
-
+* Implemented notes GUI.
+* Added room names and walls.
+* Fixed magical invisible cell problem, working on drawing walls.
+* Correct the player offset.
+* Custom dialog box and GUI class for the notes.
+* Pretty colors based on Solarized: http://ethanschoonover.com/solarized
+* Reduce use of magic constants with public CELL_SIZE in GUIBoard.
+* Player pieces now displayed.
+*   Merge Ryan's 3D and my CELL_SIZE.
+|\  
+| * Playing with rectangle styles.
+* | Up and Left doors draw in the gui.
+|/  
+* New Board GUI is drawing squares.
+* Control GUI.
+* gitlog.txt include github repo url.
+* gitlog.txt for class.
 * gitlog.txt for class.
 * createSuggestion implemented, light bugfixing.
 *   Merge branch 'clueplayers' of https://github.com/nurbu5/ClueBoard into clueplayers
