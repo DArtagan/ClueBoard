@@ -195,6 +195,7 @@ public class ClueGame extends JPanel {
 		for(Player player : players) {
 			player.paintComponent(g, board.getNumRows(), board.getNumColumns());
 		}
+
 	}
 
 	// These methods to be used by unit tests only.

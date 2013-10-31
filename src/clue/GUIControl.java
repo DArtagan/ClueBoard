@@ -3,19 +3,18 @@ package clue;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-public class GUIControl extends JFrame {
+public class GUIControl extends JPanel {
 	private JTextArea turnDisplay, dieDisplay, suggestionDisplay, resultDisplay;
 
 	public GUIControl() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Controls");
-		setSize(500, 150);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setTitle("Controls");
+		//setSize(500, 150);
 		setLayout(new GridLayout(0, 3));
 		createLayout();
 	}

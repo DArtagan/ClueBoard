@@ -41,6 +41,9 @@ public class GUIBoard extends JFrame {
 		setJMenuBar(menuBar);
 		menuBar.add(createFileMenu());
 
+		// Control gui
+		add(new GUIControl(), BorderLayout.SOUTH);
+
 		notes = new GUINotes(clueGame);
 		notes.pack();
 	}
