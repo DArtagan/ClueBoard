@@ -120,7 +120,7 @@ public abstract class Player extends JPanel {
 		g.setColor(color);
 		int row = index / numRows;
 		int col = index % numColumns;
-		g.fillOval(col*size+size+1, row*size+size+1, size-padding, size-padding);
+		g.fillOval(col*size+1, row*size+1, size-padding, size-padding);
 	}
 
 	// For use by unit tests only.
