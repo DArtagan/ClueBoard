@@ -72,7 +72,6 @@ public class Board extends JPanel {
 		Scanner scan = new Scanner(reader);
 
 		while (scan.hasNextLine()) {
-			++numRows;
 			String line = scan.nextLine();
 			colCount1 = 0;
 			for (int i = 0; i < line.length(); ++i) {
@@ -85,10 +84,7 @@ public class Board extends JPanel {
 					reader.close();
 					throw new BadConfigFormatException("Bad room initial in layout.");
 				} else {
-					++colCount1;
-					if (numRows == 1) {
-						++colCount2;
-					}
+					System.out.println(colCount1);
 					if (c != WALKWAY) {
 						if (i != line.length()-1) {
 							cells.add(new RoomCell(numRows, colCount1, c, line.charAt(i+1)));
@@ -98,14 +94,18 @@ public class Board extends JPanel {
 					} else {
 						cells.add(new WalkwayCell(numRows, colCount1));
 					}
+					++colCount1;
 				}
 			}
-			if (colCount1 != colCount2) {
+			++numRows;
+			if (numRows == 1) {
+				// If this is the first row.
+				colCount2 = colCount1;
+			} else if (colCount1 != colCount2) {
 				scan.close();
 				reader.close();
-				throw new BadConfigFormatException();
+				throw new BadConfigFormatException("Unexpected number of columns.");
 			}
-			colCount2 = colCount1;
 		}
 		numColumns = colCount2;
 		scan.close();

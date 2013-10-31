@@ -2,6 +2,8 @@ package clue;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.util.LinkedList;
 
 public class RoomCell extends BoardCell {
 	public static enum DoorDirection {UP, DOWN, LEFT, RIGHT, NONE};
@@ -58,6 +60,30 @@ public class RoomCell extends BoardCell {
 			g.drawLine(col*size, row*size+size-1, col*size+size, row*size+size-1);
 		} else if (doorDirection == DoorDirection.LEFT) {
 			g.drawLine(col*size, row*size, col*size, row*size+size);
+		}
+		// Walls
+		BoardCell cell;
+		LinkedList<Point> myCorners = new LinkedList<Point>();
+		LinkedList<Point> otherCorners = new LinkedList<Point>();
+		System.out.println(board.calcIndex(row, col));
+		for (Integer cellIndex : board.getAdjList(board.calcIndex(row, col))) {
+			if ((cell = board.getCellAt(cellIndex)).isRoom()) {
+				if (cell.getInitial() != getInitial()) {
+					for (int i = 0; i < 1; ++i) {
+						for (int j = 0; j < 1; ++j) {
+							myCorners.add(new Point(col*i + col, row*j + row));
+							otherCorners.add(new Point(cell.col*i + cell.col, cell.row*j + cell.row));
+						}
+					}
+					LinkedList<Point> matchingCorners = new LinkedList<Point>(myCorners);
+					for (Point point : myCorners) {
+						if (!otherCorners.contains(point)) {
+							matchingCorners.remove(point);
+						}
+					}
+					g.drawLine(matchingCorners.getFirst().x*size, matchingCorners.getFirst().y*size, matchingCorners.getLast().x*size, matchingCorners.getLast().y*size+size);
+				}
+			}
 		}
 	}
 }
