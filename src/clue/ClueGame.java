@@ -184,6 +184,10 @@ public class ClueGame extends JPanel {
 		deck.addAll(weapons);
 	}
 
+	public HashSet<Card> getWeapons() {
+		return weapons;
+	}
+
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

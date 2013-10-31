@@ -15,6 +15,7 @@ public class GUIBoard extends JFrame {
 
 	private Board board;
 	private ClueGame clueGame;
+	private GUINotes notes;
 
 	public GUIBoard() {
 		// Setup
@@ -40,8 +41,8 @@ public class GUIBoard extends JFrame {
 		setJMenuBar(menuBar);
 		menuBar.add(createFileMenu());
 
-		// Custom Dialogue
-
+		notes = new GUINotes(clueGame);
+		notes.pack();
 	}
 
 	// File menu in menu bar
@@ -69,8 +70,7 @@ public class GUIBoard extends JFrame {
 		JMenuItem item = new JMenuItem("Notes");
 		class MenuItemListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {
-				GUINotes dialogue = new GUINotes();
-				dialogue.setVisible(true);
+				notes.setVisible(true);
 			}
 		}
 		item.addActionListener(new MenuItemListener());
