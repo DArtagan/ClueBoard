@@ -12,11 +12,11 @@ public class RoomCell extends BoardCell {
 	RoomCell(int row, int col, char initial, char direction) {
 		super(row, col, initial);
 		switch (direction) {
-			case 'U': doorDirection = DoorDirection.UP; break;
-			case 'D': doorDirection = DoorDirection.DOWN; break;
-			case 'L': doorDirection = DoorDirection.LEFT; break;
-			case 'R': doorDirection = DoorDirection.RIGHT; break;
-			default: doorDirection = DoorDirection.NONE; break;
+		case 'U': doorDirection = DoorDirection.UP; break;
+		case 'D': doorDirection = DoorDirection.DOWN; break;
+		case 'L': doorDirection = DoorDirection.LEFT; break;
+		case 'R': doorDirection = DoorDirection.RIGHT; break;
+		default: doorDirection = DoorDirection.NONE; break;
 		}
 	}
 

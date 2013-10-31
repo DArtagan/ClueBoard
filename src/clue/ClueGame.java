@@ -1,5 +1,6 @@
 package clue;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.io.FileReader;
 import java.io.IOException;
@@ -27,6 +28,9 @@ public class ClueGame extends JPanel {
 		board.loadConfigFiles(layoutName, legendName);
 		board.calcAdjacencies();
 		playerNames = new HashMap<String, Player>();
+
+		// GUI
+		setPreferredSize(new Dimension(getBoard().getNumColumns()*GUIBoard.CELL_SIZE, getBoard().getNumColumns()*GUIBoard.CELL_SIZE));
 	}
 
 	public static Card randomCard(HashSet<Card> set) {

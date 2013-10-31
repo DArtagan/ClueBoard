@@ -1,6 +1,5 @@
 package clue;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -31,10 +30,9 @@ public class GUIBoard extends JFrame {
 		} catch (BadConfigFormatException | IOException e) {
 			e.printStackTrace();
 		}
-		setSize(clueGame.getBoard().getNumColumns()*CELL_SIZE+50, clueGame.getBoard().getNumRows()*CELL_SIZE+100);
 
 		// Draw board
-		add(clueGame, BorderLayout.CENTER);
+		add(clueGame);
 
 		// Menu bar
 		JMenuBar menuBar = new JMenuBar();
@@ -79,6 +77,7 @@ public class GUIBoard extends JFrame {
 
 	public static void main(String[] args) {
 		GUIBoard gui = new GUIBoard();
+		gui.pack();
 		gui.setVisible(true);
 	}
 }
