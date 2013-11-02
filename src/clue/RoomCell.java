@@ -83,7 +83,7 @@ public class RoomCell extends BoardCell {
 					}
 					otherCorners.clear();
 					myCorners.clear();
-					g.setColor(Color.BLACK);
+					g.setColor(Color.WHITE);
 					g.drawLine(matchingCorners.getFirst().x*size, matchingCorners.getFirst().y*size, matchingCorners.getLast().x*size, matchingCorners.getLast().y*size);
 				}
 			}

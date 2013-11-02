@@ -260,7 +260,7 @@ public class Board extends JPanel {
 	}
 
 	public void paintNames(Graphics g) {
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 		for (Character key : namesMap.keySet()) {
 			g.drawString(rooms.get(key), namesMap.get(key).x*GUIBoard.CELL_SIZE, namesMap.get(key).y*GUIBoard.CELL_SIZE);
 		}

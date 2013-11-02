@@ -1,5 +1,6 @@
 package clue;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -18,6 +19,7 @@ public class GUIBoard extends JFrame {
 	private ClueGame clueGame;
 	private GUINotes notes;
 	private JPanel myCards;
+	private GUIControl controls;
 
 	public GUIBoard() {
 		// Setup
@@ -33,12 +35,10 @@ public class GUIBoard extends JFrame {
 		} catch (BadConfigFormatException | IOException e) {
 			e.printStackTrace();
 		}
-
-		// Splash Dialogue
-		//JOptionPane.showMessageDialog(JFrame, "You're a person.", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+		clueGame.deal();
 
 		// Draw board
-		add(clueGame);
+		add(clueGame, BorderLayout.CENTER);
 
 		// Menu bar
 		JMenuBar menuBar = new JMenuBar();
@@ -50,8 +50,11 @@ public class GUIBoard extends JFrame {
 
 		// Player cards
 		myCards = new GUIPlayerCards(clueGame.getPlayers().get(1).getCards());
-		myCards.updateCards();
-		add(myCards);
+		add(myCards, BorderLayout.EAST);
+
+		// Control panel
+		controls = new GUIControl();
+		add(controls, BorderLayout.SOUTH);
 	}
 
 	// File menu in menu bar
@@ -88,8 +91,8 @@ public class GUIBoard extends JFrame {
 
 	public static void main(String[] args) {
 		GUIBoard gui = new GUIBoard();
-		JOptionPane.showMessageDialog(gui, "You're a person.", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 		gui.pack();
+		JOptionPane.showMessageDialog(gui, "You're " + gui.clueGame.getPlayers().get(1).getName() + ". Let's start the game!", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 		gui.setVisible(true);
 	}
 }

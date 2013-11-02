@@ -200,7 +200,6 @@ public class ClueGame extends JPanel {
 		for(Player player : players) {
 			player.paintComponent(g, board.getNumRows(), board.getNumColumns());
 		}
-
 	}
 
 	public LinkedList<Player> getPlayers() {
