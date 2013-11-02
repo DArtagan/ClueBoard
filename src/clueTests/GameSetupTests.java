@@ -44,10 +44,10 @@ public class GameSetupTests {
 	@Test
 	public void testLoadPeople() {
 		// Test some valid players, including first and last in the file.
-		ComputerPlayer mrgreen = new ComputerPlayer("Mr. Green", "0x859900", 160);
-		ComputerPlayer mustard = new ComputerPlayer("Colonel Mustard", "0xb58900", 10);
-		ComputerPlayer prfplum = new ComputerPlayer("Professor Plum", "0x6c71c4", 368);
-		HumanPlayer scarlet = new HumanPlayer("Miss Scarlett", "0xdc322f", 161);
+		ComputerPlayer mrgreen = new ComputerPlayer("Mr. Green", "0x859900", 6, 22);
+		ComputerPlayer mustard = new ComputerPlayer("Colonel Mustard", "0xb58900", 0, 10);
+		ComputerPlayer prfplum = new ComputerPlayer("Professor Plum", "0x6c71c4", 16, 0);
+		HumanPlayer scarlet = new HumanPlayer("Miss Scarlett", "0xdc322f", 7, 0);
 
 		// Test to make sure the number of players is correct.
 		assertEquals(6, clueGame.getPlayers().size());

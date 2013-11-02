@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 public class GUIBoard extends JFrame {
 	public final static int CELL_SIZE = 20;
+	public final static int DIE = 6;
 
 	private Board board;
 	private ClueGame clueGame;
@@ -35,6 +36,7 @@ public class GUIBoard extends JFrame {
 		} catch (BadConfigFormatException | IOException e) {
 			e.printStackTrace();
 		}
+		clueGame.getBoard().calcAdjacencies();
 		clueGame.deal();
 
 		// Draw board
@@ -49,7 +51,7 @@ public class GUIBoard extends JFrame {
 		notes.pack();
 
 		// Player cards
-		myCards = new GUIPlayerCards(clueGame.getPlayers().get(1).getCards());
+		myCards = new GUIPlayerCards(clueGame.getPlayers().get(0).getCards());
 		add(myCards, BorderLayout.EAST);
 
 		// Control panel
@@ -92,7 +94,7 @@ public class GUIBoard extends JFrame {
 	public static void main(String[] args) {
 		GUIBoard gui = new GUIBoard();
 		gui.pack();
-		JOptionPane.showMessageDialog(gui, "You're " + gui.clueGame.getPlayers().get(1).getName() + ". Let's start the game!", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(gui, "You're " + gui.clueGame.getPlayers().get(0).getName() + ". Let's start the game!", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 		gui.setVisible(true);
 	}
 }

@@ -90,9 +90,9 @@ public class ClueGame extends JPanel {
 			// First player is human.
 			line = playerScanner.nextLine();
 			fields = line.split(", ");
-			if (fields.length >= 3) {
+			if (fields.length >= 4) {
 				try {
-					players.add(new HumanPlayer(fields[0], fields[1], Integer.parseInt(fields[2])));
+					players.add(new HumanPlayer(fields[0], fields[1], Integer.parseInt(fields[2]), Integer.parseInt(fields[3])));
 				} catch (NumberFormatException e) {
 					playerScanner.close();
 					playerReader.close();
@@ -106,7 +106,7 @@ public class ClueGame extends JPanel {
 			fields = line.split(", ");
 			if (fields.length >= 3) {
 				try {
-					players.add(new ComputerPlayer(fields[0], fields[1], Integer.parseInt(fields[2])));
+					players.add(new ComputerPlayer(fields[0], fields[1], Integer.parseInt(fields[2]), Integer.parseInt(fields[3])));
 				} catch (NumberFormatException e) {
 					playerScanner.close();
 					playerReader.close();

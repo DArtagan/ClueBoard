@@ -1,6 +1,6 @@
-Miss Scarlett, 0xdc322f, 161
-Colonel Mustard, 0xb58900, 10
-Mrs. White, white, 15
-Mr. Green, 0x859900, 160
-Mrs. Peacock, 0x268bd2, 344
-Professor Plum, 0x6c71c4, 368
+Miss Scarlett, 0xdc322f, 7, 0
+Colonel Mustard, 0xb58900, 0, 10
+Mrs. White, white, 0, 15
+Mr. Green, 0x859900, 6, 22
+Mrs. Peacock, 0x268bd2, 14, 22
+Professor Plum, 0x6c71c4, 16, 0

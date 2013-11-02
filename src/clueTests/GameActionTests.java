@@ -34,7 +34,7 @@ public class GameActionTests {
 	public void setUp() throws Exception {
 		clueGame = new ClueGame("ClueBoard.csv", "legend.txt");
 		clueGame.loadConfigFiles("playerConfig.txt", "weaponConfig.txt");
-		grimm = new ComputerPlayer("Grimm", "black", 291);
+		grimm = new ComputerPlayer("Grimm", "black", 12, 15);
 
 		// Cards.
 		profplumCard = new Card("Professor Plum", Card.CardType.PERSON);
@@ -51,10 +51,10 @@ public class GameActionTests {
 		labCard = new Card("Laboratory", Card.CardType.ROOM);
 		studyCard = new Card("Study", Card.CardType.ROOM);
 		// Players.
-		mrgreen = new ComputerPlayer("Mr. Green", "green", 160);
-		mustard = new ComputerPlayer("Colonel Mustard", "yellow", 10);
-		plum = new ComputerPlayer("Professor Plum", "magenta", 368);
-		scarlett = new HumanPlayer("Miss Scarlett", "red", 161);
+		mrgreen = new ComputerPlayer("Mr. Green", "green", 6, 22);
+		mustard = new ComputerPlayer("Colonel Mustard", "yellow", 0, 10);
+		plum = new ComputerPlayer("Professor Plum", "magenta", 16, 0);
+		scarlett = new HumanPlayer("Miss Scarlett", "red", 7, 0);
 		players = new ArrayList<Player>();
 		players.add(grimm);
 		players.add(mrgreen);

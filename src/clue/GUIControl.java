@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -13,8 +14,11 @@ import javax.swing.border.TitledBorder;
 
 public class GUIControl extends JPanel {
 	private JTextArea turnDisplay, dieDisplay, suggestionDisplay, resultDisplay;
+	private ClueGame clueGame;
+	private int turn = 0;
 
-	public GUIControl(ClueGame clueGame) {
+	public GUIControl(ClueGame game) {
+		clueGame = game;
 		setSize(500, 150);
 		setLayout(new GridLayout(0, 3));
 		createLayout();
@@ -71,7 +75,20 @@ public class GUIControl extends JPanel {
 	// Menu bar listener
 	class NextListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			System.exit(0);
+			// Move players
+			int die = new Random().nextInt(GUIBoard.DIE) + 1;
+			Player player = clueGame.getPlayers().get(turn % clueGame.getPlayers().size());
+			if (player.isComputerPlayer()) {
+				clueGame.getBoard().calcTargets(player.getRow(), player.getCol(), die);
+				player.move(((ComputerPlayer) player).pickLocation(clueGame.getBoard().getTargets()));
+			}
+			clueGame.repaint();
+
+			// Turn display
+			turnDisplay.setText(player.getName());
+			dieDisplay.setText(new Integer(die).toString());
+
+			++turn;
 		}
 	}
 

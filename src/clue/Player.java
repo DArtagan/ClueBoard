@@ -11,11 +11,15 @@ public abstract class Player extends JPanel {
 	private String name;
 	private Color color;
 	private int index;
+	private int row;
+	private int column;
 	private HashSet<Card> myCards;
 
-	public Player(String name, String color, int index) {
+	public Player(String name, String color, int row, int col) {
 		this.name = name;
-		this.index = index;
+
+		this.row = row;
+		this.column = col;
 
 		if (color.length() == 8) {
 			try {
@@ -113,18 +117,28 @@ public abstract class Player extends JPanel {
 		myCards.add(card);
 	}
 
+	public void move(BoardCell cell) {
+		row = cell.row;
+		column = cell.col;
+	}
+
 	public void paintComponent(Graphics g, int numRows, int numColumns) {
 		super.paintComponent(g);
 		int size = GUIBoard.CELL_SIZE;
 		int padding = 4;
 		g.setColor(color);
-		int row = index / numRows;
-		int col = index % numColumns;
-		g.fillOval(col*size+1, row*size+1, size-padding, size-padding);
+		g.fillOval(column*size+1, row*size+1, size-padding, size-padding);
 	}
 
-	// For use by unit tests only.
 	public HashSet<Card> getCards() {
 		return myCards;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public int getCol() {
+		return column;
 	}
 }

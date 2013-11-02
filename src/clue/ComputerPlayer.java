@@ -9,8 +9,8 @@ public class ComputerPlayer extends Player {
 	private HashSet<Card> seenCards;
 
 
-	public ComputerPlayer(String player, String color, int index) {
-		super(player, color, index);
+	public ComputerPlayer(String player, String color, int row, int col) {
+		super(player, color, row, col);
 		seenCards = new HashSet<Card>();
 		lastRoomVisited = null;
 	}
