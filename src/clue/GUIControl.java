@@ -2,6 +2,8 @@ package clue;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -12,7 +14,7 @@ import javax.swing.border.TitledBorder;
 public class GUIControl extends JPanel {
 	private JTextArea turnDisplay, dieDisplay, suggestionDisplay, resultDisplay;
 
-	public GUIControl() {
+	public GUIControl(ClueGame clueGame) {
 		setSize(500, 150);
 		setLayout(new GridLayout(0, 3));
 		createLayout();
@@ -32,8 +34,10 @@ public class GUIControl extends JPanel {
 
 		// Buttons
 		JButton nextButton = new JButton("Next Turn");
+		nextButton.addActionListener(new NextListener());
 		add(nextButton);
 		JButton accuseButton = new JButton("Make Accusation");
+		accuseButton.addActionListener(new AccusationListener());
 		add(accuseButton);
 
 		// Die Panel
@@ -62,5 +66,19 @@ public class GUIControl extends JPanel {
 		result.add(resultDisplay);
 		result.setBorder(new TitledBorder (new EtchedBorder(), "Result"));
 		add(result);
+	}
+
+	// Menu bar listener
+	class NextListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+		}
+	}
+
+	// Accusation listener
+	class AccusationListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			System.exit(0);
+		}
 	}
 }

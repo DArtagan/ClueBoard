@@ -53,7 +53,7 @@ public class GUIBoard extends JFrame {
 		add(myCards, BorderLayout.EAST);
 
 		// Control panel
-		controls = new GUIControl();
+		controls = new GUIControl(clueGame);
 		add(controls, BorderLayout.SOUTH);
 	}
 
