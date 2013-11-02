@@ -270,9 +270,18 @@ public class Board extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(Color.BLUE);
-		for(BoardCell cell : cells){
+		for(BoardCell cell : cells) {
 			cell.draw(g, this);
 		}
+		if (targets != null) {
+			for (BoardCell target : targets) {
+				target.draw(g, this, Color.CYAN);
+			}
+		}
 		paintNames(g);
+	}
+
+	public void setTargets(HashSet<BoardCell> set) {
+		targets = set;
 	}
 }

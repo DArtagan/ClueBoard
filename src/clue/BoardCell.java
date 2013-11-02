@@ -1,5 +1,6 @@
 package clue;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -33,5 +34,12 @@ public abstract class BoardCell extends JPanel {
 	}
 
 	public abstract void draw(Graphics g, Board board);
+
+	public void draw(Graphics g, Board board, Color color) {
+		super.paintComponent(g);
+		int size = GUIBoard.CELL_SIZE;
+		g.setColor(color);
+		g.fill3DRect(col*size, row*size, size, size, false);
+	}
 
 }

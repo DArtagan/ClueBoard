@@ -72,27 +72,29 @@ public class GUIControl extends JPanel {
 		add(result);
 	}
 
-	// Menu bar listener
 	class NextListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			// Move players
 			int die = new Random().nextInt(GUIBoard.DIE) + 1;
 			Player player = clueGame.getPlayers().get(turn % clueGame.getPlayers().size());
+			clueGame.getBoard().calcTargets(player.getRow(), player.getCol(), die);
+
 			if (player.isComputerPlayer()) {
-				clueGame.getBoard().calcTargets(player.getRow(), player.getCol(), die);
 				player.move(((ComputerPlayer) player).pickLocation(clueGame.getBoard().getTargets()));
+				clueGame.getBoard().setTargets(null);
+			} else {
+				clueGame.getBoard().getTargets();
 			}
+
 			clueGame.repaint();
 
 			// Turn display
 			turnDisplay.setText(player.getName());
 			dieDisplay.setText(new Integer(die).toString());
-
 			++turn;
 		}
 	}
 
-	// Accusation listener
 	class AccusationListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			System.exit(0);
