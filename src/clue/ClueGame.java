@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -15,14 +16,14 @@ import clue.Card.CardType;
 
 public class ClueGame extends JPanel {
 	public Solution solution;
-	private HashSet<Player> players;
+	private LinkedList<Player> players;
 	private HashMap<String, Player> playerNames;
 	private HashSet<Card> weapons;
 	private HashSet<Card> deck;
 	private Board board;
 
 	public ClueGame(String layoutName, String legendName) throws IOException, BadConfigFormatException {
-		players = new HashSet<Player>();
+		players = new LinkedList<Player>();
 		weapons = new HashSet<Card>();
 		board = new Board();
 		board.loadConfigFiles(layoutName, legendName);
@@ -148,7 +149,7 @@ public class ClueGame extends JPanel {
 				personCard = card;
 			}
 		}
-		playerNames.get(personCard.toString()).setIndex(accusingPerson.getIndex());;
+		playerNames.get(personCard.toString()).setIndex(accusingPerson.getIndex());
 
 		Card card = null;
 		for (Player player : players) {
@@ -202,10 +203,12 @@ public class ClueGame extends JPanel {
 
 	}
 
-	// These methods to be used by unit tests only.
-	public HashSet<Player> getPlayers() {
+	public LinkedList<Player> getPlayers() {
 		return players;
 	}
+
+	// These methods to be used by unit tests only.
+
 
 	public void setSolution(Solution accusation) {
 		solution = accusation;
@@ -219,7 +222,7 @@ public class ClueGame extends JPanel {
 		return board;
 	}
 
-	public void setPlayers(HashSet<Player> players) {
+	public void setPlayers(LinkedList<Player> players) {
 		this.players = players;
 	}
 

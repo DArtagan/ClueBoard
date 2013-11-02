@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashSet;
+import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -95,7 +95,7 @@ public class GameSetupTests {
 
 	@Test
 	public void testDealCards() {
-		HashSet<Player> players = clueGame.getPlayers();
+		LinkedList<Player> players = clueGame.getPlayers();
 
 		// Solution generated
 		assertTrue(clueGame.solution.weapon != null && clueGame.solution.room != null && clueGame.solution.person != null);

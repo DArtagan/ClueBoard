@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -233,7 +234,7 @@ public class GameActionTests {
 		scarlett.addCard(leadpipeCard);
 		scarlett.addCard(whiteCard);
 		scarlett.addCard(studyCard);
-		clueGame.setPlayers(new HashSet<Player>(players));
+		clueGame.setPlayers(new LinkedList<Player>(players));
 
 		// Make a suggestion which no players can disprove, and ensure that null is returned.
 		suggestion.add(scarlettCard);
@@ -260,7 +261,7 @@ public class GameActionTests {
 		suggestion.add(ballroomCard);
 		suggestion.add(leadpipeCard);
 		suggestion.add(mustardCard);
-		assertEquals(mustardCard, clueGame.handleSuggestion(suggestion, grimm));
+		assertEquals(leadpipeCard, clueGame.handleSuggestion(suggestion, grimm));
 		// Set up a test where the furthest person from the accuser is the one who can disprove, to ensure that all players are queried.
 		suggestion.clear();
 		suggestion.add(scarlettCard);

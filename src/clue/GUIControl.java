@@ -24,6 +24,7 @@ public class GUIControl extends JFrame {
 		// Turn Panel
 		JPanel turn = new JPanel();
 		turnDisplay = new JTextArea(1,10);
+		turnDisplay.setEditable(false);
 		turn.add(turnDisplay);
 		turn.setBorder(new TitledBorder (new EtchedBorder(), "Turn"));
 		add(turn);
@@ -35,18 +36,21 @@ public class GUIControl extends JFrame {
 		// Die Panel
 		JPanel die = new JPanel();
 		dieDisplay = new JTextArea(1,10);
+		dieDisplay.setEditable(false);
 		die.add(dieDisplay);
 		die.setBorder(new TitledBorder (new EtchedBorder(), "Die"));
 		add(die);
 		// Suggestion Panel
 		JPanel suggestion = new JPanel();
 		suggestionDisplay = new JTextArea(1,10);
+		suggestionDisplay.setEditable(false);
 		suggestion.add(suggestionDisplay);
 		suggestion.setBorder(new TitledBorder (new EtchedBorder(), "Suggestion"));
 		add(suggestion);
 		// Result Panel
 		JPanel result = new JPanel();
 		resultDisplay = new JTextArea(1,10);
+		resultDisplay.setEditable(false);
 		result.add(resultDisplay);
 		result.setBorder(new TitledBorder (new EtchedBorder(), "Result"));
 		add(result);

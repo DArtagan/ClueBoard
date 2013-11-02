@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class GUIBoard extends JFrame {
 	public final static int CELL_SIZE = 20;
@@ -15,6 +17,7 @@ public class GUIBoard extends JFrame {
 	private Board board;
 	private ClueGame clueGame;
 	private GUINotes notes;
+	private JPanel myCards;
 
 	public GUIBoard() {
 		// Setup
@@ -31,6 +34,9 @@ public class GUIBoard extends JFrame {
 			e.printStackTrace();
 		}
 
+		// Splash Dialogue
+		//JOptionPane.showMessageDialog(JFrame, "You're a person.", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+
 		// Draw board
 		add(clueGame);
 
@@ -41,6 +47,11 @@ public class GUIBoard extends JFrame {
 
 		notes = new GUINotes(clueGame);
 		notes.pack();
+
+		// Player cards
+		myCards = new GUIPlayerCards(clueGame.getPlayers().get(1).getCards());
+		myCards.updateCards();
+		add(myCards);
 	}
 
 	// File menu in menu bar
@@ -77,6 +88,7 @@ public class GUIBoard extends JFrame {
 
 	public static void main(String[] args) {
 		GUIBoard gui = new GUIBoard();
+		JOptionPane.showMessageDialog(gui, "You're a person.", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
 		gui.pack();
 		gui.setVisible(true);
 	}
