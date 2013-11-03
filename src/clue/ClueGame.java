@@ -2,6 +2,8 @@ package clue;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -10,17 +12,20 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import clue.Card.CardType;
 
-public class ClueGame extends JPanel {
+public class ClueGame extends JPanel implements MouseListener {
 	public Solution solution;
 	private LinkedList<Player> players;
 	private HashMap<String, Player> playerNames;
 	private HashSet<Card> weapons;
 	private HashSet<Card> deck;
 	private Board board;
+	private int turn = 0;
+	private boolean humanMoved = false;
 
 	public ClueGame(String layoutName, String legendName) throws IOException, BadConfigFormatException {
 		players = new LinkedList<Player>();
@@ -32,6 +37,7 @@ public class ClueGame extends JPanel {
 
 		// GUI
 		setPreferredSize(new Dimension(getBoard().getNumColumns()*GUIBoard.CELL_SIZE, getBoard().getNumColumns()*GUIBoard.CELL_SIZE));
+		addMouseListener(this);
 	}
 
 	public static Card randomCard(HashSet<Card> set) {
@@ -202,13 +208,55 @@ public class ClueGame extends JPanel {
 		}
 	}
 
+	// Board mouse listener
+	public void mouseClicked(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
+	public void mousePressed(MouseEvent e)  {
+		BoardCell targetCell = null;
+		if( getBoard().getTargets() != null) {
+			for (BoardCell target : getBoard().getTargets()) {
+				if (target.containsClick(e.getX(), e.getY())) {
+					targetCell = target;
+					break;
+				}
+			}
+			// display some information just to show whether a box was clicked
+			if (targetCell != null) {
+				players.get(turn % players.size() - 1).move(targetCell);
+				System.out.println("Box!");
+				humanMoved = true;
+				getBoard().setTargets(null);
+				repaint();
+			} else {
+				JOptionPane.showMessageDialog(this, "Invalid move, try again.", "Invalid move", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
+	}
+
 	public LinkedList<Player> getPlayers() {
 		return players;
 	}
 
+	public int getTurn() {
+		return turn;
+	}
+
+	public void incrementTurn() {
+		++turn;
+	}
+
+
+	public void setHumanMoved(boolean b) {
+		humanMoved = b;
+	}
+
+	public boolean getHumanMoved() {
+		return humanMoved;
+	}
+
 	// These methods to be used by unit tests only.
-
-
 	public void setSolution(Solution accusation) {
 		solution = accusation;
 	}

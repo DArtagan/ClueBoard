@@ -15,7 +15,6 @@ import javax.swing.border.TitledBorder;
 public class GUIControl extends JPanel {
 	private JTextArea turnDisplay, dieDisplay, suggestionDisplay, resultDisplay;
 	private ClueGame clueGame;
-	private int turn = 0;
 
 	public GUIControl(ClueGame game) {
 		clueGame = game;
@@ -70,28 +69,32 @@ public class GUIControl extends JPanel {
 		result.add(resultDisplay);
 		result.setBorder(new TitledBorder (new EtchedBorder(), "Result"));
 		add(result);
+
 	}
 
 	class NextListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			// Move players
-			int die = new Random().nextInt(GUIBoard.DIE) + 1;
-			Player player = clueGame.getPlayers().get(turn % clueGame.getPlayers().size());
-			clueGame.getBoard().calcTargets(player.getRow(), player.getCol(), die);
+			if (clueGame.getHumanMoved() || clueGame.getTurn() == 0) {
+				// Move players
+				int die = new Random().nextInt(GUIBoard.DIE) + 1;
+				Player player = clueGame.getPlayers().get(clueGame.getTurn() % clueGame.getPlayers().size());
+				clueGame.getBoard().calcTargets(player.getRow(), player.getCol(), die);
 
-			if (player.isComputerPlayer()) {
-				player.move(((ComputerPlayer) player).pickLocation(clueGame.getBoard().getTargets()));
-				clueGame.getBoard().setTargets(null);
-			} else {
-				clueGame.getBoard().getTargets();
+				if (player.isComputerPlayer()) {
+					player.move(((ComputerPlayer) player).pickLocation(clueGame.getBoard().getTargets()));
+					clueGame.getBoard().setTargets(null);
+				} else {
+					clueGame.getBoard().getTargets();
+					clueGame.setHumanMoved(false);
+				}
+
+				clueGame.repaint();
+
+				// Turn display
+				turnDisplay.setText(player.getName());
+				dieDisplay.setText(new Integer(die).toString());
+				clueGame.incrementTurn();
 			}
-
-			clueGame.repaint();
-
-			// Turn display
-			turnDisplay.setText(player.getName());
-			dieDisplay.setText(new Integer(die).toString());
-			++turn;
 		}
 	}
 
