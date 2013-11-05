@@ -88,10 +88,11 @@ public class GUISuggestion extends JFrame {
 	class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == submit) {
+				suggestion.add(new Card(personGuess.getSelectedItem().toString(), Card.CardType.PERSON));
+				suggestion.add(new Card(weaponGuess.getSelectedItem().toString(), Card.CardType.WEAPON));
 				disprove = clueGame.handleSuggestion(suggestion, clueGame.getPlayers().get(clueGame.getTurn() % clueGame.getPlayers().size()));
-			} else {
-				setVisible(false);
 			}
+			setVisible(false);
 		}
 	}
 
