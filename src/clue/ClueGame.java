@@ -229,7 +229,7 @@ public class ClueGame extends JPanel implements MouseListener {
 				humanMoved = true;
 				BoardCell location = getBoard().getCellAt(player.getRow(), player.getCol());
 				if (location.isRoom()) {
-					GUISuggestion suggestionWindow = new GUISuggestion(getBoard().getRooms().get(location.getInitial()));
+					GUISuggestion suggestionWindow = new GUISuggestion(this, new Card(getBoard().getRooms().get(location.getInitial()), Card.CardType.ROOM));
 					suggestionWindow.pack();
 					suggestionWindow.setVisible(true);
 				}

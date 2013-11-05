@@ -26,13 +26,13 @@ public class GUINotes extends JDialog {
 
 		people.setBorder(new TitledBorder (new EtchedBorder(), "People"));
 		people.setLayout(new GridLayout(0, 2));
-		rooms.setBorder(new TitledBorder (new EtchedBorder(), "Rooms"));
+		rooms.setBorder(new TitledBorder(new EtchedBorder(), "Rooms"));
 		rooms.setLayout(new GridLayout(0, 2));
-		weapons.setBorder(new TitledBorder (new EtchedBorder(), "Weapons"));
+		weapons.setBorder(new TitledBorder(new EtchedBorder(), "Weapons"));
 		weapons.setLayout(new GridLayout(0, 2));
-		peopleGuess.setBorder(new TitledBorder (new EtchedBorder(), "People Guess"));
-		roomsGuess.setBorder(new TitledBorder (new EtchedBorder(), "Rooms Guess"));
-		weaponsGuess.setBorder(new TitledBorder (new EtchedBorder(), "Weapons Guess"));
+		peopleGuess.setBorder(new TitledBorder(new EtchedBorder(), "People Guess"));
+		roomsGuess.setBorder(new TitledBorder(new EtchedBorder(), "Rooms Guess"));
+		weaponsGuess.setBorder(new TitledBorder(new EtchedBorder(), "Weapons Guess"));
 
 		for(Player player : clueGame.getPlayers()) {
 			people.add(new JCheckBox(player.getName()));

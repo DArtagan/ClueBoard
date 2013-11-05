@@ -14,7 +14,8 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 public class GUIControl extends JPanel {
-	private JTextArea turnDisplay, dieDisplay, suggestionDisplay, resultDisplay;
+	private JTextArea turnDisplay, dieDisplay;
+	protected JTextArea suggestionDisplay, resultDisplay;
 	private ClueGame clueGame;
 
 	public GUIControl(ClueGame game) {
