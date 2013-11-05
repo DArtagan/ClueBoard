@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.Random;
 
 import javax.swing.JButton;
@@ -54,7 +55,9 @@ public class GUIControl extends JPanel {
 
 		// Suggestion Panel
 		JPanel suggestion = new JPanel();
-		suggestionDisplay = new JTextArea(1,10);
+		suggestionDisplay = new JTextArea(2,20);
+		suggestionDisplay.setLineWrap(true);
+		suggestionDisplay.setWrapStyleWord(true);
 		suggestionDisplay.setEditable(false);
 		suggestionDisplay.setBackground(jframeColor);
 		suggestion.add(suggestionDisplay);
@@ -69,11 +72,12 @@ public class GUIControl extends JPanel {
 		result.add(resultDisplay);
 		result.setBorder(new TitledBorder (new EtchedBorder(), "Result"));
 		add(result);
-
 	}
 
 	class NextListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			suggestionDisplay.setText(null);
+			resultDisplay.setText(null);
 			if (clueGame.getHumanMoved() || clueGame.getTurn() == 0) {
 				// Move players
 				int die = new Random().nextInt(GUIBoard.DIE) + 1;
@@ -81,7 +85,22 @@ public class GUIControl extends JPanel {
 				clueGame.getBoard().calcTargets(player.getRow(), player.getCol(), die);
 
 				if (player.isComputerPlayer()) {
-					player.move(((ComputerPlayer) player).pickLocation(clueGame.getBoard().getTargets()));
+					BoardCell location = ((ComputerPlayer) player).pickLocation(clueGame.getBoard().getTargets());
+					player.move(location);
+					if (clueGame.getBoard().getCellAt(player.getRow(), player.getCol()).isRoom()) {
+						HashSet<Card> suggestion = ((ComputerPlayer) player).createSuggestion(clueGame.getCards(), clueGame.getBoard().getRooms());
+						for (Card card : suggestion) {
+							if(card.getType() == Card.CardType.PERSON) {
+								for(Player accused : clueGame.getPlayers()) {
+									if (accused.getName() == card.toString()) {
+										accused.move(location);
+									}
+								}
+							}
+						}
+						suggestionDisplay.setText(suggestion.toString());
+						resultDisplay.setText(clueGame.handleSuggestion(suggestion, player).toString());
+					}
 					clueGame.getBoard().setTargets(null);
 				} else {
 					clueGame.getBoard().getTargets();

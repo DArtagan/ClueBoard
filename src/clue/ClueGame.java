@@ -224,9 +224,15 @@ public class ClueGame extends JPanel implements MouseListener {
 			}
 			// display some information just to show whether a box was clicked
 			if (targetCell != null) {
-				players.get(turn % players.size() - 1).move(targetCell);
-				System.out.println("Box!");
+				Player player = players.get(turn % players.size() - 1);
+				player.move(targetCell);
 				humanMoved = true;
+				BoardCell location = getBoard().getCellAt(player.getRow(), player.getCol());
+				if (location.isRoom()) {
+					GUISuggestion suggestionWindow = new GUISuggestion(getBoard().getRooms().get(location.getInitial()));
+					suggestionWindow.pack();
+					suggestionWindow.setVisible(true);
+				}
 				getBoard().setTargets(null);
 				repaint();
 			} else {

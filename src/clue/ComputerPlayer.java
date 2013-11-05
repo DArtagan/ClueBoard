@@ -48,7 +48,6 @@ public class ComputerPlayer extends Player {
 
 		// Create and split not-seen list into players and weapons
 		for (Card card : deck) {
-			System.out.println(seenCards);
 			if (!(seenCards.contains(card))) {
 				if (card.getType() == Card.CardType.PERSON) {
 					person.add(card);
@@ -58,10 +57,10 @@ public class ComputerPlayer extends Player {
 			}
 		}
 
+		// Note: By convention the suggestion is given in order of person room, weapon
 		suggestion.add(ClueGame.randomCard(person));
 		suggestion.add(new Card(rooms.get(lastRoomVisited.getInitial()), Card.CardType.ROOM));
 		suggestion.add(ClueGame.randomCard(weapon));
-		System.out.println(suggestion);
 		return suggestion;
 	}
 
