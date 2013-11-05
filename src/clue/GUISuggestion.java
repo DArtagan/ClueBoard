@@ -59,7 +59,6 @@ public class GUISuggestion extends JFrame {
 		for(Player player : clueGame.getPlayers()) {
 			personGuess.addItem(player.getName());
 		}
-		personGuess.addActionListener(new SuggestionListener());
 		add(new JPanel().add(personGuess));
 
 		// Weapon
@@ -73,7 +72,6 @@ public class GUISuggestion extends JFrame {
 		for(Card player : clueGame.getWeapons()) {
 			weaponGuess.addItem(player.toString());
 		}
-		personGuess.addActionListener(new SuggestionListener());
 		add(new JPanel().add(weaponGuess));
 
 		// Buttons
@@ -93,16 +91,6 @@ public class GUISuggestion extends JFrame {
 				disprove = clueGame.handleSuggestion(suggestion, clueGame.getPlayers().get(clueGame.getTurn() % clueGame.getPlayers().size()));
 			}
 			setVisible(false);
-		}
-	}
-
-	class SuggestionListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == personGuess) {
-				suggestion.add(new Card(personGuess.getSelectedItem().toString(), Card.CardType.PERSON));
-			} else if (e.getSource() == weaponGuess) {
-				suggestion.add(new Card(weaponGuess.getSelectedItem().toString(), Card.CardType.WEAPON));
-			}
 		}
 	}
 
