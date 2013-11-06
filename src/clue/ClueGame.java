@@ -26,6 +26,7 @@ public class ClueGame extends JPanel implements MouseListener {
 	private Board board;
 	private int turn = 0;
 	private boolean humanMoved = false;
+	private GUISuggestion suggestionWindow;
 
 	public ClueGame(String layoutName, String legendName) throws IOException, BadConfigFormatException {
 		players = new LinkedList<Player>();
@@ -229,7 +230,7 @@ public class ClueGame extends JPanel implements MouseListener {
 				humanMoved = true;
 				BoardCell location = getBoard().getCellAt(player.getRow(), player.getCol());
 				if (location.isRoom()) {
-					GUISuggestion suggestionWindow = new GUISuggestion(this, new Card(getBoard().getRooms().get(location.getInitial()), Card.CardType.ROOM));
+					suggestionWindow = new GUISuggestion(this, new Card(getBoard().getRooms().get(location.getInitial()), Card.CardType.ROOM));
 					suggestionWindow.pack();
 					suggestionWindow.setVisible(true);
 				}
@@ -260,6 +261,10 @@ public class ClueGame extends JPanel implements MouseListener {
 
 	public boolean getHumanMoved() {
 		return humanMoved;
+	}
+
+	public GUISuggestion getSuggestionWindow() {
+		return suggestionWindow;
 	}
 
 	// These methods to be used by unit tests only.

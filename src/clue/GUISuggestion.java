@@ -90,6 +90,22 @@ public class GUISuggestion extends JFrame {
 				suggestion.add(new Card(weaponGuess.getSelectedItem().toString(), Card.CardType.WEAPON));
 				disprove = clueGame.handleSuggestion(suggestion, clueGame.getPlayers().get(clueGame.getTurn() % clueGame.getPlayers().size()));
 			}
+			BoardCell location = clueGame.getBoard().getCellAt(clueGame.getBoard().calcIndex(clueGame.getPlayers().get(0).getRow(), clueGame.getPlayers().get(0).getCol()));
+			for (Card card : suggestion) {
+				if(card.getType() == Card.CardType.PERSON) {
+					for(Player accused : clueGame.getPlayers()) {
+						if (accused.getName() == card.toString()) {
+							accused.move(location);
+						}
+					}
+				}
+			}
+			GUIControl.suggestionDisplay.setText(suggestion.toString());
+			if (disprove == null) {
+				GUIControl.resultDisplay.setText("No new clue.");
+			} else {
+				GUIControl.resultDisplay.setText(disprove.toString());
+			}
 			setVisible(false);
 		}
 	}

@@ -15,7 +15,7 @@ import javax.swing.border.TitledBorder;
 
 public class GUIControl extends JPanel {
 	private JTextArea turnDisplay, dieDisplay;
-	protected JTextArea suggestionDisplay, resultDisplay;
+	protected static JTextArea suggestionDisplay, resultDisplay;
 	private ClueGame clueGame;
 
 	public GUIControl(ClueGame game) {
@@ -106,10 +106,13 @@ public class GUIControl extends JPanel {
 				} else {
 					clueGame.getBoard().getTargets();
 					clueGame.setHumanMoved(false);
+					if (clueGame.getSuggestionWindow() != null) {
+						suggestionDisplay.setText(clueGame.getSuggestionWindow().getSuggestion().toString());
+						resultDisplay.setText(clueGame.getSuggestionWindow().getDisprove().toString());
+					}
 				}
 
 				clueGame.repaint();
-
 				// Turn display
 				turnDisplay.setText(player.getName());
 				dieDisplay.setText(new Integer(die).toString());
