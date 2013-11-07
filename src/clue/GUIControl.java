@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Random;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EtchedBorder;
@@ -80,12 +81,45 @@ public class GUIControl extends JPanel {
 			suggestionDisplay.setText(null);
 			resultDisplay.setText(null);
 			if (clueGame.getHumanMoved() || clueGame.getTurn() == 0) {
-				// Move players
 				int die = new Random().nextInt(GUIBoard.DIE) + 1;
 				Player player = clueGame.getPlayers().get(clueGame.getTurn() % clueGame.getPlayers().size());
 				clueGame.getBoard().calcTargets(player.getRow(), player.getCol(), die);
 
 				if (player.isComputerPlayer()) {
+					System.out.println(((ComputerPlayer) player).getSeen().toString());
+					// Accusation
+					// Cause there's three cards in the deck that can't be seen
+					HashSet<Card> seen = ((ComputerPlayer) player).getSeen();
+					HashSet<Card> deck = clueGame.getCards();
+					if (seen.size() == deck.size() - 3) {
+						HashSet<Card> accusation = new HashSet<Card>(deck);
+						for (Card card : seen) {
+							if (accusation.contains(card)) {
+								accusation.remove(card);
+							}
+						}
+						String room = "";
+						String person = "";
+						String weapon = "";
+						for (Card card : accusation) {
+							if (card.getType() == Card.CardType.ROOM) {
+								room = card.toString();
+							}
+							if (card.getType() == Card.CardType.PERSON) {
+								person = card.toString();
+							}
+							if (card.getType() == Card.CardType.WEAPON) {
+								weapon = card.toString();
+							}
+						}
+						if (clueGame.checkAccusation(new Solution(person, weapon, room))) {
+							JOptionPane.showMessageDialog(clueGame, person + " in the " + room + " with the " + weapon + ". " + player.getName() + " just won the game!", "Winning", JOptionPane.INFORMATION_MESSAGE);
+							System.exit(0);
+						} else {
+							JOptionPane.showMessageDialog(clueGame, person + " in the " + room + " with the " + weapon + ". " + player.getName() + " just guessed wrong.  If this was a real clue game, they'd be disqualified.", "Nope", JOptionPane.INFORMATION_MESSAGE);
+						}
+					}
+					// Move and suggest
 					BoardCell location = ((ComputerPlayer) player).pickLocation(clueGame.getBoard().getTargets());
 					player.move(location);
 					if (clueGame.getBoard().getCellAt(player.getRow(), player.getCol()).isRoom()) {
@@ -100,7 +134,12 @@ public class GUIControl extends JPanel {
 							}
 						}
 						suggestionDisplay.setText(suggestion.toString());
-						resultDisplay.setText(clueGame.handleSuggestion(suggestion, player).toString());
+						Card disprove = clueGame.handleSuggestion(suggestion, player);
+						if (disprove == null) {
+							resultDisplay.setText("No new clue.");
+						} else {
+							resultDisplay.setText(disprove.toString());
+						}
 					}
 					clueGame.getBoard().setTargets(null);
 				} else {

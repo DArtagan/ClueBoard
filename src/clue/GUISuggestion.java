@@ -46,8 +46,6 @@ public class GUISuggestion extends JFrame {
 		roomGuess.setText(room.toString());
 		add(new JPanel().add(roomGuess));
 
-		suggestion.add(room);
-
 		// Person
 		personText = new JTextArea(1,10);
 		personText.setEditable(false);
@@ -85,6 +83,9 @@ public class GUISuggestion extends JFrame {
 
 	class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			suggestion.add(room);
+
+			disprove = null;
 			if (e.getSource() == submit) {
 				suggestion.add(new Card(personGuess.getSelectedItem().toString(), Card.CardType.PERSON));
 				suggestion.add(new Card(weaponGuess.getSelectedItem().toString(), Card.CardType.WEAPON));

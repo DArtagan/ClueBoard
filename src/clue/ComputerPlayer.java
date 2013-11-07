@@ -6,18 +6,13 @@ import java.util.Random;
 
 public class ComputerPlayer extends Player {
 	private BoardCell lastRoomVisited;
-	private HashSet<Card> seenCards;
+	private static HashSet<Card> seenCards;
 
 
 	public ComputerPlayer(String player, String color, int row, int col) {
 		super(player, color, row, col);
 		seenCards = new HashSet<Card>();
 		lastRoomVisited = null;
-	}
-
-	public void addCard(Card card) {
-		super.addCard(card);
-		updateSeen(card);
 	}
 
 	public BoardCell pickLocation(HashSet<BoardCell> targets) {
@@ -47,8 +42,10 @@ public class ComputerPlayer extends Player {
 		HashSet<Card> weapon = new HashSet<Card>();
 
 		// Create and split not-seen list into players and weapons
+		HashSet<Card> extraSeen = new HashSet<Card>(seenCards);
+		extraSeen.addAll(myCards);
 		for (Card card : deck) {
-			if (!(seenCards.contains(card))) {
+			if (!(extraSeen.contains(card))) {
 				if (card.getType() == Card.CardType.PERSON) {
 					person.add(card);
 				} else if (card.getType() == Card.CardType.WEAPON) {
@@ -82,6 +79,10 @@ public class ComputerPlayer extends Player {
 			++i;
 		}
 		return null;
+	}
+
+	public HashSet<Card> getSeen() {
+		return seenCards;
 	}
 
 	// For tests

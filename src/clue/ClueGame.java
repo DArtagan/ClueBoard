@@ -12,7 +12,6 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import clue.Card.CardType;
@@ -161,11 +160,12 @@ public class ClueGame extends JPanel implements MouseListener {
 		Card card = null;
 		for (Player player : players) {
 			// Don't check the accuser's cards.
-			if (!player.equals(accusingPerson)) {
+			if (!(player.equals(accusingPerson))) {
 				card = player.disproveSuggestion(suggestion);
 				if (card != null) {
 					// Update the computer players' "seen" lists.
 					if (player.isComputerPlayer()) {
+						System.out.println("Update " + player.getName() + " " + player.getCards().toString() + " " + card.toString());
 						((ComputerPlayer) player).updateSeen(card);
 					}
 					return card;
@@ -237,7 +237,7 @@ public class ClueGame extends JPanel implements MouseListener {
 				getBoard().setTargets(null);
 				repaint();
 			} else {
-				JOptionPane.showMessageDialog(this, "Invalid move, try again.", "Invalid move", JOptionPane.INFORMATION_MESSAGE);
+				// JOptionPane.showMessageDialog(this, "Invalid move, try again.", "Invalid move", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}
@@ -267,17 +267,18 @@ public class ClueGame extends JPanel implements MouseListener {
 		return suggestionWindow;
 	}
 
-	// These methods to be used by unit tests only.
-	public void setSolution(Solution accusation) {
-		solution = accusation;
+
+	public Board getBoard() {
+		return board;
 	}
 
 	public HashSet<Card> getCards() {
 		return deck;
 	}
 
-	public Board getBoard() {
-		return board;
+	// These methods to be used by unit tests only.
+	public void setSolution(Solution accusation) {
+		solution = accusation;
 	}
 
 	public void setPlayers(LinkedList<Player> players) {

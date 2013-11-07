@@ -13,7 +13,7 @@ public abstract class Player extends JPanel {
 	private int index;
 	private int row;
 	private int column;
-	private HashSet<Card> myCards;
+	protected HashSet<Card> myCards;
 
 	public Player(String name, String color, int row, int col) {
 		this.name = name;
