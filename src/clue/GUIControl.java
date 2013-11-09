@@ -91,7 +91,6 @@ public class GUIControl extends JPanel {
 				clueGame.getBoard().calcTargets(player.getRow(), player.getCol(), die);
 
 				if (player.isComputerPlayer()) {
-					System.out.println(((ComputerPlayer) player).getSeen().toString());
 					// Accusation
 					// Cause there's three cards in the deck that can't be seen
 					HashSet<Card> seen = ((ComputerPlayer) player).getSeen();
@@ -167,7 +166,11 @@ public class GUIControl extends JPanel {
 
 	class AccusationListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			System.exit(0);
+			Player player = clueGame.getPlayers().get(clueGame.getTurn() % clueGame.getPlayers().size());
+			if (!(player.isComputerPlayer()) && !(clueGame.getHumanMoved())) {
+				GUIAccusation accusationWindow = new GUIAccusation(clueGame);
+				accusationWindow.setVisible(true);
+			}
 		}
 	}
 }
