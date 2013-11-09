@@ -70,17 +70,20 @@ public class ClueGame extends JPanel implements MouseListener {
 			tempSolution[i] = card.name;
 			++i;
 		}
-
 		solution = new Solution(tempSolution[0], tempSolution[1], tempSolution[2]);
+		System.out.println(solution.toString());
+
 		// Give to players
 		while (!(tempDeck.isEmpty())) {
 			for (Player player : players) {
 				card = randomCard(tempDeck);
+				System.out.print(card.toString() + ",");
 				if (card != null) {
 					player.addCard(card);
 					tempDeck.remove(card);
 				}
 			}
+			System.out.println();
 		}
 	}
 
@@ -158,15 +161,19 @@ public class ClueGame extends JPanel implements MouseListener {
 		playerNames.get(personCard.toString()).setIndex(accusingPerson.getIndex());
 
 		Card card = null;
-		for (Player player : players) {
+		for (int i = 0; i < players.size(); ++i) {
 			// Don't check the accuser's cards.
-			if (!(player.equals(accusingPerson))) {
-				card = player.disproveSuggestion(suggestion);
+			if (!(players.get(i).equals(accusingPerson))) {
+				System.out.println(suggestion.toString());
+				card = players.get(i).disproveSuggestion(suggestion);
+				System.out.println(card);
 				if (card != null) {
 					// Update the computer players' "seen" lists.
-					if (player.isComputerPlayer()) {
-						System.out.println("Update " + player.getName() + " " + player.getCards().toString() + " " + card.toString());
-						((ComputerPlayer) player).updateSeen(card);
+					if (players.get(i).isComputerPlayer()) {
+						System.out.println("Update " + players.get(i).getName() + " " + players.get(i).getCards().toString() + " " + card.toString());
+						((ComputerPlayer) players.get(i)).updateSeen(card);
+					} else {
+						((ComputerPlayer) players.get(i+1)).updateSeen(card);
 					}
 					return card;
 				}
@@ -228,8 +235,10 @@ public class ClueGame extends JPanel implements MouseListener {
 				Player player = players.get(turn % players.size() - 1);
 				player.move(targetCell);
 				humanMoved = true;
+				repaint();
 				BoardCell location = getBoard().getCellAt(player.getRow(), player.getCol());
 				if (location.isRoom()) {
+					this.setEnabled(false);
 					suggestionWindow = new GUISuggestion(this, new Card(getBoard().getRooms().get(location.getInitial()), Card.CardType.ROOM));
 					suggestionWindow.pack();
 					suggestionWindow.setVisible(true);

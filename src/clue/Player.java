@@ -14,6 +14,7 @@ public abstract class Player extends JPanel {
 	private int row;
 	private int column;
 	protected HashSet<Card> myCards;
+	private HashSet<Card> seen = null;
 
 	public Player(String name, String color, int row, int col) {
 		this.name = name;

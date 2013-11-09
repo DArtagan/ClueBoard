@@ -54,6 +54,7 @@ public class ComputerPlayer extends Player {
 			}
 		}
 
+
 		// Note: By convention the suggestion is given in order of person room, weapon
 		suggestion.add(ClueGame.randomCard(person));
 		suggestion.add(new Card(rooms.get(lastRoomVisited.getInitial()), Card.CardType.ROOM));

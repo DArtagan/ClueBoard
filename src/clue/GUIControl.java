@@ -83,6 +83,11 @@ public class GUIControl extends JPanel {
 			if (clueGame.getHumanMoved() || clueGame.getTurn() == 0) {
 				int die = new Random().nextInt(GUIBoard.DIE) + 1;
 				Player player = clueGame.getPlayers().get(clueGame.getTurn() % clueGame.getPlayers().size());
+
+				// Turn display
+				turnDisplay.setText(player.getName());
+				dieDisplay.setText(new Integer(die).toString());
+
 				clueGame.getBoard().calcTargets(player.getRow(), player.getCol(), die);
 
 				if (player.isComputerPlayer()) {
@@ -125,7 +130,7 @@ public class GUIControl extends JPanel {
 					if (clueGame.getBoard().getCellAt(player.getRow(), player.getCol()).isRoom()) {
 						HashSet<Card> suggestion = ((ComputerPlayer) player).createSuggestion(clueGame.getCards(), clueGame.getBoard().getRooms());
 						for (Card card : suggestion) {
-							if(card.getType() == Card.CardType.PERSON) {
+							if(card != null && card.getType() == Card.CardType.PERSON) {
 								for(Player accused : clueGame.getPlayers()) {
 									if (accused.getName() == card.toString()) {
 										accused.move(location);
@@ -147,14 +152,14 @@ public class GUIControl extends JPanel {
 					clueGame.setHumanMoved(false);
 					if (clueGame.getSuggestionWindow() != null) {
 						suggestionDisplay.setText(clueGame.getSuggestionWindow().getSuggestion().toString());
-						resultDisplay.setText(clueGame.getSuggestionWindow().getDisprove().toString());
+						if (clueGame.getSuggestionWindow().getDisprove().toString() != null) {
+							resultDisplay.setText(clueGame.getSuggestionWindow().getDisprove().toString());
+						}
 					}
 				}
 
+				repaint();
 				clueGame.repaint();
-				// Turn display
-				turnDisplay.setText(player.getName());
-				dieDisplay.setText(new Integer(die).toString());
 				clueGame.incrementTurn();
 			}
 		}

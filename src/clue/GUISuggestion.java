@@ -8,11 +8,11 @@ import java.util.HashSet;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-public class GUISuggestion extends JFrame {
+public class GUISuggestion extends JDialog {
 	private JTextArea roomText, roomGuess, personText, weaponText;
 	private JComboBox<String> personGuess, weaponGuess;
 	private JButton submit, cancel;
@@ -28,6 +28,7 @@ public class GUISuggestion extends JFrame {
 		setSize(500, 150);
 		setLayout(new GridLayout(0, 2));
 		createLayout(room);
+		this.setModalityType(ModalityType.APPLICATION_MODAL);
 	}
 
 	private void createLayout(Card room) {
