@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import clue.Card.CardType;
@@ -71,7 +72,7 @@ public class ClueGame extends JPanel implements MouseListener {
 			++i;
 		}
 		solution = new Solution(tempSolution[0], tempSolution[1], tempSolution[2]);
-
+		System.out.println(solution);
 		// Give to players
 		while (!(tempDeck.isEmpty())) {
 			for (Player player : players) {
@@ -240,7 +241,7 @@ public class ClueGame extends JPanel implements MouseListener {
 				getBoard().setTargets(null);
 				repaint();
 			} else {
-				// JOptionPane.showMessageDialog(this, "Invalid move, try again.", "Invalid move", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Invalid move, try again.", "Invalid move", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}

@@ -9,6 +9,7 @@ import java.util.HashSet;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -88,39 +89,19 @@ public class GUIAccusation extends JDialog {
 
 	class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			suggestion.add(room);
-
 			disprove = null;
 			if (e.getSource() == submit) {
-				suggestion.add(new Card(personGuess.getSelectedItem().toString(), Card.CardType.PERSON));
-				suggestion.add(new Card(weaponGuess.getSelectedItem().toString(), Card.CardType.WEAPON));
-				disprove = clueGame.handleSuggestion(suggestion, clueGame.getPlayers().get(clueGame.getTurn() % clueGame.getPlayers().size()));
-			}
-			BoardCell location = clueGame.getBoard().getCellAt(clueGame.getBoard().calcIndex(clueGame.getPlayers().get(0).getRow(), clueGame.getPlayers().get(0).getCol()));
-			for (Card card : suggestion) {
-				if(card.getType() == Card.CardType.PERSON) {
-					for(Player accused : clueGame.getPlayers()) {
-						if (accused.getName() == card.toString()) {
-							accused.move(location);
-						}
-					}
+				String person = personGuess.getSelectedItem().toString();
+				String weapon = weaponGuess.getSelectedItem().toString();
+				String room = roomGuess.getSelectedItem().toString();
+				if (clueGame.checkAccusation(new Solution(person, weapon, room))) {
+					JOptionPane.showMessageDialog(clueGame, person + " in the " + room + " with the " + weapon + ". " + person + " just won the game!", "Winning", JOptionPane.INFORMATION_MESSAGE);
+					System.exit(0);
+				} else {
+					JOptionPane.showMessageDialog(clueGame, person + " in the " + room + " with the " + weapon + ". " + person + " just guessed wrong.  If this was a real clue game, you'd be disqualified.", "Nope", JOptionPane.INFORMATION_MESSAGE);
 				}
-			}
-			GUIControl.suggestionDisplay.setText(suggestion.toString());
-			if (disprove == null) {
-				GUIControl.resultDisplay.setText("No new clue.");
-			} else {
-				GUIControl.resultDisplay.setText(disprove.toString());
 			}
 			setVisible(false);
 		}
-	}
-
-	public HashSet<Card> getSuggestion() {
-		return suggestion;
-	}
-
-	public Card getDisprove() {
-		return disprove;
 	}
 }

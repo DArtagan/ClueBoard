@@ -149,6 +149,7 @@ public class GUIControl extends JPanel {
 				} else {
 					clueGame.getBoard().getTargets();
 					clueGame.setHumanMoved(false);
+					//System.out.println(clueGame.getHumanMoved());
 					if (clueGame.getSuggestionWindow() != null) {
 						suggestionDisplay.setText(clueGame.getSuggestionWindow().getSuggestion().toString());
 						if (clueGame.getSuggestionWindow().getDisprove().toString() != null) {
@@ -160,16 +161,27 @@ public class GUIControl extends JPanel {
 				repaint();
 				clueGame.repaint();
 				clueGame.incrementTurn();
+			} else if (clueGame.getHumanMoved() == false) {
+				JOptionPane.showMessageDialog(clueGame, "Finish your turn!", "No", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}
 
 	class AccusationListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			Player player = clueGame.getPlayers().get(clueGame.getTurn() % clueGame.getPlayers().size());
-			if (!(player.isComputerPlayer()) && !(clueGame.getHumanMoved())) {
-				GUIAccusation accusationWindow = new GUIAccusation(clueGame);
+			Player player;
+			GUIAccusation accusationWindow = new GUIAccusation(clueGame);
+			if (clueGame.getTurn() != 0) {
+				player = clueGame.getPlayers().get(clueGame.getTurn() % clueGame.getPlayers().size() - 1);
+			} else {
+				player = clueGame.getPlayers().get(clueGame.getTurn() % clueGame.getPlayers().size());
+			}
+			System.out.println(clueGame.getHumanMoved());
+			System.out.println(player.getName());
+			if (!(player.isComputerPlayer()) && !(clueGame.getHumanMoved()) && clueGame.getTurn() != 0) {
 				accusationWindow.setVisible(true);
+			} else {
+				JOptionPane.showMessageDialog(clueGame, "Wait your turn!", "Wrong turn.", JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
 	}
